@@ -1,0 +1,617 @@
+% LaTeX Curriculum Vitae
+% Seo-Won Chang
+% Structure adapted from Jason Blevins' CV template (http://jblevins.org/projects/cv-template/)
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{xcolor}
+\usepackage[colorlinks=true,urlcolor=purple,linkcolor=purple!87!black,pdfborder={0 0 0}]{hyperref}
+\usepackage{geometry}
+\usepackage{etaremune}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage[sc,osf]{mathpazo}
+
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\cdot$}
+
+% Set your name here
+\def\name{Seo-Won Chang}
+
+\hypersetup{
+  colorlinks = true,
+  urlcolor = purple,
+  pdfauthor = {\name},
+  pdfkeywords = {astronomy, astrophysics, time-domain, multi-messenger},
+  pdftitle = {\name: Curriculum Vitae},
+  pdfsubject = {Curriculum Vitae},
+  pdfpagemode = UseNone
+}
+
+\geometry{
+  body={6.5in, 9.0in},
+  left=1.0in,
+  top=1.0in
+}
+
+\newenvironment{cvitemize}{
+  \begin{list}{$\bullet$}{
+    \setlength{\leftmargin}{1.5em}
+    \setlength{\itemsep}{0.2em}
+    \setlength{\parsep}{0em}
+  }
+}{
+  \end{list}
+}
+
+
+\pagestyle{myheadings}
+\markright{\name}
+\thispagestyle{empty}
+
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+
+\setlength\parindent{0em}
+
+% Allow slight line stretching to avoid overfull boxes from URLs / long designations
+\setlength{\emergencystretch}{2.5em}
+\hyphenation{Django Post-greSQL data-management}
+
+% Tight itemize without bullets for list-style sections
+\newenvironment{cvlist}{
+  \begin{list}{}{
+    \setlength{\leftmargin}{1.5em}
+    \setlength{\itemsep}{0.15em}
+    \setlength{\parsep}{0em}
+  }
+}{
+  \end{list}
+}
+
+% Keep the original bullet-less itemize behaviour
+\renewenvironment{itemize}{
+  \begin{list}{}{
+    \setlength{\leftmargin}{1.5em}
+    \setlength{\itemsep}{0.2em}
+    \setlength{\parsep}{0em}
+  }
+}{
+  \end{list}
+}
+
+\begin{document}
+
+%========================= HEADER =========================
+{\huge \name}
+
+\vspace{0.2in}
+
+\begin{minipage}{0.52\linewidth}
+  Research Associate Professor \\
+  SNU Astronomy Research Center \\
+  Seoul National University \\
+  1 Gwanak-ro, Gwanak-gu \\
+  Seoul 08826, Republic of Korea
+\end{minipage}
+\begin{minipage}{0.46\linewidth}
+  \begin{tabular}{ll}
+    Office: & Room 202, Building 45 \\
+    Email: & \href{mailto:seowon.chang@snu.ac.kr}{\tt seowon.chang@snu.ac.kr} \\
+    ORCID: & \href{https://orcid.org/0000-0002-3118-8275}{\tt 0000-0002-3118-8275} \\
+  \end{tabular}
+\end{minipage}
+
+\vspace{0.15in}
+
+%========================= RESEARCH INTERESTS =========================
+\section*{Research Interests}
+
+I am an observational astronomer working in \textbf{time-domain and multi-messenger
+astronomy}. To study how the sky changes on timescales from minutes to years, I have
+spent the past decade building end-to-end infrastructure for wide-field surveys ---
+high-precision photometric pipelines, spatio-temporal databases, and real-time
+transient-detection systems --- for facilities including SkyMapper, KMTNet, and the
+7-Dimensional Telescope (7DT). On these platforms I pursue four connected lines of
+research: \textbf{(i) time-domain survey infrastructure and AI-based classification};
+\textbf{(ii) stellar magnetic activity} --- flares, starspots, and the
+activity--rotation--age relation; \textbf{(iii) stellar pulsation} --- the formation
+channels of Blue Large-Amplitude Pulsators (BLAPs); and \textbf{(iv) multi-messenger
+astronomy} --- the optical search for gravitational-wave counterparts (kilonovae) and
+other high-energy transients. This work is positioned for the era of the Vera C.\ Rubin
+Observatory's Legacy Survey of Space and Time (LSST) and the International
+Gravitational-Wave Observatory Network (IGWN).
+
+%========================= EDUCATION =========================
+\section*{Education}
+\begin{itemize}
+  \item \textbf{Ph.D. in Astronomy}, Yonsei University, 2014 \\
+        Thesis: \emph{Flare and Starspot-induced Variability of Red Dwarf Stars in the
+        Open Cluster M37: Photometric Study on Magnetic Activity} \\
+        Advisor: Prof.\ Yong-Ik Byun
+  \item \textbf{M.S. in Astronomy}, Yonsei University, 2007 \\
+        Thesis: \emph{Verification and Characterization of Optical Transient Candidates}
+  \item \textbf{B.S. in Astronomy}, Yonsei University, 2005
+\end{itemize}
+
+%========================= EMPLOYMENT =========================
+\section*{Employment}
+\begin{itemize}
+\item \textbf{Research Associate Professor}, Research Institute of Basic Sciences,
+      Seoul National University (Dec 2023 -- present)
+\item \textbf{Research Assistant Professor}, Research Institute of Basic Sciences,
+      Seoul National University (Dec 2020 -- Nov 2023)
+\item \textbf{OzGrav Postdoctoral Researcher}, Centre for Gravitational Astrophysics,
+      Australian National University (Jan 2019 -- Nov 2020)
+\item \textbf{CAASTRO Postdoctoral Researcher}, Australian National University
+      (Jan 2017 -- Jan 2019)
+\item \textbf{Postdoctoral Researcher}, Yonsei University Observatory (Sep 2014 -- Dec 2016)
+\item \textbf{Research Assistant}, Near-Earth Space Survey Group, Korea Astronomy and
+      Space Science Institute (Jan 2008 -- Dec 2008)
+\end{itemize}
+
+%========================= APPOINTMENTS =========================
+\section*{Professional Appointments}
+\begin{itemize}
+\item \textbf{Visiting Fellow}, Research School of Astronomy \& Astrophysics,
+      Australian National University (Nov 2020 -- Nov 2025; Feb 2026 -- Feb 2027)
+\end{itemize}
+
+%========================= GRANTS =========================
+\section*{Research Grants as Principal Investigator}
+\begin{itemize}
+\item \textbf{The Origins of Blue Large-Amplitude Pulsators (BLAPs): Binary Interaction,
+      Merger, and Supernova Survivor Scenarios}, National Research Foundation of Korea
+      (Core Research Program), Mar 2026 -- Feb 2029, 280M KRW 
+\item \textbf{Understanding Galactic Disc Evolution with Stellar Activity and Kinematic
+      Age}, National Research Foundation of Korea, Jun 2023 -- May 2026, 210M KRW 
+\end{itemize}
+
+%========================= AWARDS =========================
+\section*{Honors \& Awards}
+\begin{itemize}
+\item \textbf{Top 100 National R\&D Achievements of 2025} (team award),
+      Ministry of Science and ICT, Republic of Korea, January 2026 \\
+      ``Commencement of Observations with the 7-Dimensional Telescope (7DT),
+      the World's First Wide-Field Simultaneous Spectral-Imaging Multiple
+      Telescope System'' \\
+      \textit{Team:} Myungshin Im (PI), Hyung Mok Lee, Ji Hoon Kim,
+      \textbf{Seo-Won Chang}, Gregory S. H. Paek, and Hyunho Choi
+\item \textbf{Yonsei Thesis Award} for Excellence in Graduate Research,
+      Yonsei University, 2014
+%\item \textbf{Yonsei Alumni Fellowship}, Yonsei University, 2004
+\end{itemize}
+
+%========================= RESEARCH HIGHLIGHTS =========================
+\section*{Research Highlights}
+\emph{Four connected research lines, emphasizing recent and ongoing directions (since 2022).}
+
+\subsection*{Time-domain Astronomy: Survey Infrastructure and AI-based Classification}
+I build the infrastructure that enables time-domain discovery --- high-precision photometry
+pipelines, spatio-temporal databases, and the public release of wide-field surveys, most
+recently as first-author lead of the KS4 Data Release~1 \emph{(Chang et al.\ 2026, JKAS)}.
+
+\smallskip
+On the methodological side, I am increasingly focused on machine-learning classification
+--- variable types, periodic variables, and real/bogus transients \emph{(Lee et al.\ 2025,
+AJ)} --- with the goal of decision-aware AI for LSST-scale time-domain astronomy: systems
+that not only classify but help decide, in real time, which of millions of nightly alerts
+merit follow-up.
+
+\smallskip
+In parallel, I am pursuing time-domain studies based on single- and multi-epoch SEDs,
+combining 7DS medium-band spectrophotometry with SPHEREx infrared spectral surveys to
+classify and characterize variable and transient sources across the optical--infrared
+range \emph{(Paek et al.\ 2026, ApJ; Kim et al.\ 2026, AJ)}.
+
+\subsection*{Stellar Magnetic Activity: Flares, Starspots, and the Activity--Age Relation}
+My work in this area began with magnetically active M dwarfs --- their flares and
+starspot-induced rotational variability --- and the age--rotation--activity relation,
+established through large-scale photometric measurements including the M-dwarf flaring
+fraction and a spatially dependent activity--kinematic-age relation across the solar
+cylinder \emph{(Chang et al.\ 2020, 2022, MNRAS; first author)}.
+
+\smallskip
+I am now extending this work to a statistical study of flare activity in FGK dwarfs
+through my NRF-funded program, and further toward spectroscopic detection of coronal mass
+ejections and stellar storms --- the space-weather events that shape the environments of
+exoplanets around Sun-like and other host stars \emph{(Oh et al., JKAS, in revision;
+corresponding author)}.
+
+\smallskip
+Looking forward, I am particularly interested in simultaneous multi-wavelength studies of
+flares --- combining optical photometry, emission/absorption-line spectroscopy, X-ray, and
+radio observations. The Einstein Probe opens new opportunities here: many of its X-ray
+transient alerts are in fact stellar flares, well suited to joint X-ray--optical studies
+with optical time-domain facilities.
+
+\subsection*{Stellar Pulsation: Blue Large-Amplitude Pulsators}
+Blue Large-Amplitude Pulsators (BLAPs) are a recently recognized class of hot pulsating
+stars --- nearly 200 have been found toward the Galactic bulge since their 2017 discovery
+by OGLE. Their evolution requires the loss of most of the stellar envelope, yet unlike hot
+subdwarfs (sdBs), which are predominantly found in binaries, BLAPs show few binary
+companions. their formation channel remains actively debated. %, and no homogeneous spectroscopic characterization of the class yet exists.
+
+\smallskip
+I discovered a new BLAP in SkyMapper and characterized it as a helium-deficient,
+thick-disk star --- a candidate for an alternative formation channel
+\emph{(Chang et al.\ 2024, MNRAS; first author)}. This discovery anchors my NRF Core
+Research program (2026--2029) on BLAP formation channels. Combining Gemini spectroscopy
+with stellar-atmosphere modeling, the program aims to build the homogeneous spectroscopic
+sample the field lacks and to map the connection between BLAPs and sdB/sdBV pulsators.
+
+\smallskip
+More broadly, this work extends toward the study of post-mass-transfer binaries ---
+the stripped-envelope systems that link BLAPs, hot subdwarfs, and the broader landscape
+of binary stellar evolution.
+
+\subsection*{Multi-Messenger Astronomy: Optical Counterparts of Gravitational Waves}
+From early 2017 through the O4 run, I devoted myself to the optical search for
+gravitational-wave counterparts --- participating in the GW170817/AT2017gfo discovery,
+building and operating the SkyMapper alert follow-up pipeline through LIGO/Virgo O3
+\emph{(Chang et al.\ 2021, PASA; first author)}, and continuing follow-up with KMTNet and
+7DT within GECKO.
+
+\smallskip
+My focus is now expanding from follow-up operations to the science of the sources
+themselves: kilonovae from NS--NS and NS--BH mergers and from gamma-ray bursts
+\emph{(Yang et al.\ 2024, Nature; Pillas et al.\ 2025, Phys.\ Rev.\ D)}, single-epoch
+SED-based identification of orphan kilonovae in the Rubin/LSST alert stream without
+gravitational-wave triggers \emph{(Paek et al.\ 2026, ApJ)}, and their connection to
+host-galaxy environments.
+
+\smallskip
+Looking ahead to the IGWN (IR1/O5) era, I am also interested in developing real-time
+automated spectroscopic follow-up systems and $\gamma$-ray CubeSat instrumentation for
+multi-messenger astronomy.
+
+
+%========================= INFRASTRUCTURE & SOFTWARE =========================
+\section*{Infrastructure, Software \& Technical Skills}
+\begin{cvitemize}
+\item \textbf{Survey data release \& systems:} End-to-end development and public release of
+      wide-field survey data --- architected the KS4 DR1 database (catalog merging,
+      quality-assurance flagging, HiPS imagery) and delivered it to the international
+      community via NOIRLab Astro Data Lab and CDS/Aladin \& VizieR; lead developer of the 7DT
+      data-management portal (full-stack Django, PostgreSQL/PostGIS).
+\item \textbf{Time-series \& transient pipelines:} High-precision multi-aperture
+      photometry, noise de-trending, variability detection, differential image analysis,
+      and multiband period analysis.
+\item \textbf{Machine learning:} Classification problems --- variable-star types, periodic
+      variables, and real/bogus transients; outlier detection in spectrophotometric
+      multi-epoch SEDs; and emulators for stellar-atmosphere models.
+\item \textbf{Tools:} Python (primary), full-stack web development, and Virtual Observatory
+      tools
+\end{cvitemize}
+
+%========================= SURVEYS & COLLABORATIONS =========================
+\section*{Survey \& Collaboration Participation}
+\begin{cvitemize}
+\item \textbf{7-Dimensional Telescope (7DT) / 7-Dimensional Sky Survey (7DS)} ---
+core member; data portal and database development; multi-messenger follow-up; time-domain
+science
+\item \textbf{KMTNet} --- KS4 Data Release 1 lead; transient and neutrino ToO programs
+\item \textbf{SkyMapper Southern Survey} --- variability and transient science (DR1--DR4);
+multi-wavelength stellar-activity collaboration (GALAH, eROSITA, ASKAP)
+\item \textbf{Korean Gravitational Wave Group} --- gravitational-wave optical follow-up within GECKO (GW-EM Counterpart Korean Observatory)
+\item \textbf{OzGrav} (ARC Centre of Excellence for Gravitational Wave Discovery) ---
+SkyMapper-side lead for gravitational-wave optical follow-up
+\item \textbf{SPHEREx (Korean Legacy Science Program)} --- proposed two legacy science
+      projects: infrared activity patterns in late-M to early-L dwarfs (time-domain study
+      with SPHEREx and SkyMapper), and the search for wide-orbit companions of Blue
+      Large-Amplitude Pulsators through infrared excess
+\item \textbf{Rubin/LSST}  --- member, Transients and Variable Stars (TVS) and
+      Stars, Milky Way and Local Volume (SMWLV) Science Collaborations; Junior Associate,
+      Korean Rubin Science Collaboration; member of the FINK community alert broker
+\end{cvitemize}
+
+%========================= TELESCOPE TIME =========================
+\section*{Telescope Time (as Principal Investigator)}
+\begin{cvitemize}
+\item Gemini GPP XT1 Program, 2025B, G-2025B-0498-V (Band-2, 5.2\,hr)
+\item ToO Spectroscopy of Gravitational-Wave Optical Counterparts with SkyMapper,
+2018Q4--2019Q3
+\item SkyMapper Transient Follow-up Program, 2017B--2019A
+\end{cvitemize}
+\emph{Co-Investigator on KMTNet time-domain and ToO follow-up programs (gravitational-wave,
+neutrino, and transient alerts; 30-minute time-domain survey; 2020--2029) and Gemini
+GW follow-up (2023--2026).}
+
+%========================= PUBLICATIONS =========================
+\section*{Publications}
+First-author or corresponding-author papers are marked with $\star$. Author role is
+indicated after each entry. Full and up-to-date metrics are available via
+\href{https://orcid.org/0000-0002-3118-8275}{ORCID} and ADS.
+
+\subsection*{Refereed Publications}
+{\sloppy
+\begin{etaremune}
+\item \emph{Masking Algorithm for CCD Bleeding in Korea Microlensing Telescope Network
+Images}, Shin, J., Jeong, M., Im, M., \textbf{Chang, S.-W.} et al.\ 2026h, JKAS,
+
+\item $\star$ \emph{High-Resolution Spectroscopic Analysis of Chromospheric Line Evolution
+during an Energetic Flare on AD~Leo}, Oh et al.\ 2026g, JKAS, [corresponding author]
+
+\item \emph{7DT Insight: Variability in Young Stellar Objects}, Kim, M.-R., Lee, J.-E.,
+Im, M., \textbf{Chang, S.-W.} et al.\ 2026f, AJ [co-author] %\href{https://arxiv.org/abs/2605.18366}{arXiv:2605.18366}
+
+\item $\star$ \emph{KMTNet Synoptic Survey of Southern Sky III: The First Data Release},
+\textbf{Chang, S.-W.} et al.\ 2026e, JKAS, 59, 1
+[first author] 
+\item \emph{A Hybrid Framework for Kilonova Anomaly Detection Using Single-epoch SEDs from the 7-Dimensional Telescope}, Paek et al.\ 2026d, ApJ
+[co-author] 
+
+\item \emph{Pre-perihelion Emergence of the CN Gas Coma in 3I/ATLAS Resolved by the
+7-Dimensional Telescope}, Paek et al.\ 2026c, ApJ [co-author] 
+
+\item \emph{KMTNet Synoptic Survey of Southern Sky II: Data Reduction Pipeline for
+Reference Imaging and Real-time Transient Detection}, Jeong et al.\ 2026b, JKAS
+[co-author]
+
+\item \emph{The Redshifts from 122 Bands: Comparative Redshift Forecast for Low-Resolution
+Spectra from SPHEREx and 7DS}, Bae et al.\ 2026a, A\&A [co-author] 
+
+\item \emph{Investigating the Effects of Point Source Injection Strategies on
+KMTNet Real/Bogus Classification}, Lee, D., Paek, G.~S.~H., \textbf{Chang, S.-W.} et al.\
+2025, AJ [co-author; key contributor] 
+
+\item \emph{AllBRICQS: The Discovery of Luminous Quasars in the Northern Hemisphere},
+Choi et al.\ 2025, ApJS [co-author]
+
+\item \emph{Limits on the Ejecta Mass and Binary Properties During the Search for Kilonovae
+Associated with Neutron Star--Black Hole Mergers: S230518h, GW230529, S230627c, and
+S240422ed}, Pillas et al.\ 2025, Phys.\ Rev.\ D [multi-messenger collaboration]
+
+\item \emph{GECKO Follow-up Observation of the Binary Neutron Star--Black Hole Merger
+Candidate S230518h}, Paek et al.\ 2025, ApJ [co-author]
+
+\item \emph{Exploring Unobscured Quasi-stellar Objects in the Southern Hemisphere with
+KS4}, Kim, Y.~J. et al.\ 2024, ApJS, 275, 46 [co-author]
+
+\item \emph{SkyMapper Southern Survey: Data Release 4}, Onken et al.\ 2024, PASP, 41, 61
+[co-author]
+
+\item $\star$ \emph{Discovery of a New Blue Large-Amplitude Pulsator in SkyMapper DR2:
+SMSS J184506.82$-$300804.7}, \textbf{Chang, S.-W.} et al.\ 2024, MNRAS
+[first author] 
+
+\item \emph{A Lanthanide-rich Kilonova in the Aftermath of a Long Gamma-ray Burst},
+Yang et al.\ 2024, Nature [multi-messenger collaboration] 
+
+\item $\star$ \emph{Spatially Dependent Photometric Activity of M Dwarfs in the Solar
+Cylinder}, \textbf{Chang, S.-W.} et al.\ 2022, MNRAS, 517, 2842 [first author]
+
+\item \emph{Multi-filter Photometry of Solar System Objects from the SkyMapper Southern
+Survey}, Sergeyev et al.\ 2022, A\&A [co-author] 
+
+\item \emph{GECKO Optical Follow-up of Three Binary Black Hole Merger Events
+(GW190408\_181802, GW190412, GW190503\_185404)}, Kim et al.\ 2021, ApJ [co-author]
+
+\item $\star$ \emph{SkyMapper Optical Follow-up of Gravitational Wave Triggers: Alert
+Science Data Pipeline and LIGO/Virgo O3 Run}, \textbf{Chang, S.-W.} et al.\ 2021, PASA
+[first author]
+
+\item \emph{A Spectroscopically Confirmed Gaia-selected Sample of 318 New Young Stars
+within $\sim$200~pc}, Zerjal et al.\ 2021, MNRAS [co-author; observations]
+
+\item \emph{Neutron Star Extreme Matter Observatory: A Kilohertz-band Gravitational-wave
+Detector in the Global Network}, Ackley et al.\ 2020, PASA, 37, 47
+[OzGrav collaboration]
+
+\item \emph{Probing the Extragalactic Fast Transient Sky at Minute Timescales with DECam},
+Andreoni et al.\ 2020, MNRAS, 491, 5852 [co-author; flare light-curve interpretation]
+
+\item $\star$ \emph{Photometric Flaring Fraction of M Dwarf Stars from the SkyMapper
+Southern Survey}, \textbf{Chang, S.-W.}, Wolf, C.\ \& Onken, C.~A.\ 2020, MNRAS, 491, 39
+[first author]
+
+\item \emph{SkyMapper Southern Survey: Second Data Release (DR2)}, Onken et al.\ 2019,
+PASA, 36, e033 [co-author; noise filtering, quality cuts, variability index]
+
+\item \emph{Five New Real-time Detections of Fast Radio Bursts with UTMOST},
+Farah et al.\ 2019, MNRAS, 488, 2989 [co-author; optical follow-up]
+
+\item \emph{A Fast Radio Burst with Frequency-dependent Polarization Detected during
+Breakthrough Listen Observations}, Price et al.\ 2019, MNRAS, 486, 3636
+[co-author; optical follow-up]
+
+\item $\star$ \emph{New Photometric Pipeline to Explore Temporal and Spatial Variability
+with KMTNet DEEP-South Observations}, \textbf{Chang, S.-W.} et al.\ 2018, JKAS, 51, 129
+[first author]
+
+\item \emph{Detecting Variability in Massive Astronomical Time-series Data III: Variable
+Candidates in SuperWASP DR1}, Shin, M.-S., \textbf{Chang, S.-W.} et al.\ 2018, AJ, 156, 5
+[co-author]
+
+\item \emph{A Nearby Superluminous Supernova with a Long Pre-maximum Plateau and Strong
+C~II Features}, Anderson et al.\ 2018, A\&A, 620, 67 [co-author; SkyMapper data]
+
+\item \emph{FRB Microstructure Revealed by the Real-time Detection of FRB170827},
+Farah et al.\ 2018, MNRAS, 478, 1209 [co-author; optical follow-up]
+
+\item \emph{SkyMapper Southern Survey: First Data Release (DR1)}, Wolf et al.\ 2018,
+PASA, 35, 10 [co-author; quality cuts, time-domain variability]
+
+\item \emph{Follow-up of GW170817 and its Electromagnetic Counterpart by Australian-led
+Observing Programs}, Andreoni et al.\ 2017, PASA, 34, 21
+[multi-messenger collaboration; SkyMapper follow-up]
+
+\item \emph{Multi-messenger Observations of a Binary Neutron Star Merger},
+Abbott et al.\ 2017, ApJL, 848, 2 [multi-messenger collaboration; SkyMapper follow-up]
+
+\item $\star$ \emph{Photometric Study on Stellar Magnetic Activity I: Flare Variability of
+Red Dwarf Stars}, \textbf{Chang, S.-W.}, Byun, Y.-I.\ \& Hartman, J.~D.\ 2015, ApJ, 814, 35
+[first author]
+
+\item $\star$ \emph{A New Catalog of Variable Stars in the Field of the Open Cluster M37},
+\textbf{Chang, S.-W.}, Byun, Y.-I.\ \& Hartman, J.~D.\ 2015, AJ, 150, 27 [first author]
+
+\item $\star$ \emph{A New Method for Robust High-Precision Time-Series Photometry from
+Well-Sampled Images: Archival MMT/Megacam Observations of M37}, \textbf{Chang, S.-W.},
+Byun, Y.-I.\ \& Hartman, J.~D.\ 2015, AJ, 149, 135 [first author]
+
+\item \emph{The EPOCH Project I: Periodic Variable Stars in the EROS-2 LMC Database},
+Kim et al.\ 2014, A\&A, 566, 43 [co-author; data and database management]
+
+\item $\star$ \emph{Statistical Properties of Galactic $\delta$ Scuti Stars: Revisited},
+\textbf{Chang, S.-W.} et al.\ 2013, AJ, 145, 132 [first author]
+
+\item \emph{Detecting Variability in Massive Astronomical Time-series Data II: Variable
+Candidates in the Northern Sky Variability Survey}, Shin et al.\ 2012, AJ, 143, 65
+[co-author]
+
+\item \emph{BVR Photometry of Supergiant Stars in Holmberg~II}, Sohn, Y.-J.,
+\textbf{Chang, S.-W.} et al.\ 2006, JASS, 23, 1 [co-author; data analysis]
+
+\end{etaremune}
+\par}
+
+\subsection*{Submitted / In Revision}
+\begin{etaremune}
+\item \emph{KS4GC: A Red-Sequence-Based Galaxy Cluster Catalog in the Southern Sky from
+KS4 DR1}, Park et al.\ 2026, A\&A, submitted [co-author]
+\item \emph{Construction of spatially resolved star formation and 3.3~$\mu$m PAH distribution map using the combined 7DT and SPHEREx photometric spectra}, Shim et al.\ 2026, ApJ, submitted
+\item \emph{Optical Transmission Spectroscopy of the Hot Jupiter WASP-74b Using Medium-Band Filters with the 7-Dimensional Telescope}, Bae et al.\ 2026, A\&A, submitted
+
+\end{etaremune}
+
+\subsection*{Selected Conference Proceedings}
+\begin{etaremune}
+% Py7DT: Data Reduction Pipeline of the 7-Dimensional Telescope, 2026, SPIE
+\item \emph{The 7-Dimensional Telescope and the 7-Dimensional Sky Survey: Status Report on Final Commissioning and Survey Operation}, Kim, J.~H., Im, M., Lee, H.~M.\ \& \textbf{Chang, S.-W.} et al. 2026, SPIE
+\item \emph{Optical Analysis of SN 2023ixf: From 10 Years Before to 100 Days After the
+Explosion}, Kim, S., Im, M., Paek, G.~S.~H., Lim, G., \textbf{Chang, S.-W.} et al.\ 2024,
+The Twelfth Pacific Rim Conference on Stellar Astrophysics, ASP Conf.\ Ser.\ 536, 61
+\item \emph{Project Management for Ground-based Telescope Array Development},
+Kim, J.~H., Im, M., Lee, H.~M.\ \& \textbf{Chang, S.-W.} 2024, SPIE
+\item \emph{Introduction to the 7-Dimensional Telescope: Commissioning Procedures and Data
+Characteristics}, Kim, J.~H. et al.\ 2024, SPIE 13094
+\item \emph{Spatially Dependent Photometric Activity of M Dwarfs in the Solar Cylinder},
+\textbf{Chang, S.-W.}, Wolf, C.\ \& Onken, C., 2022, Cool Stars 21 (CS21)
+\end{etaremune}
+
+\subsection*{GCN Circulars \& Astronomical Telegrams}
+Lead- or co-author on numerous GCN Circulars and Astronomer's Telegrams (ATels) reporting
+real-time optical follow-up of gravitational-wave events, gamma-ray bursts, and other
+transients (e.g., fast radio bursts), through the SkyMapper, ANU 2.3\,m
+WiFeS, KMTNet/GECKO, and 7DT programs. Full list available via ADS.
+
+%========================= TALKS =========================
+\section*{Selected Talks \& Presentations}
+\emph{Representative presentations on my recent (last five years) research topics.}
+\begin{etaremune}
+\item \emph{Searching for Blue Large-Amplitude Pulsators: SkyMapper Results and
+Strategies}, 3rd Stars, Milky Way, Local Volume and Exoplanet (SMiLE) Workshop, 2026
+\item \emph{KMTNet Synoptic Survey of Southern Sky: The First Data Release (KS4 DR1)},
+Korean Astronomical Society Meeting, 2026
+\item Session Chair, Special Session \emph{Early Science Results from 7DT}, Korean
+Astronomical Society Spring Meeting, 2026
+\item \emph{Searching for Stellar Flares from FGKM Dwarfs in SkyMapper DR4}, Korean
+Astronomical Society Meeting, 2025
+\item \emph{SkyMapper's Fourth Data Release and Stellar Science Cases}, Stars, Milky Way,
+Local Volume and Exoplanet (SMiLE) Workshop, 2024
+\item \emph{KMTNet Synoptic Survey of Southern Sky: Early Data Release Preparation},
+Korean Astronomical Society Meeting, 2023
+\item \emph{Evidence for Spatially Dependent Magnetic Activity of M Dwarfs in the Solar
+Cylinder}, Korean Astronomical Society Meeting, 2022
+\item \emph{Preparation for the Advanced LIGO-Virgo-KAGRA O4 Observing Run}, Centre for
+Gravitational Astrophysics / RSAA Joint Seminar Series, ANU, 2021 (colloquium)
+\item \emph{SkyMapper Optical Follow-up of Gravitational Wave Triggers: Alert Science
+Data Pipeline and LIGO/Virgo O3}, European Astronomical Society Annual Meeting, 2021
+\item \emph{SkyMapper Optical Follow-up of Gravitational Wave Triggers and OzGrav~2.0},
+Seoul National University, 2021 (colloquium)
+
+\end{etaremune}
+
+
+%========================= TEACHING & MENTORING =========================
+\section*{Teaching \& Mentoring}
+\begin{cvitemize}
+\item Thesis Committee Member, M.S. thesis on time-resolved spectroscopy of an
+      energetic flare on AD~Leo, Seoul National University, 2025
+\item Mentor, high-school research project (\emph{Efficient Linkage Algorithms for
+      DEEP-South Asteroid Discovery}), Hansung Science High School, 2022
+\item Advisor, Undergraduate Summer/Winter Research Programs, Yonsei University
+      (2012, 2013, 2015)
+\item Teaching Assistant, Yonsei University: \emph{Galaxies and the Universe} (2006, 2007),
+      \emph{Astrophysics II} (2005), \emph{Understanding of Space} (2005)
+\end{cvitemize}
+
+%========================= SERVICE =========================
+\section*{Professional Service}
+\begin{cvitemize}
+\item Member, Multi-Messenger Astronomy Planning Task Force, Korea Astronomy and Space
+      Science Institute (KASI) --- contributed to a national research-planning proposal,
+      \emph{Extreme-Gravity Astrophysics and Cosmic Expansion through Gravitational-Wave
+      and Multi-Messenger Observations}
+\item Committee Member, Working Group on Multi-Messenger Observing Facilities and
+      Data/Computing Infrastructure, \emph{The Decadal Survey for Korean Astronomy
+      (2026--2035)}
+\item Referee/Reviewer: AAS Journals (ApJ, AJ, ApJS), Journal of the Korean Astronomical
+      Society (JKAS), Publications of the Korean Astronomical Society (PKAS)
+\end{cvitemize}
+
+
+%========================= OUTREACH =========================
+\section*{Outreach \& Public Engagement}
+\begin{cvitemize}
+\item Led the public release of the KS4 DR1 dataset to the global astronomical community,
+      announced through coordinated releases by KASI, SNU,
+      \href{https://cds.unistra.fr/blog/2026/04/29-ks4-data-release/}{CDS}, and
+      \href{https://noirlab.edu/science/news/announcements/sci26025}{NOIRLab} (2026)
+\item Contributing Author, \emph{Encyclopedia of Astronomy}, published by the Korean
+      Astronomical Society via Naver Knowledge Encyclopedia
+\end{cvitemize}
+
+%========================= RESEARCH PROJECT PARTICIPATION =========================
+%\section*{Selected Research Project Participation}
+%\begin{itemize}
+%\item Multi-Messenger Astronomy with the 7-Dimensional Telescope and Artificial
+%     Intelligence (Jul 2021 -- Dec 2025)
+%\item Multi-Messenger Astronomy and Massive Astrophysical Systems through Wide-area
+%     Imaging Survey (Jun 2020 -- Feb 2025)
+%\end{itemize}
+
+%========================= COMMUNITY SERVICE =========================
+\section*{Other}
+\begin{itemize}
+\item Mandatory Military Service as Technical Research Personnel, Republic of Korea
+      (Sep 2010 -- Aug 2013)
+\end{itemize}
+
+%========================= REFERENCES =========================
+\section*{References}
+
+\begin{minipage}[t]{0.48\linewidth}
+\textbf{Prof.\ Christian Wolf} \\
+Siding Spring Observatory Director \\
+Research School of Astronomy \& Astrophysics \\
+Australian National University \\
+Email: \href{mailto:christian.wolf@anu.edu.au}{\tt christian.wolf@anu.edu.au}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\textbf{Prof.\ Myungshin Im} \\
+Professor, Department of Physics \& Astronomy \\
+Seoul National University \\
+Email: \href{mailto:m_im@snu.ac.kr}{\tt m\_im@snu.ac.kr}
+\end{minipage}
+
+\vspace{0.2in}
+
+\begin{minipage}[t]{0.48\linewidth}
+\textbf{Prof.\ Yong-Ik Byun} \\
+Professor, Department of Astronomy \\
+Yonsei University \\
+Email: \href{mailto:ybyun@yonsei.ac.kr}{\tt ybyun@yonsei.ac.kr}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\textbf{Dr.\ Min-Su Shin} \\
+Senior Researcher \\
+Korea Astronomy and Space Science Institute \\
+Email: \href{mailto:msshin@kasi.re.kr}{\tt msshin@kasi.re.kr}
+\end{minipage}
+
+\end{document}

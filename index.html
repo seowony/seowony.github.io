@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seo-Won Chang</title>
+<meta name="description" content="Seo-Won Chang — observational astronomer at Seoul National University, working on time-domain and multi-messenger astronomy with 7DT/7DS, KMTNet, SkyMapper and Rubin/LSST.">
+<meta property="og:title" content="Seo-Won Chang">
+<meta property="og:description" content="Observational astronomer, Seoul National University. Time-domain and multi-messenger astronomy.">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://seowony.github.io/">
+<meta property="og:image" content="https://seowony.github.io/assets/photo.jpg">
+<link rel="canonical" href="https://seowony.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Karla:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --paper:  #E5E9E4;
+    --panel:  #F3F6F1;
+    --ink:    #18211E;
+    --body:   #3C463F;
+    --second: #4E584F;
+    --label:  #7C867C;
+    --rule:   #C3CCC1;
+    --edge:   #CBD3C9;
+    --accent: #B02E26;
+    --accent-d: #7E1F1A;
+
+    --serif: Newsreader, "Iowan Old Style", Georgia, serif;
+    --sans:  Karla, "Helvetica Neue", Arial, sans-serif;
+    --gutter: clamp(16px, 5vw, 56px);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-d); text-decoration: underline; }
+  a:focus-visible, .skip:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 1120px; margin-inline: auto; padding-inline: var(--gutter); }
+
+  .skip { position: absolute; left: -9999px; background: var(--ink); color: var(--paper); padding: 10px 16px; z-index: 10; }
+  .skip:focus { left: 8px; top: 8px; }
+
+  header.site { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--edge); z-index: 5; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-block: 14px; }
+  .wordmark { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 19px; }
+  nav.site ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0; padding: 0; font-size: 14.5px; }
+  nav.site a { color: var(--second); }
+  nav.site a:hover { color: var(--ink); }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(34px, 5.4vw, 50px); line-height: 1.06; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(25px, 3.4vw, 32px); line-height: 1.15; }
+  h3 { font-size: clamp(19px, 2.4vw, 23px); line-height: 1.28; }
+  p { margin: 0; }
+
+  .kicker { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin: 0; }
+  section { padding-block: clamp(40px, 6vw, 60px); }
+  .sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+             border-bottom: 1px solid var(--rule); padding-bottom: 13px; margin-bottom: 30px; }
+
+  /* hero */
+  .hero { display: grid; gap: clamp(24px, 4vw, 44px); align-items: start; }
+  @media (min-width: 760px) { .hero { grid-template-columns: 240px minmax(0, 1fr); } }
+  .portrait { width: 100%; max-width: 240px; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .hero-copy { display: flex; flex-direction: column; gap: 18px; }
+  .hero-copy p.bio { color: var(--body); line-height: 1.72; max-width: 64ch; font-size: 16.5px; }
+  .idlinks { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+  .idlinks a {
+    font-size: 14px; padding: 9px 15px; border: 1px solid var(--edge);
+    color: var(--second); background: var(--panel); text-decoration: none;
+  }
+  .idlinks a:hover { border-color: var(--ink); color: var(--ink); text-decoration: none; }
+  .idlinks a.strong { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .idlinks a.strong:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* illustrations */
+  svg.art { display: block; width: 100%; height: auto; }
+  .ln  { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .lnt { fill: none; stroke: var(--ink); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+  .dash{ fill: none; stroke: var(--label); stroke-width: 1.1; stroke-dasharray: 3 5; stroke-linecap: round; }
+  .ac  { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .acf { fill: var(--accent); }
+  .lnf { fill: var(--ink); }
+  text.cap { font-family: var(--sans); font-size: 12px; letter-spacing: 1.4px; fill: var(--label); }
+
+  /* research cards */
+  .topics { display: grid; gap: clamp(28px, 4vw, 40px); }
+  @media (min-width: 880px) { .topics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .topic { display: flex; flex-direction: column; gap: 14px; }
+  .plate { background: var(--panel); border: 1px solid var(--edge); padding: 16px; }
+  .topic p { font-size: 15.5px; line-height: 1.68; color: var(--body); }
+
+  /* programmes */
+  .progs { display: flex; flex-direction: column; }
+  .prog { display: grid; gap: 6px 20px; padding-block: 22px; border-top: 1px solid var(--edge); }
+  .prog:first-child { border-top: 0; padding-top: 0; }
+  @media (min-width: 720px) { .prog { grid-template-columns: 52px minmax(0, 1fr) 200px; } }
+  .prog-mark svg { display: block; width: 34px; height: 34px; }
+  .prog p { color: var(--body); line-height: 1.66; font-size: 15px; max-width: 62ch; }
+  .prog .meta { font-size: 13px; line-height: 1.6; color: var(--label); }
+  .prog .meta b { font-weight: 500; color: var(--second); display: block; margin-bottom: 3px; }
+  .queue { margin-top: 26px; border-top: 1px solid var(--rule); padding-top: 20px; display: grid; gap: 10px 32px; }
+  @media (min-width: 720px) { .queue { grid-template-columns: 52px minmax(0, 1fr); } }
+  .queue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .queue li { font-size: 15px; color: var(--second); }
+  .queue li::before { content: "— "; color: var(--label); }
+
+  /* rubin block */
+  .rubin { display: grid; gap: clamp(20px, 4vw, 40px); }
+  @media (min-width: 820px) { .rubin { grid-template-columns: minmax(0, 1fr) 320px; } }
+  .rubin p { color: var(--body); line-height: 1.7; max-width: 62ch; }
+  .roles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 14.5px; color: var(--second); }
+  .roles li { padding-left: 16px; position: relative; line-height: 1.55; }
+  .roles li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--accent); }
+  .topicchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .topicchips span { font-size: 13px; padding: 5px 11px; border: 1px solid var(--edge); background: var(--panel); color: var(--second); }
+
+  /* publications */
+  .pubs { display: flex; flex-direction: column; gap: 0; }
+  .pub { display: grid; gap: 2px 18px; padding-block: 15px; border-top: 1px solid var(--edge); align-items: baseline; }
+  .pub:first-child { border-top: 0; }
+  @media (min-width: 640px) { .pub { grid-template-columns: 62px minmax(0, 1fr) 132px; } }
+  .pub .yr { font-size: 14px; color: var(--label); font-variant-numeric: tabular-nums; }
+  .pub .ti { font-size: 15.5px; line-height: 1.5; color: var(--ink); }
+  .pub .vn { font-size: 13px; color: var(--label); }
+  @media (min-width: 640px) { .pub .vn { text-align: right; } }
+  .star { color: var(--accent); margin-right: 5px; }
+
+  /* news + contact */
+  .split { display: grid; gap: clamp(18px, 4vw, 40px); }
+  @media (min-width: 820px) { .split { grid-template-columns: 190px minmax(0, 1fr); } }
+  .news { display: flex; flex-direction: column; gap: 14px; max-width: 70ch; }
+  .item { display: grid; gap: 2px 18px; }
+  @media (min-width: 520px) { .item { grid-template-columns: 92px minmax(0, 1fr); align-items: baseline; } }
+  .when { font-size: 14px; color: var(--label); }
+  .what { font-size: 15.5px; line-height: 1.62; color: var(--body); }
+
+  footer.site { border-top: 1px solid var(--rule); }
+  .foot { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between;
+          padding-block: 22px 40px; font-size: 13px; color: var(--label); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap bar">
+    <div class="wordmark">
+      <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="24" fill="none" stroke="#18211E" stroke-width="3.4"></circle>
+        <circle cx="32" cy="32" r="8" fill="#B02E26"></circle>
+      </svg>
+      Seo-Won Chang
+    </div>
+    <nav class="site" aria-label="Sections">
+      <ul>
+        <li><a href="#work">Research</a></li>
+        <li><a href="#now">On sky now</a></li>
+        <li><a href="#rubin">Rubin / LSST</a></li>
+        <li><a href="#pubs">Publications</a></li>
+        <li><a href="cv.pdf">CV</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== HERO ===== -->
+  <section class="wrap" style="padding-block: clamp(32px, 5vw, 52px) clamp(24px, 4vw, 36px);">
+    <div class="hero">
+      <img class="portrait" src="assets/photo.jpg" width="560" height="629"
+           alt="Seo-Won Chang">
+      <div class="hero-copy">
+        <p class="kicker">Research Associate Professor · Astronomy Research Center, Seoul National University</p>
+        <h1>Seo-Won Chang</h1>
+        <p class="bio">
+          I am an observational astronomer working in time-domain and multi-messenger astronomy. I build the software
+          behind wide-field surveys — photometric pipelines, spatio-temporal databases and real-time transient systems
+          for SkyMapper, KMTNet and the <a href="https://7ds.snu.ac.kr/">7-Dimensional Telescope</a> — and use them to
+          catch stars flaring, pulsating and colliding. Then I take their spectra to find out why.
+        </p>
+        <p class="bio">
+          I led the first public data release of KMTNet's southern survey (KS4 DR1, 2026), and in 2017 I was on the
+          SkyMapper team that chased GW170817 and caught AT2017gfo — the first optical counterpart of a gravitational
+          wave. I am currently also a Visiting Fellow at RSAA, Australian National University.
+        </p>
+        <div class="idlinks">
+          <a class="strong" href="cv.pdf">CV (PDF)</a>
+          <a href="mailto:seowon.chang@snu.ac.kr">Email</a>
+          <a href="https://orcid.org/0000-0002-3118-8275">ORCID</a>
+          <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-3118-8275&sort=date%20desc">NASA ADS</a>
+          <a href="https://7ds.snu.ac.kr/">7DS / 7DT</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RESEARCH ===== -->
+  <section class="wrap" id="work">
+    <div class="sechead">
+      <h2>What I work on</h2>
+      <p class="kicker">Four connected lines</p>
+    </div>
+
+    <div class="topics">
+
+      <article class="topic">
+        <div class="plate">
+          <svg class="art" viewBox="0 0 500 250" role="img"
+               aria-label="A star with magnetic loops, one snapping into a flare, and the spike it leaves in a light curve">
+            <circle class="ln" cx="128" cy="130" r="62"></circle>
+            <path class="lnt" d="M128 68 C 158 84 162 122 140 146"></path>
+            <path class="lnt" d="M96 174 C 118 158 128 128 114 92"></path>
+            <path class="lnt" d="M70 118 C 92 106 112 112 122 130"></path>
+            <path class="ln" d="M84 82 C 62 46 106 22 128 44"></path>
+            <path class="ac" d="M150 78 C 178 44 216 68 202 98"></path>
+            <circle class="acf" cx="202" cy="98" r="5.5"></circle>
+            <g class="ac" stroke-width="1.8">
+              <path d="M210 88 l12 -8"></path><path d="M214 104 l14 2"></path><path d="M204 78 l4 -13"></path>
+            </g>
+            <path class="dash" d="M222 108 L 288 142"></path>
+            <path class="ln" d="M300 206 L 480 206"></path>
+            <path class="ln" d="M300 206 L 300 52"></path>
+            <path class="lnt" d="M300 178 L 342 176 L 356 180 L 368 174"></path>
+            <path class="ac" d="M368 174 L 380 72 L 393 128 L 407 158 L 424 172 L 480 176"></path>
+            <text class="cap" x="292" y="58" text-anchor="end" letter-spacing="0">bright</text>
+            <text class="cap" x="480" y="230" text-anchor="end" letter-spacing="0">time →</text>
+          </svg>
+        </div>
+        <h3>Stars that lose their temper</h3>
+        <p>
+          A small red star twists its own magnetic field until it snaps, and for a few minutes it can double in
+          brightness. How often that happens depends on how old the star is — so a flare is also a clock.
+        </p>
+      </article>
+
+      <article class="topic">
+        <div class="plate">
+          <svg class="art" viewBox="0 0 500 250" role="img"
+               aria-label="A hot star swelling and shrinking, with the sawtooth light curve of its pulsation">
+            <circle class="dash" cx="140" cy="128" r="94"></circle>
+            <circle class="dash" cx="140" cy="128" r="76"></circle>
+            <circle class="ln" cx="140" cy="128" r="54"></circle>
+            <g class="ac" stroke-width="2">
+              <path d="M140 56 l0 -14"></path><path d="M134 46 l6 -8 l6 8"></path>
+              <path d="M140 200 l0 14"></path><path d="M134 210 l6 8 l6 -8"></path>
+              <path d="M68 128 l-14 0"></path><path d="M58 122 l-8 6 l8 6"></path>
+              <path d="M212 128 l14 0"></path><path d="M222 122 l8 6 l-8 6"></path>
+            </g>
+            <path class="lnt" d="M118 110 C 132 122 150 122 164 112"></path>
+            <path class="lnt" d="M116 142 C 132 152 152 150 166 140"></path>
+            <path class="ln" d="M300 206 L 480 206"></path>
+            <path class="ln" d="M300 206 L 300 52"></path>
+            <path class="ac" d="M302 178 L 322 74 L 344 178 L 366 74 L 388 178 L 410 74 L 432 178 L 454 74 L 474 178"></path>
+            <text class="cap" x="480" y="230" text-anchor="end" letter-spacing="0">20 minutes →</text>
+          </svg>
+        </div>
+        <h3>A star that breathes every 20 minutes</h3>
+        <p>
+          Blue Large-Amplitude Pulsators swell and shrink faster than a coffee break, and to exist at all they must
+          have lost almost their entire outer envelope. Nobody agrees yet on how. I found one nobody expected, and now
+          I am collecting the rest.
+        </p>
+      </article>
+
+      <article class="topic">
+        <div class="plate">
+          <svg class="art" viewBox="0 0 500 250" role="img"
+               aria-label="Telescopes feeding a tiled sky map into a stream of alerts, one flagged as worth following">
+            <g class="ln">
+              <path d="M44 200 l0 -14"></path><path d="M36 200 l8 -9"></path><path d="M52 200 l-8 -9"></path>
+              <path d="M44 186 l14 -24"></path><path d="M55 184 l11 -18"></path><path d="M44 186 L 55 184"></path>
+              <path d="M80 200 l0 -14"></path><path d="M72 200 l8 -9"></path><path d="M88 200 l-8 -9"></path>
+              <path d="M80 186 l14 -24"></path><path d="M91 184 l11 -18"></path><path d="M80 186 L 91 184"></path>
+            </g>
+            <path class="dash" d="M108 160 L 156 128"></path>
+            <g class="lnt">
+              <path d="M164 64 l152 0 l0 118 l-152 0 z"></path>
+              <path d="M164 103 l152 0"></path><path d="M164 142 l152 0"></path>
+              <path d="M202 64 l0 118"></path><path d="M240 64 l0 118"></path><path d="M278 64 l0 118"></path>
+            </g>
+            <circle class="lnf" cx="183" cy="84" r="1.8"></circle>
+            <circle class="lnf" cx="297" cy="84" r="1.8"></circle>
+            <circle class="lnf" cx="221" cy="161" r="1.8"></circle>
+            <rect class="ac" x="240" y="103" width="38" height="39"></rect>
+            <circle class="acf" cx="259" cy="122" r="4.5"></circle>
+            <path class="dash" d="M322 122 L 360 122"></path>
+            <g class="lnt">
+              <path d="M366 74 l108 0 l0 30 l-108 0 z"></path>
+              <path d="M366 112 l108 0 l0 30 l-108 0 z"></path>
+              <path d="M366 150 l108 0 l0 30 l-108 0 z"></path>
+              <path d="M378 89 l52 0"></path><path d="M378 127 l64 0"></path><path d="M378 165 l44 0"></path>
+            </g>
+            <circle class="acf" cx="462" cy="127" r="4.5"></circle>
+            <text class="cap" x="420" y="210" text-anchor="middle">WORTH A LOOK?</text>
+          </svg>
+        </div>
+        <h3>Millions of alerts, one night</h3>
+        <p>
+          A modern survey photographs the whole southern sky again and again, and every night reports millions of
+          things that changed. I build the pipelines and databases behind that — and teach machines which handful is
+          worth waking someone up for.
+        </p>
+      </article>
+
+      <article class="topic">
+        <div class="plate">
+          <svg class="art" viewBox="0 0 500 250" role="img"
+               aria-label="Two neutron stars spiralling together, their ripples reaching a telescope that finds the new source on a sky map">
+            <circle class="dash" cx="128" cy="128" r="76"></circle>
+            <circle class="dash" cx="128" cy="128" r="58"></circle>
+            <path class="lnt" d="M96 92 C 148 72 186 112 162 148 C 144 174 104 168 100 140 C 98 120 116 110 132 118"></path>
+            <circle class="lnf" cx="132" cy="118" r="6"></circle>
+            <circle class="lnf" cx="150" cy="138" r="4"></circle>
+            <circle class="acf" cx="141" cy="128" r="6"></circle>
+            <g class="ac" stroke-width="1.8">
+              <path d="M152 108 l12 -10"></path><path d="M158 132 l15 2"></path><path d="M136 102 l3 -14"></path>
+            </g>
+            <path class="dash" d="M214 132 L 274 152"></path>
+            <g class="ln">
+              <path d="M300 208 l0 -18"></path><path d="M290 208 l10 -12"></path><path d="M310 208 l-10 -12"></path>
+              <path d="M300 190 l28 -44"></path><path d="M320 187 l22 -34"></path><path d="M300 190 L 320 187"></path>
+              <path d="M330 146 l14 8"></path>
+            </g>
+            <g class="lnt">
+              <path d="M366 62 l112 0 l0 76 l-112 0 z"></path>
+              <path d="M366 100 l112 0"></path><path d="M422 62 l0 76"></path>
+            </g>
+            <circle class="lnf" cx="392" cy="80" r="1.8"></circle>
+            <circle class="lnf" cx="452" cy="120" r="1.8"></circle>
+            <circle class="lnf" cx="440" cy="76" r="1.8"></circle>
+            <circle class="acf" cx="404" cy="118" r="5"></circle>
+            <circle class="ac" cx="404" cy="118" r="11"></circle>
+            <text class="cap" x="422" y="168" text-anchor="middle">NEW SOURCE</text>
+          </svg>
+        </div>
+        <h3>Catching the light of a collision</h3>
+        <p>
+          When two neutron stars merge, the shudder in spacetime arrives first and the glow follows within hours —
+          somewhere in a patch of sky the size of a fist. Finding it before it fades is a race, and I have been running
+          it since GW170817.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== ON SKY NOW ===== -->
+  <section class="wrap" id="now">
+    <div class="sechead">
+      <h2>On sky now</h2>
+      <p class="kicker">Programmes I lead — 7DT, 7DS, BOES, Gemini</p>
+    </div>
+
+    <div class="progs">
+
+      <article class="prog">
+        <div class="prog-mark">
+          <svg viewBox="0 0 40 40" role="img" aria-label="A sawtooth pulsation light curve">
+            <path class="lnt" d="M3 34 L37 34"></path>
+            <path class="ac" d="M5 30 L12 9 L19 30 L26 9 L33 30"></path>
+          </svg>
+        </div>
+        <div>
+          <h3>Timing 100 new BLAP candidates</h3>
+          <p>
+            A search for ultraviolet variability in SkyMapper DR4 turned up more than a hundred candidate Blue
+            Large-Amplitude Pulsators in southern fields — outside the crowded, dust-choked bulge where nearly all the
+            known ones live. Several 7DT units watch the same star at once in <em>g</em> and <em>r</em>, and their
+            interleaved exposures stitch into one continuous light curve: two or three nights of half-hour blocks pin
+            a period to about 0.1% down to nineteenth magnitude.
+          </p>
+        </div>
+        <div class="meta">
+          <b>With</b>
+          Christian Wolf, Christopher Onken, Michael Bessell (ANU) · Péter Németh (Czech Academy of Sciences) ·
+          Nicolás Rodríguez-Segovia (KASI) · 7DT core members
+        </div>
+      </article>
+
+      <article class="prog">
+        <div class="prog-mark">
+          <svg viewBox="0 0 40 40" role="img" aria-label="A spectrum with one emission line rising above the continuum">
+            <path class="lnt" d="M3 34 L37 34"></path>
+            <path class="ln" d="M4 26 C 11 25, 15 25, 18 25"></path>
+            <path class="ac" d="M18 25 L21 8 L24 25"></path>
+            <path class="ln" d="M24 25 C 29 24, 33 23, 37 23"></path>
+          </svg>
+        </div>
+        <div>
+          <h3>An Hα map of the southern K and M dwarfs</h3>
+          <p>
+            Hα emission is the clearest sign that a small star is magnetically active, but the big samples come from
+            spectroscopy — slow, and almost all northern. 7DS takes a low-resolution spectrum of everything in its
+            footprint, 400 to 900 nm at once, so the Hα excess can be read straight off the medium bands. With repeat
+            visits, quiet activity separates from flares on timescales of days to months.
+          </p>
+        </div>
+        <div class="meta">
+          <b>With</b>
+          7DT core members · rotation periods from TESS and K2, ages from Gaia kinematics
+        </div>
+      </article>
+
+      <article class="prog">
+        <div class="prog-mark">
+          <svg viewBox="0 0 40 40" role="img" aria-label="Two cooling curves separating as a flare decays">
+            <path class="lnt" d="M5 34 L37 34"></path>
+            <path class="lnt" d="M5 34 L5 5"></path>
+            <path class="ln" d="M7 9 C 16 10, 22 18, 36 21"></path>
+            <path class="ac" d="M7 9 C 14 14, 19 26, 36 30"></path>
+          </svg>
+        </div>
+        <div>
+          <h3>Watching a flare cool, colour by colour</h3>
+          <p>
+            Flares are usually modelled as a single 10,000 K glow, but the biggest ones come apart during the decay:
+            the blue continuum stays near 8,000–11,000 K while the red end falls to 3,500–5,500 K, and nobody agrees
+            what the cool red part is. Rubin will report these flares by the thousand but only in snapshot pairs of
+            filters. The plan is to catch the alert and turn 7DT on it within minutes, then track the full
+            400–900 nm shape — and Hα with it — all the way down.
+          </p>
+        </div>
+        <div class="meta">
+          <b>With</b>
+          7DT core members · Adam Kowalski (NSO / CU Boulder)
+        </div>
+      </article>
+
+      <article class="prog">
+        <div class="prog-mark">
+          <svg viewBox="0 0 40 40" role="img" aria-label="Three stacked spectral line profiles, the middle one at its peak">
+            <path class="lnt" d="M4 33 L14 33 L17 29 L20 33 L36 33"></path>
+            <path class="ac" d="M4 22 L14 22 L17 11 L20 22 L36 22"></path>
+            <path class="lnt" d="M4 10 L14 10 L17 6 L20 10 L36 10"></path>
+          </svg>
+        </div>
+        <div>
+          <h3>A flare, line by line, with BOES</h3>
+          <p>
+            Photometry tells you a flare happened; a spectrum tells you what happened to the gas. With the echelle
+            spectrograph at Bohyunsan we take spectra fast enough to watch the chromospheric lines evolve through a
+            single energetic flare — Hα and the Balmer series filling in and then draining away, minute by minute,
+            while the continuum does something else entirely. Those line profiles are where an ejected filament would
+            show up.
+          </p>
+        </div>
+        <div class="meta">
+          <b>Latest</b>
+          Chromospheric line evolution during an energetic flare on AD Leo — Oh et al., JKAS (corresponding author)
+        </div>
+      </article>
+
+      <article class="prog">
+        <div class="prog-mark">
+          <svg viewBox="0 0 40 40" role="img" aria-label="An observed spectrum with two broad absorption lines and a model fit beneath it">
+            <path class="ln" d="M4 12 L11 12 L14 23 L17 12 L24 12 L27 21 L30 12 L36 12"></path>
+            <path class="ac" d="M4 26 L11 26 L14 35 L17 26 L24 26 L27 34 L30 26 L36 26"></path>
+          </svg>
+        </div>
+        <div>
+          <h3>What a BLAP is actually made of</h3>
+          <p>
+            A period alone will not tell you where a pulsator came from — the surface will. Binary mass transfer, a
+            merger, and surviving a supernova each leave a different temperature, gravity and set of abundances behind.
+            So the confirmed pulsators go to Gemini for spectra, and the spectra go through non-LTE model atmospheres.
+            Only about 15% of the roughly two hundred known BLAPs have measured atmospheric parameters at all.
+          </p>
+        </div>
+        <div class="meta">
+          <b>With</b>
+          Péter Németh (Czech Academy of Sciences &amp; Astroserver.org) — XTgrid / TLUSTY modelling ·
+          Gemini programme G-2025B-0498-V
+        </div>
+      </article>
+
+    </div>
+
+    <div class="queue">
+      <p class="kicker">Next</p>
+      <ul>
+        <li>New gyrochronology benchmarks in southern open clusters with 7DT</li>
+        <li>A southern white dwarf census with 7DS — atmospheric parameters and peculiar systems</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== RUBIN / LSST ===== -->
+  <section class="wrap" id="rubin">
+    <div class="sechead">
+      <h2>Rubin / LSST</h2>
+      <p class="kicker">Where my work meets the survey</p>
+    </div>
+
+    <div class="rubin">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <p>
+          LSST will report millions of changes a night, and most of what I care about — flares, pulsators, kilonovae —
+          arrives in that stream as a handful of points that mean nothing on their own. My interest is the step after
+          the alert: deciding in real time which events are worth a telescope, and then getting a second instrument
+          onto them fast enough to matter.
+        </p>
+        <p>
+          Concretely, I am building a path from the Rubin alert stream to minute-cadence medium-band follow-up with
+          7DT — cross-matching alerts against K–M dwarf catalogues, deriving per-event colour temperatures, and setting
+          trigger criteria for the extreme, multi-hour events worth chasing. The same machinery applies to orphan
+          kilonovae found by their single-epoch SED, without a gravitational-wave trigger.
+        </p>
+        <p>
+          I have built this kind of system before: the SkyMapper alert follow-up pipeline through LIGO/Virgo O3, the
+          KS4 public data release, and the 7DT survey-management portal.
+        </p>
+        <div class="topicchips">
+          <span>Time domain / transients</span>
+          <span>Galactic</span>
+          <span>Software development</span>
+          <span>Synergies with other observatories</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="kicker" style="margin-bottom: 14px;">Affiliations</p>
+        <ul class="roles">
+          <li>Member, Transients and Variable Stars (TVS) Science Collaboration</li>
+          <li>Member, Stars, Milky Way and Local Volume (SMWLV) Science Collaboration</li>
+          <li>Junior Associate, Korean Rubin Science Collaboration</li>
+          <li>Member, FINK community alert broker</li>
+          <li>Core member, <a href="https://7ds.snu.ac.kr/">7DT / 7DS</a> — 20 × 0.5 m medium-band array at CTIO, Chile</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PUBLICATIONS ===== -->
+  <section class="wrap" id="pubs">
+    <div class="sechead">
+      <h2>Selected publications</h2>
+      <p class="kicker">
+        <span class="star">★</span>first or corresponding author ·
+        <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-3118-8275&sort=date%20desc">full list on ADS</a>
+      </p>
+    </div>
+
+    <div class="pubs">
+      <div class="pub">
+        <div class="yr">2026</div>
+        <div class="ti"><span class="star">★</span>KMTNet Synoptic Survey of Southern Sky III: The First Data Release</div>
+        <div class="vn">JKAS 59, 1</div>
+      </div>
+      <div class="pub">
+        <div class="yr">2026</div>
+        <div class="ti"><span class="star">★</span>High-resolution spectroscopic analysis of chromospheric line evolution during an energetic flare on AD Leo</div>
+        <div class="vn">JKAS</div>
+      </div>
+      <div class="pub">
+        <div class="yr">2026</div>
+        <div class="ti">A hybrid framework for kilonova anomaly detection using single-epoch SEDs from the 7-Dimensional Telescope</div>
+        <div class="vn">ApJ</div>
+      </div>
+      <div class="pub">
+        <div class="yr">2024</div>
+        <div class="ti"><span class="star">★</span>Discovery of a new Blue Large-Amplitude Pulsator in SkyMapper DR2</div>
+        <div class="vn">MNRAS</div>
+      </div>
+      <div class="pub">
+        <div class="yr">2024</div>
+        <div class="ti">A lanthanide-rich kilonova in the aftermath of a long gamma-ray burst</div>
+        <div class="vn">Nature</div>
+      </div>
+      <div class="pub">
+        <div class="yr">2022</div>
+        <div class="ti"><span class="star">★</span>Spatially dependent photometric activity of M dwarfs in the solar cylinder</div>
+        <div class="vn">MNRAS 517, 2842</div>
+      </div>
+      <div class="pub">
+        <div class="yr">2021</div>
+        <div class="ti"><span class="star">★</span>SkyMapper optical follow-up of gravitational wave triggers: alert science data pipeline and the LIGO/Virgo O3 run</div>
+        <div class="vn">PASA</div>
+      </div>
+      <div class="pub">
+        <div class="yr">2020</div>
+        <div class="ti"><span class="star">★</span>Photometric flaring fraction of M dwarf stars from the SkyMapper Southern Survey</div>
+        <div class="vn">MNRAS 491, 39</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RECENT ===== -->
+  <section class="wrap" id="news">
+    <div class="split">
+      <div>
+        <h2>Recent</h2>
+        <p class="kicker" style="margin-top: 8px;">2026</p>
+      </div>
+      <div class="news">
+        <div class="item">
+          <div class="when">April</div>
+          <div class="what">KS4 Data Release 1 went public, through NOIRLab Astro Data Lab and CDS Aladin &amp; VizieR.</div>
+        </div>
+        <div class="item">
+          <div class="when">March</div>
+          <div class="what">My NRF Core Research programme on the origins of Blue Large-Amplitude Pulsators began (2026–2029).</div>
+        </div>
+        <div class="item">
+          <div class="when">February</div>
+          <div class="what">Back at RSAA, Australian National University as a Visiting Fellow through February 2027.</div>
+        </div>
+        <div class="item">
+          <div class="when">January</div>
+          <div class="what">The start of 7DT observations was named one of Korea's Top 100 National R&amp;D Achievements of 2025.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="wrap" id="contact">
+    <div class="split" style="border-top: 1px solid var(--rule); padding-top: 30px;">
+      <h2>Contact</h2>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <p class="what" style="max-width: 62ch;">
+          I am always glad to hear from students who like the idea of staring at the same patch of sky for years, and
+          from anyone who wants to point a telescope at something the moment it changes.
+        </p>
+        <div style="display: grid; gap: 6px 40px; font-size: 15px;">
+          <div><a href="mailto:seowon.chang@snu.ac.kr">seowon.chang@snu.ac.kr</a></div>
+          <div><a href="https://orcid.org/0000-0002-3118-8275">ORCID 0000-0002-3118-8275</a></div>
+          <div style="color: var(--label); line-height: 1.6; margin-top: 6px;">
+            Room 202, Building 45 · Astronomy Research Center<br>
+            Seoul National University, 1 Gwanak-ro, Gwanak-gu, Seoul 08826, Republic of Korea
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot">
+    <div><a href="https://7ds.snu.ac.kr/">7DT / 7DS</a> · KMTNet · SkyMapper · GECKO · OzGrav · Rubin LSST</div>
+    <div>Updated September 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
