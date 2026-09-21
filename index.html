@@ -67,6 +67,9 @@
   p { margin: 0; }
 
   .kicker { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin: 0; }
+  .affil { font-family: var(--serif); font-size: clamp(17px, 2.2vw, 19px); color: var(--ink); line-height: 1.4; margin: 0; }
+  .affil a { color: var(--ink); border-bottom: 1px solid var(--rule); }
+  .affil a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
   section { padding-block: clamp(40px, 6vw, 60px); }
   .sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap;
              border-bottom: 1px solid var(--rule); padding-bottom: 13px; margin-bottom: 30px; }
@@ -117,6 +120,18 @@
   .queue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
   .queue li { font-size: 15px; color: var(--second); }
   .queue li::before { content: "— "; color: var(--label); }
+
+  /* gallery */
+  .gallery { display: grid; gap: 18px; }
+  @media (min-width: 720px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .gallery-item { display: flex; flex-direction: column; }
+  .gallery-item.wide { grid-column: 1 / -1; }
+  .gallery-item img { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .gallery-cap { padding: 10px 2px 0; }
+  .gallery-cap .obj { font-family: var(--serif); font-size: 17px; color: var(--ink); }
+  .gallery-cap .desc { font-size: 14.5px; color: var(--body); line-height: 1.62; margin-top: 4px; }
+  .gallery-cap .fov { font-size: 13px; color: var(--label); margin-top: 4px; }
+  .gallery-credit { font-size: 13px; color: var(--label); margin-top: 20px; border-top: 1px solid var(--edge); padding-top: 12px; }
 
   /* rubin block */
   .rubin { display: grid; gap: clamp(20px, 4vw, 40px); }
@@ -171,6 +186,7 @@
     <nav class="site" aria-label="Sections">
       <ul>
         <li><a href="#work">Research</a></li>
+        <li><a href="#ks4">KS4 Gallery</a></li>
         <li><a href="#now">On sky now</a></li>
         <li><a href="#rubin">Rubin / LSST</a></li>
         <li><a href="#pubs">Publications</a></li>
@@ -189,8 +205,9 @@
       <img class="portrait" src="assets/photo.jpg" width="560" height="629"
            alt="Seo-Won Chang">
       <div class="hero-copy">
-        <p class="kicker">Research Associate Professor · Research Institute of Basic Sciences, Seoul National University</p>
+        <p class="kicker">Research Associate Professor</p>
         <h1>Seo-Won Chang</h1>
+        <p class="affil">Research Institute of Basic Sciences, <a href="https://astron.snu.ac.kr/en/">Seoul National University</a></p>
         <p class="bio">
           I am an observational astronomer working in time-domain and multi-messenger astronomy.
           To study how the sky changes on timescales from minutes to years, I have spent the past decade building
@@ -379,6 +396,75 @@
       </article>
 
     </div>
+  </section>
+
+  <!-- ===== KS4 GALLERY ===== -->
+  <section class="wrap" id="ks4">
+    <div class="sechead">
+      <h2>KS4 Gallery</h2>
+      <p class="kicker">KMTNet Synoptic Survey of Southern Sky</p>
+    </div>
+
+    <div class="gallery">
+
+      <div class="gallery-item wide">
+        <img src="assets/ks4-ngc4696-centaurus.jpg" width="1200" height="656"
+             alt="The Centaurus galaxy cluster field, showing dozens of elliptical, lenticular and background spiral galaxies around NGC 4696"
+             loading="lazy">
+        <div class="gallery-cap">
+          <div class="obj">NGC 4696 and the Centaurus cluster</div>
+          <div class="desc">The central region of the Centaurus galaxy cluster (Abell 3526), dominated by NGC 4696 — a giant elliptical and one of the most luminous galaxies in the nearby universe. Dozens of cluster members, including ellipticals, lenticulars, and background spirals, are visible across the field.</div>
+          <div class="fov">1.31° × 0.71° · BVI composite</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/ks4-ngc2442.jpg" width="1200" height="655"
+             alt="NGC 2442, an asymmetric barred spiral galaxy with one extended diffuse arm and one compact arm"
+             loading="lazy">
+        <div class="gallery-cap">
+          <div class="obj">NGC 2442 — the Meathook Galaxy</div>
+          <div class="desc">A strongly asymmetric barred spiral in Volans at <em>d</em> ≈ 15 Mpc. One arm is extended and diffuse, the other compact — a signature of a past tidal interaction.</div>
+          <div class="fov">21.1′ × 11.5′ · BVI composite</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/ks4-ngc5291.jpg" width="1200" height="699"
+             alt="NGC 5291 and its collisional ring system with tidal dwarf galaxies forming in the debris"
+             loading="lazy">
+        <div class="gallery-cap">
+          <div class="obj">NGC 5291 — tidal dwarfs in Abell 3574</div>
+          <div class="desc">A collisional ring system in the outskirts of Abell 3574. Tidal dwarf galaxies are forming in the debris ring — products of a high-velocity collision ~360 Myr ago.</div>
+          <div class="fov">18.4′ × 10.1′ · BVI composite</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/ks4-ngc5292.jpg" width="1200" height="699"
+             alt="NGC 5292, a face-on disc galaxy with resolved spiral structure and central bar"
+             loading="lazy">
+        <div class="gallery-cap">
+          <div class="obj">NGC 5292</div>
+          <div class="desc">A face-on disc galaxy in Centaurus, with spiral structure and central bar resolved in the stacked imaging.</div>
+          <div class="fov">9.42′ × 5.15′ · BVI composite</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="assets/ks4-galactic-plane.jpg" width="1200" height="699"
+             alt="A dense Milky Way star field observed as part of the KS4 survey"
+             loading="lazy">
+        <div class="gallery-cap">
+          <div class="obj">Galactic plane field</div>
+          <div class="desc">A dense Milky Way star field from the KS4 survey footprint, constructed from stacked KMTNet <em>BVI</em> exposures.</div>
+          <div class="fov">1.42° × 0.83′ · BVI composite</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="gallery-credit">Credit: Seo-Won Chang &amp; Mankeun Jeong (Seoul National University) · KS4 Data Release 1</p>
   </section>
 
   <!-- ===== ON SKY NOW ===== -->
