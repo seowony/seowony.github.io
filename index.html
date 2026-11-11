@@ -131,6 +131,10 @@
   .gallery-cap .obj { font-family: var(--serif); font-size: 17px; color: var(--ink); }
   .gallery-cap .desc { font-size: 14.5px; color: var(--body); line-height: 1.62; margin-top: 4px; }
   .gallery-cap .fov { font-size: 13px; color: var(--label); margin-top: 4px; }
+  .media { margin-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--rule); padding-top: 20px; }
+  .media .gallery { margin-top: 14px; }
+  figure.gallery-item { margin: 0; }
+  .gallery-item video { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: #000; }
   .gallery-credit { font-size: 13px; color: var(--label); margin-top: 20px; border-top: 1px solid var(--edge); padding-top: 12px; }
 
   /* rubin block */
@@ -416,7 +420,7 @@
         <div class="gallery-cap">
           <div class="obj">NGC 4696 and the Centaurus cluster</div>
           <div class="desc">The central region of the Centaurus galaxy cluster (Abell 3526), dominated by NGC 4696 — a giant elliptical and one of the most luminous galaxies in the nearby universe. Dozens of cluster members, including ellipticals, lenticulars, and background spirals, are visible across the field.</div>
-          <div class="fov">1.31° × 0.71° · BVI composite</div>
+          <div class="fov">1.31° × 0.71°, BVI composite</div>
         </div>
       </div>
 
@@ -427,7 +431,7 @@
         <div class="gallery-cap">
           <div class="obj">NGC 2442 — the Meathook Galaxy</div>
           <div class="desc">A strongly asymmetric barred spiral in Volans at <em>d</em> ≈ 15 Mpc. One arm is extended and diffuse, the other compact — a signature of a past tidal interaction.</div>
-          <div class="fov">21.1′ × 11.5′ · BVI composite</div>
+          <div class="fov">21.1′ × 11.5′, BVI composite</div>
         </div>
       </div>
 
@@ -438,7 +442,7 @@
         <div class="gallery-cap">
           <div class="obj">NGC 5291 — tidal dwarfs in Abell 3574</div>
           <div class="desc">A collisional ring system in the outskirts of Abell 3574. Tidal dwarf galaxies are forming in the debris ring — products of a high-velocity collision ~360 Myr ago.</div>
-          <div class="fov">18.4′ × 10.1′ · BVI composite</div>
+          <div class="fov">18.4′ × 10.1′, BVI composite</div>
         </div>
       </div>
 
@@ -449,7 +453,7 @@
         <div class="gallery-cap">
           <div class="obj">NGC 5292</div>
           <div class="desc">A face-on disc galaxy in Centaurus, with spiral structure and central bar resolved in the stacked imaging.</div>
-          <div class="fov">9.42′ × 5.15′ · BVI composite</div>
+          <div class="fov">9.42′ × 5.15′, BVI composite</div>
         </div>
       </div>
 
@@ -460,13 +464,13 @@
         <div class="gallery-cap">
           <div class="obj">Galactic plane field</div>
           <div class="desc">A dense Milky Way star field from the KS4 survey footprint, constructed from stacked KMTNet <em>BVI</em> exposures.</div>
-          <div class="fov">1.42° × 0.83′ · BVI composite</div>
+          <div class="fov">1.42° × 0.83°, BVI composite</div>
         </div>
       </div>
 
     </div>
 
-    <p class="gallery-credit">Credit: Seo-Won Chang &amp; Mankeun Jeong (Seoul National University) · KS4 Data Release 1</p>
+    <p class="gallery-credit">Credit: Seo-Won Chang &amp; Mankeun Jeong (Seoul National University), KS4 Data Release 1</p>
   </section>
 
   <!-- ===== ON SKY NOW ===== -->
@@ -497,7 +501,8 @@
         </div>
         <div class="meta">
           <b>With</b>
-          Christian Wolf, Christopher Onken, Michael Bessell (ANU) · Péter Németh (Czech Academy of Sciences) ·
+          Christian Wolf, Christopher Onken, Michael Bessell (ANU)<br>
+          Péter Németh (Czech Academy of Sciences)<br>
           7DT core members
         </div>
       </article>
@@ -523,7 +528,8 @@
         </div>
         <div class="meta">
           <b>With</b>
-          7DT core members · rotation periods from TESS and K2, ages from Gaia kinematics
+          7DT core members<br>
+          Rotation periods from TESS and K2, ages from Gaia kinematics
         </div>
       </article>
 
@@ -596,7 +602,7 @@
         </div>
         <div class="meta">
           <b>With</b>
-          Péter Németh (Czech Academy of Sciences &amp; Astroserver.org) — XTgrid / TLUSTY modelling ·
+          Péter Németh (Czech Academy of Sciences &amp; Astroserver.org) — XTgrid / TLUSTY modelling<br>
           Gemini programme G-2025B-0498-V
         </div>
       </article>
@@ -659,6 +665,27 @@
         </ul>
       </div>
     </div>
+
+    <div class="media">
+      <p class="kicker">From the data</p>
+      <div class="gallery">
+        <figure class="gallery-item wide">
+          <video controls preload="none" playsinline
+                 poster="assets/ed138-skymapper-poster.jpg" width="1280" height="720"
+                 aria-label="Animation tracing 2026 ED138 across the sky from 2013 to 2020, with SkyMapper difference images of all 24 exposures">
+            <source src="assets/ed138-skymapper-2013-2020.mp4" type="video/mp4">
+            <a href="assets/ed138-skymapper-2013-2020.mp4">Download the video (MP4)</a>
+          </video>
+          <figcaption class="gallery-cap">
+            <div class="obj">Precovery of 2026 ED138 in SkyMapper archival images, 2013–2020</div>
+            <div class="desc">2026 ED138 was observed by Rubin Observatory in 2026. A search of SkyMapper images along its orbit,
+              covering the DR4 survey data and the 2013 AEGIS pre-survey observations, recovered it on 10 nights between 2013 and 2020: 24 exposures, giving 21 measured positions, 1 marginal
+              detection and 2 non-detections. The positions have been submitted to the Minor Planet Center.</div>
+            <div class="fov">SkyMapper DR4 and AEGIS pre-survey (2013), difference imaging, 2 min 22 s, with sound</div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <!-- ===== PUBLICATIONS ===== -->
@@ -666,7 +693,7 @@
     <div class="sechead">
       <h2>Selected publications</h2>
       <p class="kicker">
-        <span class="star">★</span>first or corresponding author ·
+        <span class="star">★</span>first or corresponding author,
         <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-3118-8275&sort=date%20desc">full list on ADS</a>
       </p>
     </div>
@@ -735,7 +762,7 @@
           <div class="what">
             <em>The Decadal Survey for Korean Astronomy (2026–2035)</em>, Korean Astronomical Society Long-term Development
             Committee. Working-group member for Multi-messenger Observing Facilities and for Data &amp; Computing Facilities.
-            <a href="https://drive.google.com/file/d/155RtthDZ6ii8yiFeNYgKH80klE6zoIF9/view?usp=drive_link">Final report</a> ·
+            <a href="https://drive.google.com/file/d/155RtthDZ6ii8yiFeNYgKH80klE6zoIF9/view?usp=drive_link">Final report</a>,
             <a href="https://www.kas.org/notice/view.php?idx=9851">KAS announcement</a>
           </div>
         </div>
@@ -808,7 +835,7 @@
 
 <footer class="site">
   <div class="wrap foot">
-    <div><a href="https://7ds.snu.ac.kr/">7DT / 7DS</a> · <a href="https://kmtnet.kasi.re.kr/kmtnet/">KMTNet</a> · <a href="https://skymapper.anu.edu.au/">SkyMapper</a> · GECKO · OzGrav · Rubin LSST</div>
+    <div><a href="https://7ds.snu.ac.kr/">7DT / 7DS</a>, <a href="https://kmtnet.kasi.re.kr/kmtnet/">KMTNet</a>, <a href="https://skymapper.anu.edu.au/">SkyMapper</a>, GECKO, OzGrav, Rubin LSST</div>
     <div>Updated September 2026</div>
   </div>
 </footer>
