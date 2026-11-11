@@ -144,6 +144,8 @@
   .roles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 14.5px; color: var(--second); }
   .roles li { padding-left: 16px; position: relative; line-height: 1.55; }
   .roles li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--accent); }
+  .roles .badge { display: inline-block; vertical-align: middle; margin-left: 4px; line-height: 0; }
+  .roles .badge img { height: 20px; width: auto; }
   .topicchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
   .topicchips span { font-size: 13px; padding: 5px 11px; border: 1px solid var(--edge); background: var(--panel); color: var(--second); }
 
@@ -305,13 +307,14 @@
             <text class="cap" x="480" y="230" text-anchor="end" letter-spacing="0">20 minutes →</text>
           </svg>
         </div>
-        <h3>Blue Large-Amplitude Pulsators: where did the envelope go?</h3>
+        <h3>Blue Large-Amplitude Pulsators beyond the Galactic bulge</h3>
         <p>
-          BLAPs are hot pulsating stars first found by OGLE in 2017. Nearly 200 are now known, mostly towards
-          the Galactic bulge. To form, they must lose most of their outer envelope, yet unlike hot subdwarfs (sdBs)
-          few of them have binary companions, so how they form is still an open question. I found a new BLAP in
-          SkyMapper and showed it is a helium-poor, thick-disc star, making it a candidate for a different
-          formation channel (Chang et al. 2024, MNRAS).
+          BLAPs are hot pulsating stars first found by OGLE in 2017. Nearly 200 are now known, but most lie
+          towards the crowded, reddened Galactic bulge. To form, they must lose most of their outer envelope, yet
+          unlike hot subdwarfs (sdBs) few have binary companions, so how they form is still an open question.
+          I found a new BLAP in SkyMapper, a helium-poor thick-disc star that may point to a different formation
+          channel (Chang et al. 2024, MNRAS). I'm now searching SkyMapper DR4 for more BLAPs outside the bulge,
+          in less crowded and less reddened fields.
         </p>
       </article>
 
@@ -392,7 +395,7 @@
           I have been searching for the optical light of gravitational-wave events since early 2017, through
           to the O4 run. I was part of the GW170817/AT2017gfo discovery, built and ran the SkyMapper alert
           follow-up pipeline through LIGO/Virgo O3 (Chang et al. 2021, PASA), and continue follow-up with
-          <a href="https://kmtnet.kasi.re.kr/kmtnet/">KMTNet</a> and 7DT in GECKO. I'm now also turning to the
+          <a href="https://kmtnet.kasi.re.kr/kmtnet/">KMTNet</a> and <a href="https://proton.snu.ac.kr/">7DT</a> in GECKO. I'm now also turning to the
           sources themselves: kilonovae from NS–NS and NS–BH mergers, and spotting orphan kilonovae in the
           Rubin/LSST alert stream from a single-epoch SED.
         </p>
@@ -418,7 +421,7 @@
           </svg>
         </div>
         <div>
-          <h3>Timing BLAP candidates beyond the Galactic bulge</h3>
+          <h3>Measuring periods of new BLAP candidates with 7DT</h3>
           <p>
             A search for ultraviolet variability in SkyMapper DR4 has turned up more than a hundred BLAP candidates
             in southern fields, away from the crowded bulge where almost all known BLAPs have been found.
@@ -553,21 +556,30 @@
     <div class="rubin">
       <div style="display: flex; flex-direction: column; gap: 16px;">
         <p>
-          The Vera C. Rubin Observatory's Legacy Survey of Space and Time will send out millions of transient
-          alerts every night. Flares, BLAPs and kilonovae all need to be picked out of that stream quickly and
-          followed up across wavelengths.
+          The Vera C. Rubin Observatory's Legacy Survey of Space and Time will send out millions of alerts every
+          night. Working with the <a href="https://fink-broker.org">Fink</a> alert broker, I pick out the events
+          worth chasing and follow them up quickly.
         </p>
         <p>
-          I'm building the link from Rubin alerts to minute-cadence medium-band follow-up with 7DT. That means
-          cross-matching alerts with K and M dwarf catalogues, working out a colour temperature for each event,
-          and deciding which events are worth an immediate trigger. The same approach can pick out orphan
-          kilonovae from a single-epoch SED, with no gravitational-wave trigger needed (Paek et al. 2026, ApJ).
+          <strong>Stellar flares</strong> come first. Our Fink filter matches Rubin alerts to K and M dwarfs in
+          real time. When a bright flare goes off, 7DT, which shares the Chilean night with Rubin, can be on the
+          star within minutes. Each of its telescopes observes through a different medium-band filter, so every
+          100-second frame gives a spectrum-like SED from 400 to 875 nm. Following a flare for an hour lets us
+          track both the hot blue continuum and the cooler red one that grows as the flare fades, and test where
+          that red light comes from.
         </p>
         <p>
-          I'm also combining 7DS medium-band spectrophotometry with SPHEREx infrared spectra to classify and
-          characterise variable and transient sources from the optical to the infrared. All of this builds on a
-          decade of survey infrastructure: the SkyMapper alert pipeline through LIGO/Virgo O3, the KS4 public data
-          release and the 7DT data-management portal.
+          <strong>Kilonovae</strong> from neutron star mergers may turn up in the alert stream without a
+          gravitational-wave trigger. A single-epoch SED from 7DT can flag these orphan kilonova candidates
+          (Paek et al. 2026, ApJ).
+        </p>
+        <p>
+          <strong>Fast blue optical transients</strong> (FBOTs) brighten and fade within days, so they need to be
+          caught early. I'm building a filter to pull FBOT candidates out of the Fink alert stream.
+        </p>
+        <p>
+          <strong>Very blue stars</strong> such as BLAPs may also be within reach. Single-epoch photometry from
+          Rubin DP2 could be enough to pick them out.
         </p>
         <div class="topicchips">
           <span>Time domain / transients</span>
@@ -583,14 +595,15 @@
           <li>Member, Transients and Variable Stars (TVS) Science Collaboration</li>
           <li>Member, Stars, Milky Way and Local Volume (SMWLV) Science Collaboration</li>
           <li>Junior Associate, Korean Rubin Science Collaboration</li>
-          <li>Member, FINK community alert broker</li>
+          <li>Member, Fink community alert broker
+            <a class="badge" href="https://fink-broker.org"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fastrolabsoftware%2Ffink-badges%2Fmain%2Fendpoints%2Ffink.json" alt="Fink" height="20" loading="lazy"></a></li>
           <li>Core member, <a href="https://7ds.snu.ac.kr/">7DT / 7DS</a>, a 20 × 0.5 m medium-band array at CTIO, Chile</li>
         </ul>
       </div>
     </div>
 
     <div class="media">
-      <p class="kicker">From the data</p>
+      <p class="kicker">A bright trans-Neptunian object candidate found by Rubin</p>
       <div class="gallery">
         <figure class="gallery-item wide">
           <video controls preload="none" playsinline
@@ -601,8 +614,8 @@
           </video>
           <figcaption class="gallery-cap">
             <div class="obj">Finding 2026 ED138 in the SkyMapper archive, 2013–2020</div>
-            <div class="desc">Rubin Observatory observed 2026 ED138 in 2026. Searching SkyMapper images along its orbit,
-              including DR4 survey data and the 2013 AEGIS pre-survey observations, we found it on 10 nights between
+            <div class="desc">Rubin Observatory found 2026 ED138 in 2026. Searching SkyMapper images along its orbit,
+              including DR4 survey data and the 2013 AEGIS pre-survey observations, we recovered it on 10 nights between
               2013 and 2020. From 24 exposures we measured 21 positions, with 1 marginal detection and 2 non-detections.
               The positions have been submitted to the Minor Planet Center.</div>
             <div class="fov">SkyMapper DR4 and AEGIS pre-survey (2013), difference imaging, 2 min 22 s, with sound</div>
@@ -708,6 +721,16 @@
         <div class="vn">ApJ</div>
       </div>
       <div class="pub">
+        <div class="yr">2025</div>
+        <div class="ti">Investigating the effects of point source injection strategies on KMTNet real/bogus classification</div>
+        <div class="vn">AJ</div>
+      </div>
+      <div class="pub">
+        <div class="yr">2025</div>
+        <div class="ti">Limits on the ejecta mass and binary properties during the search for kilonovae associated with neutron star–black hole mergers: S230518h, GW230529, S230627c, and S240422ed</div>
+        <div class="vn">Phys. Rev. D</div>
+      </div>
+      <div class="pub">
         <div class="yr">2024</div>
         <div class="ti"><span class="star">★</span>Discovery of a new Blue Large-Amplitude Pulsator in SkyMapper DR2</div>
         <div class="vn">MNRAS</div>
@@ -721,6 +744,11 @@
         <div class="yr">2022</div>
         <div class="ti"><span class="star">★</span>Spatially dependent photometric activity of M dwarfs in the solar cylinder</div>
         <div class="vn">MNRAS 517, 2842</div>
+      </div>
+      <div class="pub">
+        <div class="yr">2022</div>
+        <div class="ti">Multi-filter photometry of Solar System objects from the SkyMapper Southern Survey</div>
+        <div class="vn">A&amp;A</div>
       </div>
       <div class="pub">
         <div class="yr">2021</div>
@@ -830,7 +858,6 @@
 
 <footer class="site">
   <div class="wrap foot">
-    <div><a href="https://7ds.snu.ac.kr/">7DT / 7DS</a>, <a href="https://kmtnet.kasi.re.kr/kmtnet/">KMTNet</a>, <a href="https://skymapper.anu.edu.au/">SkyMapper</a>, GECKO, OzGrav, Rubin LSST</div>
     <div>Updated November 2026</div>
   </div>
 </footer>
