@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why I rang the bell | Seo-Won Chang</title>
+<meta name="description" content="The night of GW170817, as seen from the SkyMapper follow-up desk: a missed alert, an urgent email and a doorbell at 1:45 am.">
+<meta property="og:title" content="Why I rang the bell while everyone was in bed">
+<meta property="og:description" content="The night of GW170817 from the SkyMapper follow-up desk.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://seowony.github.io/stories/gw170817.html">
+<meta property="og:image" content="https://seowony.github.io/assets/photo.jpg">
+<link rel="canonical" href="https://seowony.github.io/stories/gw170817.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Karla:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --paper:  #E5E9E4;
+    --panel:  #F3F6F1;
+    --ink:    #18211E;
+    --body:   #3C463F;
+    --second: #4E584F;
+    --label:  #7C867C;
+    --rule:   #C3CCC1;
+    --edge:   #CBD3C9;
+    --accent: #B02E26;
+    --accent-d: #7E1F1A;
+
+    --serif: Newsreader, "Iowan Old Style", Georgia, serif;
+    --sans:  Karla, "Helvetica Neue", Arial, sans-serif;
+    --gutter: clamp(16px, 5vw, 56px);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-d); text-decoration: underline; }
+  a:focus-visible, .skip:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 1120px; margin-inline: auto; padding-inline: var(--gutter); }
+
+  .skip { position: absolute; left: -9999px; background: var(--ink); color: var(--paper); padding: 10px 16px; z-index: 10; }
+  .skip:focus { left: 8px; top: 8px; }
+
+  header.site { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--edge); z-index: 5; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-block: 14px; }
+  .wordmark { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 19px; }
+  nav.site ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0; padding: 0; font-size: 14.5px; }
+  nav.site a { color: var(--second); }
+  nav.site a:hover { color: var(--ink); }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(34px, 5.4vw, 50px); line-height: 1.06; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(25px, 3.4vw, 32px); line-height: 1.15; }
+  h3 { font-size: clamp(19px, 2.4vw, 23px); line-height: 1.28; }
+  p { margin: 0; }
+
+  .kicker { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin: 0; }
+  .affil { font-family: var(--serif); font-size: clamp(17px, 2.2vw, 19px); color: var(--ink); line-height: 1.4; margin: 0; }
+  .affil a { color: var(--ink); border-bottom: 1px solid var(--rule); }
+  .affil a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+  section { padding-block: clamp(40px, 6vw, 60px); }
+  .sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+             border-bottom: 1px solid var(--rule); padding-bottom: 13px; margin-bottom: 30px; }
+
+  /* hero */
+  .hero { display: grid; gap: clamp(24px, 4vw, 44px); align-items: start; }
+  @media (min-width: 760px) { .hero { grid-template-columns: 240px minmax(0, 1fr); } }
+  .portrait { width: 100%; max-width: 240px; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .hero-copy { display: flex; flex-direction: column; gap: 18px; }
+  .hero-copy p.bio { color: var(--body); line-height: 1.72; max-width: 64ch; font-size: 16.5px; }
+  .idlinks { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+  .idlinks a {
+    font-size: 14px; padding: 9px 15px; border: 1px solid var(--edge);
+    color: var(--second); background: var(--panel); text-decoration: none;
+  }
+  .idlinks a:hover { border-color: var(--ink); color: var(--ink); text-decoration: none; }
+  .idlinks a.strong { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .idlinks a.strong:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* illustrations */
+  svg.art { display: block; width: 100%; height: auto; }
+  .ln  { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .lnt { fill: none; stroke: var(--ink); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+  .dash{ fill: none; stroke: var(--label); stroke-width: 1.1; stroke-dasharray: 3 5; stroke-linecap: round; }
+  .ac  { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .acf { fill: var(--accent); }
+  .lnf { fill: var(--ink); }
+  text.cap { font-family: var(--sans); font-size: 12px; letter-spacing: 1.4px; fill: var(--label); }
+
+  /* research cards */
+  .topics { display: grid; gap: clamp(28px, 4vw, 40px); }
+  @media (min-width: 880px) { .topics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .topic { display: flex; flex-direction: column; gap: 14px; }
+  .plate { background: var(--panel); border: 1px solid var(--edge); padding: 16px; }
+  .topic p { font-size: 15.5px; line-height: 1.68; color: var(--body); }
+
+  /* programs */
+  .progs { display: flex; flex-direction: column; }
+  .prog { display: grid; gap: 6px 20px; padding-block: 22px; border-top: 1px solid var(--edge); }
+  .prog:first-child { border-top: 0; padding-top: 0; }
+  @media (min-width: 720px) { .prog { grid-template-columns: 52px minmax(0, 1fr) 200px; } }
+  .prog-mark svg { display: block; width: 34px; height: 34px; }
+  .prog p { color: var(--body); line-height: 1.66; font-size: 15px; max-width: 62ch; }
+  .prog .meta { font-size: 13px; line-height: 1.6; color: var(--label); }
+  .prog .meta b { font-weight: 500; color: var(--second); display: block; margin-bottom: 3px; }
+  .queue { margin-top: 26px; border-top: 1px solid var(--rule); padding-top: 20px; display: grid; gap: 10px 32px; }
+  @media (min-width: 720px) { .queue { grid-template-columns: 52px minmax(0, 1fr); } }
+  .queue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .queue li { font-size: 15px; color: var(--second); }
+  .queue li::before { content: "— "; color: var(--label); }
+
+  /* gallery */
+  .gallery { display: grid; gap: 18px; }
+  @media (min-width: 720px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .gallery-item { display: flex; flex-direction: column; }
+  .gallery-item.wide { grid-column: 1 / -1; }
+  .gallery-item img { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .gallery-cap { padding: 10px 2px 0; }
+  .gallery-cap .obj { font-family: var(--serif); font-size: 17px; color: var(--ink); }
+  .gallery-cap .desc { font-size: 14.5px; color: var(--body); line-height: 1.62; margin-top: 4px; }
+  .gallery-cap .fov { font-size: 13px; color: var(--label); margin-top: 4px; }
+  .media { margin-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--rule); padding-top: 20px; }
+  .media .gallery { margin-top: 14px; }
+  figure.gallery-item { margin: 0; }
+  .gallery-item video { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: #000; }
+  .gallery-credit { font-size: 13px; color: var(--label); margin-top: 20px; border-top: 1px solid var(--edge); padding-top: 12px; }
+
+  /* rubin block */
+  .rubin { display: grid; gap: clamp(20px, 4vw, 40px); }
+  @media (min-width: 820px) { .rubin { grid-template-columns: minmax(0, 1fr) 320px; } }
+  .rubin p { color: var(--body); line-height: 1.7; max-width: 62ch; }
+  .roles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 14.5px; color: var(--second); }
+  .roles li { padding-left: 16px; position: relative; line-height: 1.55; }
+  .roles li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--accent); }
+  .roles .badge { display: inline-block; vertical-align: middle; margin-left: 4px; line-height: 0; }
+  .roles .badge img { height: 20px; width: auto; }
+  .topicchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .topicchips span { font-size: 13px; padding: 5px 11px; border: 1px solid var(--edge); background: var(--panel); color: var(--second); }
+
+  /* publications */
+  .pubs { display: flex; flex-direction: column; gap: 0; }
+  .pub { display: grid; gap: 2px 18px; padding-block: 15px; border-top: 1px solid var(--edge); align-items: baseline; }
+  .pub:first-child { border-top: 0; }
+  @media (min-width: 640px) { .pub { grid-template-columns: 62px minmax(0, 1fr) 132px; } }
+  .pub .yr { font-size: 14px; color: var(--label); font-variant-numeric: tabular-nums; }
+  .pub .ti { font-size: 15.5px; line-height: 1.5; color: var(--ink); }
+  .pub .vn { font-size: 13px; color: var(--label); }
+  @media (min-width: 640px) { .pub .vn { text-align: right; } }
+  .star { color: var(--accent); margin-right: 5px; }
+
+  /* news + contact */
+  .split { display: grid; gap: clamp(18px, 4vw, 40px); }
+  @media (min-width: 820px) { .split { grid-template-columns: 190px minmax(0, 1fr); } }
+  .news { display: flex; flex-direction: column; gap: 14px; max-width: 70ch; }
+  .item { display: grid; gap: 2px 18px; }
+  @media (min-width: 520px) { .item { grid-template-columns: 92px minmax(0, 1fr); align-items: baseline; } }
+  .when { font-size: 14px; color: var(--label); }
+  .when small { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+  .what { font-size: 15.5px; line-height: 1.62; color: var(--body); }
+
+  footer.site { border-top: 1px solid var(--rule); }
+  .foot { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between;
+          padding-block: 22px 40px; font-size: 13px; color: var(--label); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  /* story page */
+  .story { padding-block: clamp(32px, 5vw, 52px); max-width: 1120px; }
+  .story h1 { margin: 10px 0 28px; max-width: 22ch; }
+  .story .kicker a { color: var(--label); }
+  .comic { display: grid; gap: 16px; margin-bottom: clamp(32px, 5vw, 48px); }
+  @media (min-width: 720px) { .comic { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .panel { margin: 0; background: var(--panel); border: 1px solid var(--edge); padding: 14px 14px 12px; }
+  .panel figcaption { font-size: 14.5px; line-height: 1.55; color: var(--body); margin-top: 8px; }
+  .panel figcaption b { font-weight: 600; color: var(--accent); margin-right: 6px; }
+  .paper { fill: var(--panel); }
+  .win { fill: var(--accent); opacity: 0.22; }
+  text.say { font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 1px; fill: var(--ink); }
+  text.say.acc { fill: var(--accent); }
+  text.say.big { font-size: 30px; }
+  .prose { max-width: 66ch; display: flex; flex-direction: column; gap: 16px; }
+  .prose p { color: var(--body); font-size: 16.5px; line-height: 1.75; }
+  .prose blockquote { margin: 4px 0; padding: 14px 20px; border-left: 3px solid var(--accent); background: var(--panel);
+                      display: flex; flex-direction: column; gap: 8px; }
+  .prose blockquote p { font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--ink); }
+  .timeline { margin-top: clamp(36px, 5vw, 52px); border-top: 1px solid var(--rule); padding-top: 24px; max-width: 760px; }
+  .timeline .day { font-family: var(--serif); font-size: 18px; color: var(--ink); margin: 18px 0 10px; }
+  .timeline .item { grid-template-columns: 120px minmax(0, 1fr); }
+  .timeline .what { font-size: 15px; }
+  .back { margin-top: 36px; font-size: 15px; }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="wordmark" href="../index.html" style="color: var(--ink); text-decoration: none;">
+      <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="24" fill="none" stroke="#18211E" stroke-width="3.4"></circle>
+        <circle cx="32" cy="32" r="8" fill="#B02E26"></circle>
+      </svg>
+      Seo-Won Chang
+    </a>
+    <nav class="site" aria-label="Sections">
+      <ul>
+        <li><a href="../index.html#work">Research</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#rubin">Rubin / LSST</a></li>
+        <li><a href="../index.html#gallery">Gallery</a></li>
+        <li><a href="../index.html#pubs">Publications</a></li>
+        <li><a href="../index.html#community">Community</a></li>
+        <li><a href="../cv.pdf">CV</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <article class="wrap story">
+    <p class="kicker"><a href="../index.html#work">Research</a> / GW170817, 17–18 August 2017</p>
+    <h1>Why I rang the bell while everyone was in bed</h1>
+
+    <div class="comic" role="group" aria-label="A four-panel cartoon of the night of GW170817">
+
+      <figure class="panel">
+        <svg class="art" viewBox="0 0 480 320" role="img" aria-label="Late at night, a researcher at a desk sees a gravitational-wave alert on the laptop. The clock reads just after eleven.">
+          <rect class="lnt" x="320" y="36" width="120" height="86"></rect>
+          <path class="lnt" d="M380 36 L380 122 M320 79 L440 79"></path>
+          <circle class="lnf" cx="342" cy="56" r="1.8"></circle>
+          <circle class="lnf" cx="418" cy="98" r="1.8"></circle>
+          <circle class="lnf" cx="402" cy="54" r="1.8"></circle>
+          <path class="ln" d="M360 104 a14 14 0 1 1 12 -22 a11 11 0 1 0 -12 22 Z"></path>
+          <circle class="ln" cx="90" cy="70" r="30"></circle>
+          <path class="ln" d="M90 70 L84 57"></path>
+          <path class="ac" d="M90 70 L105 56"></path>
+          <circle class="lnf" cx="90" cy="70" r="2.5"></circle>
+          <path class="ln" d="M240 222 L460 222"></path>
+          <path class="ln" d="M256 222 L256 296 M444 222 L444 296"></path>
+          <rect class="ln" x="300" y="140" width="116" height="76"></rect>
+          <path class="ln" d="M286 222 L430 222"></path>
+          <text class="say acc" x="358" y="172" text-anchor="middle">GW ALERT</text>
+          <text class="say" x="358" y="198" text-anchor="middle">NS 100%</text>
+          <g class="ac" stroke-width="1.8"><path d="M424 150 l12 -8"></path><path d="M426 168 l14 0"></path><path d="M424 186 l12 8"></path></g>
+          <path class="ln" d="M150 246 L216 246 M156 246 L156 296 M210 246 L210 296 M150 246 L146 188"></path>
+          <circle class="ln paper" cx="196" cy="156" r="18"></circle>
+          <path class="ln" d="M194 174 L198 240 L246 246 L246 296"></path>
+          <path class="ln" d="M196 192 L282 214"></path>
+          <path class="ln" d="M20 296 L460 296"></path>
+        </svg>
+        <figcaption><b>11:08 pm</b> A gravitational-wave alert. Chance of a neutron star: 100%.</figcaption>
+      </figure>
+
+      <figure class="panel">
+        <svg class="art" viewBox="0 0 480 320" role="img" aria-label="An email marked urgent fills the screen, while a database icon next to the laptop is crossed out.">
+          <rect class="ln" x="120" y="30" width="240" height="170"></rect>
+          <path class="ln" d="M96 204 L384 204 L404 222 L76 222 Z"></path>
+          <rect class="ln" x="168" y="62" width="144" height="90"></rect>
+          <path class="ln" d="M168 62 L240 112 L312 62"></path>
+          <text class="say acc" x="240" y="184" text-anchor="middle">URGENT</text>
+          <ellipse class="ln" cx="58" cy="232" rx="30" ry="10"></ellipse>
+          <path class="ln" d="M28 232 L28 286 M88 232 L88 286"></path>
+          <path class="ln" d="M28 286 a30 10 0 0 0 60 0"></path>
+          <path class="lnt" d="M28 259 a30 10 0 0 0 60 0"></path>
+          <path class="ac" d="M36 228 L82 290 M82 228 L36 290"></path>
+          <circle class="ln paper" cx="430" cy="150" r="18"></circle>
+          <path class="ln" d="M430 168 L430 240 M430 240 L414 296 M430 240 L446 296 M430 190 L404 214 M430 190 L456 170"></path>
+          <text class="say acc big" x="440" y="114" text-anchor="middle">!!</text>
+          <path class="ln" d="M20 296 L460 296"></path>
+        </svg>
+        <figcaption><b>11:51 pm</b> "Can you get SkyMapper on it immediately?" The database hadn't updated, so I entered the event by hand.</figcaption>
+      </figure>
+
+      <figure class="panel">
+        <svg class="art" viewBox="0 0 480 320" role="img" aria-label="On the phone, surrounded by bubbles for emails, calls and a video call, while a telescope dome sits on a distant hill.">
+          <circle class="ln paper" cx="200" cy="168" r="18"></circle>
+          <rect class="ln" x="214" y="150" width="10" height="20" rx="2"></rect>
+          <path class="ln" d="M200 186 L200 250 M200 250 L184 296 M200 250 L216 296 M200 206 L220 168 M200 206 L176 230"></path>
+          <rect class="lnt" x="40" y="60" width="96" height="58" rx="10"></rect>
+          <path class="lnt" d="M110 118 L150 150"></path>
+          <rect class="lnt" x="62" y="74" width="52" height="32"></rect>
+          <path class="lnt" d="M62 74 L88 92 L114 74"></path>
+          <rect class="lnt" x="160" y="26" width="84" height="54" rx="10"></rect>
+          <path class="lnt" d="M196 80 L198 140"></path>
+          <text class="say acc" x="202" y="60" text-anchor="middle">SOS</text>
+          <rect class="lnt" x="268" y="62" width="96" height="58" rx="10"></rect>
+          <path class="lnt" d="M284 120 L232 150"></path>
+          <rect class="lnt" x="290" y="78" width="36" height="26" rx="3"></rect>
+          <path class="lnt" d="M326 86 L344 78 L344 104 L326 96"></path>
+          <path class="ln" d="M300 296 Q 390 230 470 296"></path>
+          <path class="ln" d="M368 268 a22 22 0 0 1 44 0 Z"></path>
+          <path class="lnt" d="M390 246 L398 236"></path>
+          <text class="say acc big" x="420" y="226" text-anchor="middle">?</text>
+          <path class="ln" d="M20 296 L460 296"></path>
+        </svg>
+        <figcaption><b>12:30 am</b> Emails, calls and a Skype meeting. Nobody nearby could take over the telescope.</figcaption>
+      </figure>
+
+      <figure class="panel">
+        <svg class="art" viewBox="0 0 480 320" role="img" aria-label="In the middle of the night, a car parked outside a house and a person pressing the doorbell. One window is lit.">
+          <path class="ln" d="M60 74 a14 14 0 1 1 12 -22 a11 11 0 1 0 -12 22 Z"></path>
+          <circle class="lnf" cx="120" cy="40" r="1.8"></circle>
+          <circle class="lnf" cx="170" cy="70" r="1.8"></circle>
+          <circle class="lnf" cx="30" cy="110" r="1.8"></circle>
+          <path class="ln" d="M296 132 L380 72 L464 132"></path>
+          <path class="ln" d="M308 124 L308 296 M452 124 L452 296"></path>
+          <rect class="ln" x="350" y="210" width="46" height="86"></rect>
+          <circle class="lnf" cx="388" cy="254" r="2.5"></circle>
+          <rect class="win" x="408" y="156" width="32" height="30"></rect>
+          <rect class="ln" x="408" y="156" width="32" height="30"></rect>
+          <circle class="acf" cx="338" cy="236" r="4"></circle>
+          <g class="ac" stroke-width="1.8"><path d="M330 224 l-8 -10"></path><path d="M326 236 l-12 0"></path><path d="M330 248 l-8 10"></path></g>
+          <text class="say acc" x="250" y="150" text-anchor="middle">DING-DONG</text>
+          <circle class="ln paper" cx="290" cy="196" r="16"></circle>
+          <path class="ln" d="M290 212 L290 262 M290 262 L278 296 M290 262 L302 296 M290 226 L334 236 M290 226 L272 250"></path>
+          <path class="ln" d="M30 282 L30 262 L56 262 L76 240 L150 240 L172 262 L212 266 L212 282 Z"></path>
+          <circle class="ln paper" cx="70" cy="286" r="11"></circle>
+          <circle class="ln paper" cx="176" cy="286" r="11"></circle>
+          <path class="lnt" d="M86 244 L104 244 L104 260 L80 260 Z M114 244 L144 244 L160 260 L114 260 Z"></path>
+          <path class="ln" d="M20 296 L460 296"></path>
+        </svg>
+        <figcaption><b>1:45 am</b> I drove to Chris Wolf's house and, very carefully, pressed the doorbell.</figcaption>
+      </figure>
+
+    </div>
+
+    <div class="prose">
+      <p>
+        It was the night of our monthly LIGO–Virgo EM follow-up telecon, so I was at my desk from about 11 pm,
+        an hour before the meeting.
+      </p>
+      <p>
+        At 11:08 pm a gravitational-wave alert landed in my inbox, and the chance that it involved a neutron star
+        was 100%. I wasn't rattled, because I'd been in a similar situation a few months earlier. I checked whether
+        our SkyMapper follow-up pipeline was working properly. It wasn't. The database hadn't updated, so I entered
+        the event by hand and switched on target-of-opportunity mode.
+      </p>
+      <p>
+        About 30 minutes later things moved fast. Fermi and INTEGRAL reported high-energy signals from the same
+        part of the sky. At 11:51 pm Anais and I got an email from Jeff Cooke with the subject line "Urgent".
+      </p>
+      <blockquote>
+        <p>Hi Anais and Seo-Won,</p>
+        <p>There is a coincident detection between LIGO Hanford and Fermi. The localisation from Fermi is something
+          like a square degree.</p>
+        <p>Can you get SkyMapper on it immediately, if you aren't doing so already?</p>
+        <p>Thanks!<br>Jeff</p>
+      </blockquote>
+      <p>
+        They wanted to stop our blind survey, by pressing the telescope's emergency button if need be, and point
+        straight at the Fermi area, which was now only a few square degrees. As far as I knew, only Chris Onken,
+        Chris Wolf and Bill could take over the telescope like that. But it was late on a Thursday night, so emails
+        and phone calls got nowhere, and Chris Onken was away on a family holiday with no way to reach him. Jeff and
+        Igor suggested I contact the staff at Siding Spring Observatory. I spoke to a staff member, but it didn't get
+        us much further.
+      </p>
+      <p>
+        Jeff kept asking where I was, and then suggested I simply go to Chris Wolf's house. OMG.
+      </p>
+      <p>
+        So at 1:45 am I drove to Chris's house and, very carefully, pressed the doorbell. Nobody expects someone at
+        the door at that hour, so Chris and his family were understandably cautious about the stranger outside.
+        Luckily, even in the dark, we recognised each other. :)
+      </p>
+      <p>This was just the beginning of the story.</p>
+    </div>
+
+    <section class="timeline" aria-labelledby="tl">
+      <h2 id="tl">Timeline</h2>
+      <p class="kicker" style="margin: 6px 0 18px;">Local time in Australia (AEST)</p>
+      <p class="day">17 August</p>
+      <div class="news">
+        <div class="item"><div class="when">11:07:50 pm</div><div class="what">The initial GW GCN notice goes out.</div></div>
+        <div class="item"><div class="when">11:08:18 pm</div><div class="what">Our GW pipeline fails to register the VOEvent message.</div></div>
+        <div class="item"><div class="when">11:24 pm</div><div class="what">Fermi GBM trigger 524666471/170817529, a possible counterpart to the LIGO/Virgo event.</div></div>
+        <div class="item"><div class="when">11:24–11:30 pm</div><div class="what">I add G298048 to the SkyMapper database by hand.</div></div>
+        <div class="item"><div class="when">11:51 pm</div><div class="what">"Urgent" email from Jeff.</div></div>
+        <div class="item"><div class="when">11:55 pm</div><div class="what">More information on the GW source arrives (pipeline still inactive).</div></div>
+        <div class="item"><div class="when">11:58 pm</div><div class="what">INTEGRAL detects a prompt gamma-ray counterpart.</div></div>
+      </div>
+      <p class="day">18 August</p>
+      <div class="news">
+        <div class="item"><div class="when">12:01 am</div><div class="what">rungw.csh runs via crontab and switches to active mode.</div></div>
+        <div class="item"><div class="when">12:08 am</div><div class="what">Jeff suggests pointing straight at the Fermi field, and Igor sends me the coordinates.</div></div>
+        <div class="item"><div class="when">12:17 am</div><div class="what">SOS email to Chris Wolf and Anais.</div></div>
+        <div class="item"><div class="when">12:24 am</div><div class="what">Skype meeting with Jeff and Igor. A lot happens during this call.</div></div>
+        <div class="item"><div class="when">12:49 am</div><div class="what">Phone call with Siding Spring staff about stopping and re-pointing the telescope.</div></div>
+        <div class="item"><div class="when">1:45 am</div><div class="what">At Chris Wolf's front door.</div></div>
+        <div class="item"><div class="when">3:50:57 am</div><div class="what">The updated GW GCN notice goes out.</div></div>
+      </div>
+    </section>
+
+    <p class="back"><a href="../index.html#work">← Back to research</a></p>
+  </article>
+
+</main>
+
+<footer class="site">
+  <div class="wrap foot">
+    <div>Updated November 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
