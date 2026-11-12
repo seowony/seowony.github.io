@@ -115,6 +115,10 @@
   .prog p { color: var(--body); line-height: 1.66; font-size: 15px; max-width: 62ch; }
   .prog .meta { font-size: 13px; line-height: 1.6; color: var(--label); }
   .prog .meta b { font-weight: 500; color: var(--second); display: block; margin-bottom: 3px; }
+  .prog-fig { margin: 8px 0 0; }
+  @media (min-width: 720px) { .prog-fig { grid-column: 2 / -1; } }
+  .prog-fig img { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: #fff; }
+  .prog-fig figcaption { font-size: 13.5px; line-height: 1.6; color: var(--second); margin-top: 8px; max-width: 90ch; }
   .queue { margin-top: 26px; border-top: 1px solid var(--rule); padding-top: 20px; display: grid; gap: 10px 32px; }
   @media (min-width: 720px) { .queue { grid-template-columns: 52px minmax(0, 1fr); } }
   .queue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
@@ -488,6 +492,17 @@
           <b>With</b>
           7DT core members
         </div>
+        <figure class="prog-fig">
+          <a href="assets/rubin-7dt-flare.png"><img src="assets/rubin-7dt-flare.png" width="1800" height="1080" loading="lazy"
+               alt="Left: a sky map of Rubin alerts on TESS Input Catalog dwarfs and the light curve of a flare on the M dwarf TIC 389432293. Right: simulated 7DT medium-band photometry of a known flare 44 minutes after the peak, fitted with hot and cool blackbodies."></a>
+          <figcaption>
+            From a Rubin alert to 7DT. (a) Rubin EDP2 alerts matched to TESS Input Catalog dwarfs through Fink, and a
+            flare on the M dwarf TIC 389432293 picked up by our cross-match (Δ<em>g</em> = 2.1 mag at detection).
+            (b) What 7DT would see 44 min after the peak of a well-studied flare (YZ CMi IF3, Kowalski et al. 2013):
+            simulated 7DT photometry fitted with hot plus cool blackbodies, recovering the cool component at about
+            3,100 K in both filter sets.
+          </figcaption>
+        </figure>
       </article>
 
       <article class="prog">
