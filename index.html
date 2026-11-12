@@ -350,12 +350,13 @@
             <text class="cap" x="420" y="210" text-anchor="middle">WORTH A LOOK?</text>
           </svg>
         </div>
-        <h3>Survey infrastructure and AI classification</h3>
+        <h3>From survey data to machine-learning classification</h3>
         <p>
-          The tools that make time-domain discovery possible: photometric pipelines, survey databases and
-          public data releases, most recently KS4 Data Release 1. I also work on machine-learning classification
-          of variable stars, periodic variables and real/bogus transients, with the goal of decision-aware AI
-          for the LSST era.
+          I build the data side of time-domain surveys: photometric pipelines, survey databases and public data
+          releases. Two datasets are central to this work. KS4 is KMTNet's survey of the southern sky, and I led
+          its first public data release. 7DS gives a spectrum-like SED for every source through its medium-band
+          filters. Together they are a rare training ground for machine-learning classification of variable stars,
+          periodic variables and real/bogus transients, with the goal of decision-aware AI for the LSST era.
         </p>
       </article>
 
@@ -409,7 +410,7 @@
   <section class="wrap" id="projects">
     <div class="sechead">
       <h2>Projects</h2>
-      <p class="kicker">Programs I lead with 7DT, 7DS, BOES and Gemini</p>
+      <p class="kicker">Current programs</p>
     </div>
 
     <div class="progs">
@@ -422,18 +423,19 @@
           </svg>
         </div>
         <div>
-          <h3>Measuring periods of new BLAP candidates with 7DT</h3>
+          <h3>Measuring periods of new BLAP candidates with 7DT and LCO</h3>
           <p>
-            A search for ultraviolet variability in SkyMapper DR4 has turned up more than a hundred BLAP candidates
-            in southern fields, away from the crowded bulge where almost all known BLAPs have been found.
-            Several 7DT units observe each target at the same time in <em>g</em> and <em>r</em>. Their interleaved
-            exposures give continuous light curves that pin periods down to about 0.1%, as faint as 19th magnitude,
-            in two to three nights of half-hour blocks.
+            A search for ultraviolet variability in SkyMapper DR4 has turned up 95 BLAP candidates, away from the
+            crowded, reddened bulge where most known BLAPs are found. Most are faint (<em>g</em> = 18–19) and none has
+            a measured period yet. We have proposed two campaigns that work together. On 7DT, sixteen units watch each
+            target at once in <em>g</em> and <em>r</em> with staggered exposures, sampling the light curve every ~14 s.
+            On the Las Cumbres Observatory (LCO) network, telescopes at Siding Spring, SAAO and CTIO observe from
+            different longitudes to break the one-day aliases. Both aim for periods good to 0.1–0.2% or better.
           </p>
         </div>
         <div class="meta">
           <b>With</b>
-          Christian Wolf, Christopher Onken, Michael Bessell (ANU)<br>
+          Christian Wolf, Christopher Onken (LCO proposal PI), Michael Bessell (ANU)<br>
           Péter Németh (Czech Academy of Sciences)<br>
           7DT core members
         </div>
@@ -441,26 +443,26 @@
 
       <article class="prog">
         <div class="prog-mark">
-          <svg viewBox="0 0 40 40" role="img" aria-label="A spectrum with one emission line rising above the continuum">
-            <path class="lnt" d="M3 34 L37 34"></path>
-            <path class="ln" d="M4 26 C 11 25, 15 25, 18 25"></path>
-            <path class="ac" d="M18 25 L21 8 L24 25"></path>
-            <path class="ln" d="M24 25 C 29 24, 33 23, 37 23"></path>
+          <svg viewBox="0 0 40 40" role="img" aria-label="An observed spectrum with two broad absorption lines and a model fit beneath it">
+            <path class="ln" d="M4 12 L11 12 L14 23 L17 12 L24 12 L27 21 L30 12 L36 12"></path>
+            <path class="ac" d="M4 26 L11 26 L14 35 L17 26 L24 26 L27 34 L30 26 L36 26"></path>
           </svg>
         </div>
         <div>
-          <h3>Hα activity of southern K and M dwarfs with 7DS</h3>
+          <h3>How BLAPs form: spectroscopy and non-LTE models</h3>
           <p>
-            Hα emission is the clearest sign of chromospheric activity in cool stars, but most large samples so far
-            are northern and spectroscopic. 7DS medium-band spectrophotometry (400–900 nm) measures Hα excess across
-            the whole survey footprint. With repeat visits, we can tell steady activity apart from flares on
-            timescales of days to months.
+            Pulsation periods alone can't tell the formation channels apart. Binary stripping, mergers and supernova
+            survivors give similar temperatures and gravities but different masses, abundances and companions, yet
+            only about 13% of the ~200 known BLAPs have been characterised spectroscopically. This NRF Core Research
+            program (2026–2029) pairs spectroscopy with non-LTE model atmospheres (XTgrid / TLUSTY). We are applying
+            for time on Gemini/GMOS and SOAR/STELES, starting with candidates confirmed by their periods, to build the
+            first homogeneous spectroscopic characterisation of the class.
           </p>
         </div>
         <div class="meta">
           <b>With</b>
-          7DT core members<br>
-          Rotation periods from TESS and K2, ages from Gaia kinematics
+          Péter Németh (Czech Academy of Sciences &amp; Astroserver.org), XTgrid / TLUSTY modelling<br>
+          Gemini program G-2025B-0498-V
         </div>
       </article>
 
@@ -490,49 +492,26 @@
 
       <article class="prog">
         <div class="prog-mark">
-          <svg viewBox="0 0 40 40" role="img" aria-label="Three stacked spectral line profiles, the middle one at its peak">
-            <path class="lnt" d="M4 33 L14 33 L17 29 L20 33 L36 33"></path>
-            <path class="ac" d="M4 22 L14 22 L17 11 L20 22 L36 22"></path>
-            <path class="lnt" d="M4 10 L14 10 L17 6 L20 10 L36 10"></path>
+          <svg viewBox="0 0 40 40" role="img" aria-label="A spectrum with one emission line rising above the continuum">
+            <path class="lnt" d="M3 34 L37 34"></path>
+            <path class="ln" d="M4 26 C 11 25, 15 25, 18 25"></path>
+            <path class="ac" d="M18 25 L21 8 L24 25"></path>
+            <path class="ln" d="M24 25 C 29 24, 33 23, 37 23"></path>
           </svg>
         </div>
         <div>
-          <h3>High-resolution spectroscopy of flaring chromospheres</h3>
+          <h3>Hα activity of southern K and M dwarfs</h3>
           <p>
-            Photometry tells us how much energy a flare releases. Time-resolved high-resolution spectra show what
-            is happening in the chromosphere. With the Bohyunsan Optical Echelle Spectrograph (BOES), we take spectra
-            through individual energetic flares and follow Hα, the Balmer series and other chromospheric lines
-            minute by minute, separately from the continuum. These line profiles are where we look for filament
-            eruptions and the coronal mass ejections that come with them.
-          </p>
-        </div>
-        <div class="meta">
-          <b>Latest</b>
-          Chromospheric line evolution during an energetic flare on AD Leo, Oh et al., JKAS (corresponding author)
-        </div>
-      </article>
-
-      <article class="prog">
-        <div class="prog-mark">
-          <svg viewBox="0 0 40 40" role="img" aria-label="An observed spectrum with two broad absorption lines and a model fit beneath it">
-            <path class="ln" d="M4 12 L11 12 L14 23 L17 12 L24 12 L27 21 L30 12 L36 12"></path>
-            <path class="ac" d="M4 26 L11 26 L14 35 L17 26 L24 26 L27 34 L30 26 L36 26"></path>
-          </svg>
-        </div>
-        <div>
-          <h3>How BLAPs form: Gemini spectroscopy and non-LTE models</h3>
-          <p>
-            Pulsation periods alone can't tell the formation channels apart. Binary mass transfer, mergers and
-            supernova survivors each leave a different mark on surface temperature, gravity and abundances, yet only
-            about 15% of the ~200 known BLAPs have measured atmospheric parameters. This NRF Core Research program
-            (2026–2029) combines Gemini spectroscopy with non-LTE model atmospheres (XTgrid / TLUSTY) to build the
-            first homogeneous spectroscopic characterisation of the class.
+            Hα emission is the clearest sign of chromospheric activity in cool stars, but most large samples so far
+            are northern and spectroscopic. 7DS medium-band spectrophotometry (400–900 nm) measures Hα excess across
+            the whole survey footprint. With repeat visits, we can tell steady activity apart from flares on
+            timescales of days to months.
           </p>
         </div>
         <div class="meta">
           <b>With</b>
-          Péter Németh (Czech Academy of Sciences &amp; Astroserver.org), XTgrid / TLUSTY modelling<br>
-          Gemini program G-2025B-0498-V
+          7DT core members<br>
+          Rotation periods from TESS and K2, ages from Gaia kinematics
         </div>
       </article>
 
