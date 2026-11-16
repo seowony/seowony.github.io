@@ -204,7 +204,8 @@
   .album { display: grid; gap: 22px; }
   @media (min-width: 760px) { .album { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .album figure { margin: 0; }
-  .album figure.wide { grid-column: 1 / -1; }
+  .album figure:first-child,
+  .album figure:nth-child(2):last-child { grid-column: 1 / -1; }
   .album img { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
   .album figcaption { padding: 10px 2px 0; }
   .album .obj { font-family: var(--serif); font-size: 18px; color: var(--ink); }
@@ -249,8 +250,28 @@
       Snapshots from the observatories and institutes where I have worked.
     </p>
 
+    <!--
+      How this album works
+      - Photo files live in assets/ and are named place-<site>-<year>.jpg
+      - The FIRST figure is the main (large) photo. To change it, move another
+        figure block to the top. No other edits are needed.
+      - To add a photo, copy one figure block and change src, alt and the caption.
+    -->
     <div class="album">
-      <figure class="wide">
+
+      <!-- MAIN PHOTO -->
+      <figure>
+        <img src="assets/place-snu45-2026.jpg" width="1600" height="1200" loading="lazy"
+             alt="A concrete building half hidden behind tall pine trees on a grey autumn day, with stone steps and a department sign in front">
+        <figcaption>
+          <div class="obj">Building 45, Seoul National University</div>
+          <div class="desc">Home of the SNU Astronomy Research Center, tucked among the pines of the Gwanak campus
+            in late autumn.</div>
+          <div class="fov">November 2026, photo by Seo-Won Chang</div>
+        </figcaption>
+      </figure>
+
+      <figure>
         <img src="assets/place-stromlo-2017.jpg" width="1600" height="1200" loading="lazy"
              alt="Two kangaroos on the lawn in front of the yellow Commonwealth Solar Observatory building at Mount Stromlo, under a blue sky">
         <figcaption>
