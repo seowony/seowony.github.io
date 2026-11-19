@@ -122,8 +122,8 @@
   .queue { margin-top: 26px; border-top: 1px solid var(--rule); padding-top: 20px; display: grid; gap: 10px 32px; }
   @media (min-width: 720px) { .queue { grid-template-columns: 52px minmax(0, 1fr); } }
   .queue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
-  .queue li { font-size: 15px; color: var(--second); }
-  .queue li::before { content: "— "; color: var(--label); }
+  .queue li { font-size: 15px; color: var(--second); position: relative; padding-left: 16px; }
+  .queue li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--label); }
 
   /* gallery */
   .gallery { display: grid; gap: 18px; }
@@ -136,8 +136,8 @@
   .gallery-cap .desc { font-size: 14.5px; color: var(--body); line-height: 1.62; margin-top: 4px; }
   .gallery-cap .fov { font-size: 13px; color: var(--label); margin-top: 4px; }
   .media { margin-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--rule); padding-top: 20px; }
-  .media .gallery { margin-top: 14px; }
-  figure.gallery-item { margin: 0; }
+  .media .gallery { margin-top: 0; }
+  figure.gallery-item { margin: 0; scroll-margin-top: 90px; }
   .gallery-item video { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: #000; }
   .gallery-credit { font-size: 13px; color: var(--label); margin-top: 20px; border-top: 1px solid var(--edge); padding-top: 12px; }
 
@@ -150,8 +150,6 @@
   .roles li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--accent); }
   .roles .badge { display: inline-block; vertical-align: middle; margin-left: 4px; line-height: 0; }
   .roles .badge img { height: 20px; width: auto; }
-  .topicchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-  .topicchips span { font-size: 13px; padding: 5px 11px; border: 1px solid var(--edge); background: var(--panel); color: var(--second); }
 
   /* publications */
   .pubs { display: flex; flex-direction: column; gap: 0; }
@@ -199,7 +197,7 @@
         <li><a href="#work">Research</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#rubin">Rubin / LSST</a></li>
-        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="#pubs">Publications</a></li>
         <li><a href="#community">Community</a></li>
         <li><a href="cv.pdf">CV</a></li>
@@ -247,11 +245,42 @@
     </div>
   </section>
 
+  <!-- ===== RECENT ===== -->
+  <section class="wrap" id="news">
+    <div class="split">
+      <div>
+        <h2>Recent</h2>
+        <p class="kicker" style="margin-top: 8px;">2026</p>
+      </div>
+      <div class="news">
+        <div class="item">
+          <div class="when">November</div>
+          <div class="what">Recovered 2026 ED138, a bright trans-Neptunian object candidate found by Rubin, in SkyMapper images from 2013 to 2020, and submitted 21 precovery positions to the Minor Planet Center. <a href="#ed138">Watch the video</a>.</div>
+        </div>
+        <div class="item">
+          <div class="when">April</div>
+          <div class="what">KS4 Data Release 1 went public through <a href="https://noirlab.edu/science/news/announcements/sci26025">NOIRLab Astro Data Lab</a> and <a href="https://cds.unistra.fr/blog/2026/04/29-ks4-data-release/">CDS Aladin &amp; VizieR</a>. News from <a href="https://www.snu.ac.kr/research/highlights?md=v&amp;bbsidx=168845">SNU</a> and <a href="https://www.kasi.re.kr/publication/post/newsMaterial/32345">KASI</a> (in Korean).</div>
+        </div>
+        <div class="item">
+          <div class="when">March</div>
+          <div class="what">Started my NRF Core Research program on the origins of Blue Large-Amplitude Pulsators (2026–2029).</div>
+        </div>
+        <div class="item">
+          <div class="when">February</div>
+          <div class="what">Back at RSAA, Australian National University, as a Visiting Fellow until February 2027.</div>
+        </div>
+        <div class="item">
+          <div class="when">January</div>
+          <div class="what">The start of 7DT observations was named one of Korea's Top 100 National R&amp;D Achievements of 2025.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== RESEARCH ===== -->
   <section class="wrap" id="work">
     <div class="sechead">
       <h2>Research</h2>
-      <p class="kicker">Four connected lines</p>
     </div>
 
     <div class="topics">
@@ -279,7 +308,7 @@
             <text class="cap" x="480" y="230" text-anchor="end" letter-spacing="0">time →</text>
           </svg>
         </div>
-        <h3>Stellar flares, starspots and how activity changes with age</h3>
+        <h3>Magnetic activity of low-mass stars: flares and starspots</h3>
         <p>
           How magnetic activity in M dwarfs, seen as flares and starspots rotating in and out of view, relates
           to rotation and age. With large <a href="https://skymapper.anu.edu.au/">SkyMapper</a> samples I measured
@@ -354,7 +383,7 @@
             <text class="cap" x="420" y="210" text-anchor="middle">WORTH A LOOK?</text>
           </svg>
         </div>
-        <h3>From survey data to machine-learning classification</h3>
+        <h3>Time-domain survey data and machine-learning classification</h3>
         <p>
           I build the data side of time-domain surveys: photometric pipelines, survey databases and public data
           releases. Two datasets are central to this work. KS4 is KMTNet's survey of the southern sky, and I led
@@ -414,7 +443,6 @@
   <section class="wrap" id="projects">
     <div class="sechead">
       <h2>Projects</h2>
-      <p class="kicker">Current programs</p>
     </div>
 
     <div class="progs">
@@ -427,14 +455,12 @@
           </svg>
         </div>
         <div>
-          <h3>Measuring periods of new BLAP candidates with 7DT and LCO</h3>
+          <h3>Pulsation periods of new BLAP candidates with 7DT and LCO</h3>
           <p>
-            A search for ultraviolet variability in SkyMapper DR4 has turned up 95 BLAP candidates, away from the
-            crowded, reddened bulge where most known BLAPs are found. Most are faint (<em>g</em> = 18–19) and none has
-            a measured period yet. We have proposed two campaigns that work together. On 7DT, sixteen units watch each
-            target at once in <em>g</em> and <em>r</em> with staggered exposures, sampling the light curve every ~14 s.
-            On the Las Cumbres Observatory (LCO) network, telescopes at Siding Spring, SAAO and CTIO observe from
-            different longitudes to break the one-day aliases. Both aim for periods good to 0.1–0.2% or better.
+            A search of SkyMapper DR4 for ultraviolet variability gave 95 BLAP candidates outside the Galactic
+            bulge. Most are faint (<em>g</em> = 18–19) and none has a measured period yet. We have proposed
+            time-series photometry on 7DT and on the LCO network (Siding Spring, SAAO and CTIO) to measure their
+            periods to 0.1–0.2% or better.
           </p>
         </div>
         <div class="meta">
@@ -453,14 +479,12 @@
           </svg>
         </div>
         <div>
-          <h3>How BLAPs form: spectroscopy and non-LTE models</h3>
+          <h3>Spectroscopy of BLAPs and their formation channels</h3>
           <p>
-            Pulsation periods alone can't tell the formation channels apart. Binary stripping, mergers and supernova
-            survivors give similar temperatures and gravities but different masses, abundances and companions, yet
-            only about 13% of the ~200 known BLAPs have been characterised spectroscopically. This NRF Core Research
-            program (2026–2029) pairs spectroscopy with non-LTE model atmospheres (XTgrid / TLUSTY). We are applying
-            for time on Gemini/GMOS and SOAR/STELES, starting with candidates confirmed by their periods, to build the
-            first homogeneous spectroscopic characterisation of the class.
+            The proposed formation channels predict similar temperatures and gravities but different masses,
+            abundances and companions, and only about 13% of the ~200 known BLAPs have spectra. In this NRF Core
+            Research program (2026–2029) we are applying for Gemini/GMOS and SOAR/STELES time and fit the spectra
+            with non-LTE model atmospheres (XTgrid / TLUSTY).
           </p>
         </div>
         <div class="meta">
@@ -480,12 +504,11 @@
           </svg>
         </div>
         <div>
-          <h3>Following stellar flares minute by minute</h3>
+          <h3>Rubin-triggered 7DT spectrophotometry of stellar flares</h3>
           <p>
-            Flares are often modelled as a single ~10,000 K blackbody, but the biggest events are more complicated.
-            As they fade, the blue continuum stays near 8,000–11,000 K while the red end cools to 3,500–5,500 K.
-            Rubin/LSST will catch thousands of these, but in only two filters per visit. This program triggers 7DT
-            within minutes of an alert and follows the full 400–900 nm spectrum, Hα included, as the flare fades.
+            Spectra of M dwarf flares show a hot continuum near 10,000 K and a cooler red continuum whose origin
+            is unknown. This program triggers 7DT within minutes of a Rubin alert and follows the flare for an hour
+            in medium bands from 400 to 875 nm, Hα included.
           </p>
         </div>
         <div class="meta">
@@ -517,10 +540,9 @@
         <div>
           <h3>Hα activity of southern K and M dwarfs</h3>
           <p>
-            Hα emission is the clearest sign of chromospheric activity in cool stars, but most large samples so far
-            are northern and spectroscopic. 7DS medium-band spectrophotometry (400–900 nm) measures Hα excess across
-            the whole survey footprint. With repeat visits, we can tell steady activity apart from flares on
-            timescales of days to months.
+            Hα emission traces chromospheric activity in cool stars, but most large samples are northern and
+            spectroscopic. 7DS medium-band photometry measures Hα excess across the southern sky, and repeat visits
+            separate steady activity from flares.
           </p>
         </div>
         <div class="meta">
@@ -545,7 +567,6 @@
   <section class="wrap" id="rubin">
     <div class="sechead">
       <h2>Rubin / LSST</h2>
-      <p class="kicker">Where my work meets the survey</p>
     </div>
 
     <div class="rubin">
@@ -576,12 +597,6 @@
           <strong>Very blue stars</strong> such as BLAPs may also be within reach. Single-epoch photometry from
           Rubin DP2 could be enough to pick them out.
         </p>
-        <div class="topicchips">
-          <span>Time domain / transients</span>
-          <span>Galactic</span>
-          <span>Software development</span>
-          <span>Synergies with other observatories</span>
-        </div>
       </div>
 
       <div>
@@ -597,10 +612,24 @@
       </div>
     </div>
 
-    <div class="media" id="ed138">
-      <p class="kicker">A bright trans-Neptunian object candidate found by Rubin</p>
+    <div class="media">
       <div class="gallery">
-        <figure class="gallery-item wide">
+        <figure class="gallery-item">
+          <video controls preload="none" playsinline
+                 poster="assets/rubin-flares-poster.jpg" width="1280" height="720"
+                 aria-label="Animation: the flare continuum question, the Rubin camera's field of view, and an all-sky map where every flash is a stellar flare candidate found in Rubin alerts">
+            <source src="assets/rubin-flares-web.mp4" type="video/mp4">
+            <a href="assets/rubin-flares-web.mp4">Download the video (MP4)</a>
+          </video>
+          <figcaption class="gallery-cap">
+            <div class="obj">Stellar flare candidates in Rubin alerts</div>
+            <div class="desc">Rubin alerts received through Fink are matched to stars in the TESS Input Catalog.
+              By November 2026 this gave 1,042 flare candidates. In the all-sky map every flash is one candidate.</div>
+            <div class="fov">Rubin alerts via Fink, TESS Input Catalog, 1 min 4 s, with sound</div>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item" id="ed138">
           <video controls preload="none" playsinline
                  poster="assets/ed138-skymapper-poster.jpg" width="1280" height="720"
                  aria-label="Animation tracing 2026 ED138 across the sky from 2013 to 2020, with SkyMapper difference images of all 24 exposures">
@@ -608,11 +637,12 @@
             <a href="assets/ed138-skymapper-2013-2020.mp4">Download the video (MP4)</a>
           </video>
           <figcaption class="gallery-cap">
-            <div class="obj">Finding 2026 ED138 in the SkyMapper archive, 2013–2020</div>
-            <div class="desc">Rubin Observatory found 2026 ED138 in 2026. Searching SkyMapper images along its orbit,
-              including DR4 survey data and the 2013 AEGIS pre-survey observations, we recovered it on 10 nights between
-              2013 and 2020. From 24 exposures we measured 21 positions, with 1 marginal detection and 2 non-detections.
-              The positions have been submitted to the Minor Planet Center.</div>
+            <div class="obj">SkyMapper precovery of 2026 ED138, 2013–2020</div>
+            <div class="desc">Rubin Observatory found 2026 ED138, a bright trans-Neptunian object candidate, in 2026.
+              Searching SkyMapper images along its orbit, including DR4 survey data and the 2013 AEGIS pre-survey
+              observations, we recovered it on 10 nights between 2013 and 2020. From 24 exposures we measured 21
+              positions, with 1 marginal detection and 2 non-detections. The positions have been submitted to the
+              Minor Planet Center.</div>
             <div class="fov">SkyMapper DR4 and AEGIS pre-survey (2013), difference imaging, 2 min 22 s, with sound</div>
           </figcaption>
         </figure>
@@ -640,54 +670,10 @@
         </div>
       </div>
 
-      <div class="gallery-item">
-        <img src="assets/ks4-ngc2442.jpg" width="1200" height="655"
-             alt="NGC 2442, an asymmetric barred spiral galaxy with one extended diffuse arm and one compact arm"
-             loading="lazy">
-        <div class="gallery-cap">
-          <div class="obj">NGC 2442, the Meathook Galaxy</div>
-          <div class="desc">A strongly lopsided barred spiral in Volans, about 15 Mpc away. One arm is long and diffuse, the other compact, a sign of a past tidal interaction.</div>
-          <div class="fov">21.1′ × 11.5′, BVI composite</div>
-        </div>
-      </div>
-
-      <div class="gallery-item">
-        <img src="assets/ks4-ngc5291.jpg" width="1200" height="699"
-             alt="NGC 5291 and its collisional ring system with tidal dwarf galaxies forming in the debris"
-             loading="lazy">
-        <div class="gallery-cap">
-          <div class="obj">NGC 5291 and its tidal dwarfs</div>
-          <div class="desc">A collisional ring system on the outskirts of Abell 3574. New tidal dwarf galaxies are forming in the debris ring, left by a high-speed collision about 360 Myr ago.</div>
-          <div class="fov">18.4′ × 10.1′, BVI composite</div>
-        </div>
-      </div>
-
-      <div class="gallery-item">
-        <img src="assets/ks4-ngc5292.jpg" width="1200" height="699"
-             alt="NGC 5292, a face-on disc galaxy with resolved spiral structure and central bar"
-             loading="lazy">
-        <div class="gallery-cap">
-          <div class="obj">NGC 5292</div>
-          <div class="desc">A face-on disc galaxy in Centaurus. The stacked images resolve its spiral arms and central bar.</div>
-          <div class="fov">9.42′ × 5.15′, BVI composite</div>
-        </div>
-      </div>
-
-      <div class="gallery-item">
-        <img src="assets/ks4-galactic-plane.jpg" width="1200" height="699"
-             alt="A dense Milky Way star field observed as part of the KS4 survey"
-             loading="lazy">
-        <div class="gallery-cap">
-          <div class="obj">Galactic plane field</div>
-          <div class="desc">A crowded Milky Way star field in the KS4 footprint, built from stacked KMTNet <em>BVI</em> exposures.</div>
-          <div class="fov">1.42° × 0.83°, BVI composite</div>
-        </div>
-      </div>
-
     </div>
 
     <p class="gallery-credit">Credit: Seo-Won Chang &amp; Mankeun Jeong (Seoul National University), KS4 Data Release 1</p>
-    <p style="margin-top: 14px; font-size: 15px;"><a href="places.html">Places: photos from the observatories and institutes where I have worked →</a></p>
+    <p style="margin-top: 14px; font-size: 15px;"><a href="gallery.html">More KS4 images and photos of places →</a></p>
   </section>
 
   <!-- ===== PUBLICATIONS ===== -->
@@ -754,7 +740,6 @@
     <div class="split">
       <div>
         <h2>Community</h2>
-        <p class="kicker" style="margin-top: 8px;">Planning and outreach</p>
       </div>
       <div class="news">
         <div class="item">
@@ -786,38 +771,6 @@
             (천문학백과) on Naver Knowledge Encyclopedia, with entries on 다중신호천문학 (multi-messenger astronomy),
             돌발천체 (transients), 베라 루빈 천문대 (Vera C. Rubin Observatory) and 스카이맵퍼 (SkyMapper).
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== RECENT ===== -->
-  <section class="wrap" id="news">
-    <div class="split">
-      <div>
-        <h2>Recent</h2>
-        <p class="kicker" style="margin-top: 8px;">2026</p>
-      </div>
-      <div class="news">
-        <div class="item">
-          <div class="when">November</div>
-          <div class="what">Recovered 2026 ED138, a bright trans-Neptunian object candidate found by Rubin, in SkyMapper images from 2013 to 2020, and submitted 21 precovery positions to the Minor Planet Center. <a href="#ed138">Watch the video</a>.</div>
-        </div>
-        <div class="item">
-          <div class="when">April</div>
-          <div class="what">KS4 Data Release 1 went public through <a href="https://noirlab.edu/science/news/announcements/sci26025">NOIRLab Astro Data Lab</a> and <a href="https://cds.unistra.fr/blog/2026/04/29-ks4-data-release/">CDS Aladin &amp; VizieR</a>. News from <a href="https://www.snu.ac.kr/research/highlights?md=v&amp;bbsidx=168845">SNU</a> and <a href="https://www.kasi.re.kr/publication/post/newsMaterial/32345">KASI</a> (in Korean).</div>
-        </div>
-        <div class="item">
-          <div class="when">March</div>
-          <div class="what">Started my NRF Core Research program on the origins of Blue Large-Amplitude Pulsators (2026–2029).</div>
-        </div>
-        <div class="item">
-          <div class="when">February</div>
-          <div class="what">Back at RSAA, Australian National University, as a Visiting Fellow until February 2027.</div>
-        </div>
-        <div class="item">
-          <div class="when">January</div>
-          <div class="what">The start of 7DT observations was named one of Korea's Top 100 National R&amp;D Achievements of 2025.</div>
         </div>
       </div>
     </div>
