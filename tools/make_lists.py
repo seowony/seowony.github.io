@@ -3,7 +3,7 @@
 Write the object lists used by tools/make_atlas.py.
 
   tools/lists/ngc.csv     NGC galaxies with major axis >= --min-size arcmin and Dec < --max-dec
-  tools/lists/phangs.csv  the 19 PHANGS-MUSE / PHANGS-JWST Cycle 1 galaxies
+  tools/lists/phangs.csv  the PHANGS-MUSE / PHANGS-JWST Cycle 1 galaxies with Dec < --max-dec
 
 Positions and sizes come from OpenNGC (https://github.com/mattiaverga/OpenNGC, CC BY-SA 4.0).
 tools/lists/clusters.csv is written by hand; its positions are resolved by name at run time.
@@ -51,7 +51,7 @@ def row(r, lo, hi):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--min-size", type=float, default=2.0, help="NGC: minimum major axis (arcmin)")
-    ap.add_argument("--max-dec", type=float, default=-20.0, help="NGC: keep Dec below this (deg)")
+    ap.add_argument("--max-dec", type=float, default=-28.0, help="keep Dec below this (deg)")
     args = ap.parse_args()
 
     text = requests.get(OPENNGC, timeout=60).text
@@ -73,9 +73,10 @@ def main():
     with open("tools/lists/phangs.csv", "w", newline="") as f:
         w = csv.DictWriter(f, cols)
         w.writeheader()
-        for n in PHANGS:
+        kept = [n for n in PHANGS if sexa(rows[n]["Dec"], False) < args.max_dec]
+        for n in kept:
             w.writerow(row(rows[n], 5.0, 20.0))
-    print(f"tools/lists/phangs.csv: {len(PHANGS)} galaxies")
+    print(f"tools/lists/phangs.csv: {len(kept)} of {len(PHANGS)} galaxies")
 
 
 if __name__ == "__main__":

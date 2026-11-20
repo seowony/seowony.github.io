@@ -37,6 +37,7 @@ HIPS = "SNU/P/KS4/DR1/colorBVI"
 HIPS2FITS = "https://alasky.cds.unistra.fr/hips-image-services/hips2fits"
 ALADIN = "https://aladin.cds.unistra.fr/AladinLite/"
 THUMB = 300
+DEC_LIMIT = -28.0          # only objects south of this declination (deg)
 BLANK_LIMIT = 0.35         # skip if more than this fraction of pixels is empty
 HOW_TO = ("Click an image to see it larger. The name under each image opens the KS4 <i>BVI</i> colour HiPS in "
           '<a href="https://aladin.cds.unistra.fr/AladinLite/">Aladin Lite</a> so you can pan and zoom around it. ')
@@ -49,17 +50,18 @@ COLLECTIONS = {
         description="Galaxies from Halton Arp's Atlas of Peculiar Galaxies, seen in the KMTNet Synoptic "
                     "Survey of Southern Sky (KS4) Data Release 1.",
         intro='This gallery shows the galaxies from <a href="https://ned.ipac.caltech.edu/level5/Arp/'
-              'Arp_contents.html">Halton Arp\'s Atlas of Peculiar Galaxies</a> that fall inside the footprint '
-              "of KS4 Data Release 1. " + HOW_TO,
-        count="{n} of the 338 Arp objects are inside the KS4 DR1 footprint.",
+              'Arp_contents.html">Halton Arp\'s Atlas of Peculiar Galaxies</a> that lie south of declination '
+              "{dec} and fall inside the footprint of KS4 Data Release 1. " + HOW_TO,
+        count="{n} Arp objects south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + " Object list: Arp (1966), positions from SIMBAD."),
     "ngc": dict(
         title="NGC galaxies in KS4", short="NGC galaxies", big=800, list="tools/lists/ngc.csv",
         description="Galaxies from the New General Catalogue, seen in the KMTNet Synoptic Survey of "
                     "Southern Sky (KS4) Data Release 1.",
         intro="This gallery shows the galaxies from the New General Catalogue that are larger than two "
-              "arcminutes and fall inside the footprint of KS4 Data Release 1. " + HOW_TO,
-        count="{n} of the {total} NGC galaxies in the list are inside the KS4 DR1 footprint.",
+              "arcminutes, lie south of declination {dec} and fall inside the footprint of KS4 Data Release 1. "
+              + HOW_TO,
+        count="{n} of the {total} NGC galaxies south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + ' Object list, positions and sizes: <a href="https://github.com/mattiaverga/'
                'OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
     "phangs": dict(
@@ -67,9 +69,9 @@ COLLECTIONS = {
         description="Nearby star-forming galaxies from the PHANGS surveys, seen in the KMTNet Synoptic "
                     "Survey of Southern Sky (KS4) Data Release 1.",
         intro='This gallery shows the galaxies of the <a href="https://sites.google.com/view/phangs/home">'
-              "PHANGS</a>-MUSE and PHANGS-JWST Cycle 1 samples that fall inside the footprint of KS4 Data "
-              "Release 1. " + HOW_TO,
-        count="{n} of the {total} PHANGS galaxies are inside the KS4 DR1 footprint.",
+              "PHANGS</a>-MUSE and PHANGS-JWST Cycle 1 samples that lie south of declination {dec} and fall "
+              "inside the footprint of KS4 Data Release 1. " + HOW_TO,
+        count="{n} of the {total} PHANGS galaxies south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + ' Positions and sizes: <a href="https://github.com/mattiaverga/OpenNGC">'
                "OpenNGC</a> (CC BY-SA 4.0)."),
     "clusters": dict(
@@ -77,10 +79,10 @@ COLLECTIONS = {
         list="tools/lists/clusters.csv",
         description="Nearby southern galaxy clusters seen in the KMTNet Synoptic Survey of Southern Sky "
                     "(KS4) Data Release 1.",
-        intro="This gallery shows nearby galaxy clusters in the southern sky that fall inside the footprint "
-              "of KS4 Data Release 1. Each image is centred on the brightest cluster galaxy or on the "
+        intro="This gallery shows nearby galaxy clusters south of declination {dec} that fall inside the "
+              "footprint of KS4 Data Release 1. Each image is centred on the brightest cluster galaxy or on the "
               "cluster position in SIMBAD. " + HOW_TO,
-        count="{n} of the {total} clusters in the list are inside the KS4 DR1 footprint.",
+        count="{n} of the {total} clusters south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + " Positions from SIMBAD and OpenNGC."),
 }
 
@@ -100,7 +102,7 @@ def parse_only(text, n_max):
     return nums
 
 
-def load_objects(name, cfg, only):
+def load_objects(name, cfg, only, dec_limit):
     """List of dicts: id, name, query, ra, dec, fov (ra/dec may be None)."""
     if name == "arp":
         fov = {}
@@ -118,6 +120,10 @@ def load_objects(name, cfg, only):
                                      ra=float(row["ra"]) if row.get("ra") else None,
                                      dec=float(row["dec"]) if row.get("dec") else None,
                                      fov=float(row["fov_arcmin"])))
+        n_all = len(all_objs)
+        all_objs = [o for o in all_objs if o["dec"] is None or o["dec"] < dec_limit]
+        if len(all_objs) < n_all:
+            print(f"{name}: {n_all - len(all_objs)} objects north of {dec_limit:g} deg left out")
     sel = parse_only(only, len(all_objs))
     by_id = {o["id"]: o for o in all_objs}
     out = []
@@ -350,7 +356,7 @@ def build(name, args):
     page_name = f"{name}.html"
     big_px = cfg["big"]
     os.makedirs(out_dir, exist_ok=True)
-    all_objs, todo = load_objects(name, cfg, args.only)
+    all_objs, todo = load_objects(name, cfg, args.only, args.dec_limit)
 
     cache_file = os.path.join(out_dir, "positions.json")
     pos = json.load(open(cache_file)) if os.path.exists(cache_file) else {}
@@ -374,6 +380,9 @@ def build(name, args):
             status[oid] = "unresolved"
             continue
         obj["ra"], obj["dec"] = rd
+        if rd[1] >= args.dec_limit:
+            status[oid] = "north"
+            continue
         f_arc = obj["fov"]
         if args.hips_url:
             base = args.hips_url.rstrip("/")
@@ -410,8 +419,14 @@ def build(name, args):
     json.dump(status, open(status_file, "w"), indent=0)
 
     # ---- write the page, in list order ----
-    ok = [o for o in all_objs if status.get(o["id"]) == "ok"
-          and os.path.exists(os.path.join(out_dir, f"{o['id']}.jpg"))]
+    for o in all_objs:
+        if o["ra"] is None and o["id"] in pos and pos[o["id"]]:
+            o["ra"], o["dec"] = pos[o["id"]]
+    ok = [o for o in all_objs if status.get(o["id"]) == "ok" and o["dec"] is not None
+          and o["dec"] < args.dec_limit and os.path.exists(os.path.join(out_dir, f"{o['id']}.jpg"))]
+    north = sum(1 for o in all_objs if status.get(o["id"]) == "north")
+    if north:
+        print(f"north of {args.dec_limit:g} deg: {north} (left out)")
     if args.hips_url:
         print(f"Tiles read: {TILE_STATS['found']}, missing: {TILE_STATS['missing']}")
     for k in ("outside", "unresolved", "failed"):
@@ -440,11 +455,12 @@ def build(name, args):
     grid = '    <div class="arp-grid">\n' + "\n".join(figs) + '\n    </div>'
     bars = sorted({bar_arcmin(o["fov"]) for o in ok})
     bar_text = " and ".join({1: "one arcminute", 5: "five arcminutes"}[b] for b in bars)
-    intro = cfg["intro"] + f"The white bar in the lower-right corner of each image is {bar_text}."
+    dec_txt = f"\u2212{abs(args.dec_limit):g}\u00b0" if args.dec_limit < 0 else f"{args.dec_limit:g}\u00b0"
+    intro = cfg["intro"].replace("{dec}", dec_txt) + f"The white bar in the lower-right corner of each image is {bar_text}."
     page = open("atlas_template.html").read()
     for key, val in (("TITLE", cfg["title"]), ("SHORT", cfg["short"]), ("DESCRIPTION", cfg["description"]),
                      ("PAGE", page_name), ("INTRO", intro), ("CREDIT", cfg["credit"]),
-                     ("COUNT", cfg["count"].format(n=len(ok), total=len(all_objs))), ("GRID", grid)):
+                     ("COUNT", cfg["count"].format(n=len(ok), total=len(all_objs), dec=dec_txt)), ("GRID", grid)):
         page = page.replace(f"<!-- {key} -->", val)
     open(page_name, "w").write(page)
     print(f"Wrote {page_name} with {len(ok)} objects.")
@@ -457,6 +473,8 @@ def main():
     ap.add_argument("--only", help="arp: 1-50 or 81,82,244; lists: row numbers or ids such as ngc1365")
     ap.add_argument("--pause", type=float, default=0.5, help="seconds between hips2fits requests")
     ap.add_argument("--keep-blank", action="store_true", help="keep objects outside the footprint")
+    ap.add_argument("--dec-limit", type=float, default=DEC_LIMIT,
+                    help=f"keep only objects south of this declination (default {DEC_LIMIT:g})")
     ap.add_argument("--hips-url", help="read tiles from this HiPS (URL or directory) instead of CDS hips2fits")
     args = ap.parse_args()
 

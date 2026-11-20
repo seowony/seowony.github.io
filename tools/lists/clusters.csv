@@ -1,7 +1,6 @@
 id,name,query,ra,dec,fov_arcmin
 fornax,Fornax cluster (NGC 1399),NGC 1399,54.62096,-35.45067,45
 antlia,Antlia cluster (NGC 3268),NGC 3268,157.50275,-35.32547,40
-hydra,Hydra cluster (Abell 1060),NGC 3311,159.17842,-27.52833,40
 centaurus,Centaurus cluster (Abell 3526),NGC 4696,192.20521,-41.31083,40
 norma,Norma cluster (Abell 3627),ACO 3627,243.5938,-60.8686,30
 a2877,Abell 2877,ACO 2877,17.4554,-45.9006,30
