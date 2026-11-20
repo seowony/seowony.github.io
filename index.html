@@ -138,6 +138,8 @@
   .media { margin-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--rule); padding-top: 20px; }
   .media .gallery { margin-top: 0; }
   figure.gallery-item { margin: 0; scroll-margin-top: 90px; }
+  .media-note { margin-top: 18px; font-size: 13.5px; line-height: 1.65; color: var(--second); max-width: 90ch; }
+  .media-note b { font-weight: 600; color: var(--ink); }
   .gallery-item video { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: #000; }
   .gallery-credit { font-size: 13px; color: var(--label); margin-top: 20px; border-top: 1px solid var(--edge); padding-top: 12px; }
 
@@ -617,15 +619,17 @@
         <figure class="gallery-item">
           <video controls preload="none" playsinline
                  poster="assets/rubin-flares-poster.jpg" width="1280" height="720"
-                 aria-label="Animation: the flare continuum question, the Rubin camera's field of view, and an all-sky map where every flash is a stellar flare candidate found in Rubin alerts">
+                 aria-label="Animation: one night of Rubin alerts arriving through Fink, individual stellar flares with their light curves and spectral energy distributions, and an all-sky map where every flash is a flare candidate">
             <source src="assets/rubin-flares-web.mp4" type="video/mp4">
             <a href="assets/rubin-flares-web.mp4">Download the video (MP4)</a>
           </video>
           <figcaption class="gallery-cap">
             <div class="obj">Stellar flare candidates in Rubin alerts</div>
-            <div class="desc">Rubin alerts received through Fink are matched to stars in the TESS Input Catalog.
-              By November 2026 this gave 1,042 flare candidates. In the all-sky map every flash is one candidate.</div>
-            <div class="fov">Rubin alerts via Fink, TESS Input Catalog, 1 min 4 s, with sound</div>
+            <div class="desc">One night of Rubin alerts arriving through Fink, a few of the flares we caught, and the
+              whole sample so far. Matching the alerts to stars in the TESS Input Catalog gave 1,042 flare candidates
+              by November 2026. In the all-sky map every flash is one candidate.</div>
+            <div class="fov">Rubin alerts via Fink, TESS Input Catalog, background images from SkyMapper DR4,
+              2 min 14 s, with sound</div>
           </figcaption>
         </figure>
 
@@ -647,6 +651,13 @@
           </figcaption>
         </figure>
       </div>
+      <p class="media-note">
+        <b>Why no Rubin images?</b> Rubin alerts are public as soon as they are sent, so the alert positions,
+        light curves and flare counts here are all shown as measured. Rubin's own images are not public yet: under
+        the <a href="https://docushare.lsst.org/docushare/dsweb/Get/RDO-013">Rubin data policy</a> they are open
+        only to LSST data-rights holders for now. The sky in the background therefore comes from the public
+        <a href="https://skymapper.anu.edu.au/">SkyMapper</a> DR4 survey.
+      </p>
     </div>
   </section>
 
