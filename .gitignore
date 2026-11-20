@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.DS_Store
+# notes for Claude Code: keep local, do not publish on GitHub Pages
+CLAUDE.md
