@@ -89,6 +89,8 @@ def cutout(ra, dec, fov_arcmin, size):
 # ---------------------------------------------------------------------------
 _PROPS = {}
 _TILES = {}
+_MOC = {}
+TILE_STATS = {"found": 0, "missing": 0}
 
 
 def _fetch(url_or_path, binary=True):
@@ -117,6 +119,32 @@ def hips_properties(base):
     return _PROPS[base]
 
 
+def in_moc(base, ra, dec):
+    """True/False from the HiPS Moc.fits, or None if there is no MOC to check against."""
+    if base not in _MOC:
+        _MOC[base] = None
+        data = _fetch(base + "/Moc.fits")
+        if data is not None:
+            from astropy.io import fits
+            with fits.open(io.BytesIO(data)) as h:
+                uniq = np.asarray(h[1].data.field(0), dtype=np.int64)
+            order = (np.floor(np.log2(uniq) / 2) - 1).astype(int)
+            _MOC[base] = (set(uniq.tolist()), sorted(set(order.tolist())))
+    if _MOC[base] is None:
+        return None
+    from astropy_healpix import HEALPix
+    from astropy.coordinates import SkyCoord
+    import astropy.units as u
+    uniq, orders = _MOC[base]
+    frame = "galactic" if hips_properties(base).get("hips_frame", "equatorial").startswith("gal") else "icrs"
+    c = SkyCoord(ra * u.deg, dec * u.deg)
+    for o in orders:
+        ipix = int(HEALPix(nside=2 ** o, order="nested", frame=frame).skycoord_to_healpix(c))
+        if 4 * 4 ** o + ipix in uniq:
+            return True
+    return False
+
+
 def _hpx_wcs(level, frame, tile_size):
     """WCS of the whole HiPS level as one HPX image (same layout as the reproject package)."""
     from astropy.wcs import WCS
@@ -139,8 +167,10 @@ def _tile(base, level, index, ext, tile_size):
         path = f"{base}/Norder{level}/Dir{(index // 10000) * 10000}/Npix{index}.{ext}"
         data = _fetch(path)
         if data is None:
+            TILE_STATS["missing"] += 1
             arr = np.zeros((tile_size, tile_size, 3), dtype=np.uint8)
         else:
+            TILE_STATS["found"] += 1
             # JPEG/PNG tiles are stored top row first, the HPX array bottom row first.
             arr = np.asarray(Image.open(io.BytesIO(data)).convert("RGB"))[::-1]
         if len(_TILES) > 400:
@@ -261,7 +291,18 @@ def main():
             continue
         f_arc = fov.get(n, DEFAULT_FOV)
         if args.hips_url:
-            img = hips_cutout(args.hips_url.rstrip("/"), rd[0], rd[1], f_arc, BIG)
+            base = args.hips_url.rstrip("/")
+            if not args.keep_blank and in_moc(base, rd[0], rd[1]) is False:
+                print(f"Arp {n}: outside KS4 (MOC, {rd[0]:.2f} {rd[1]:+.2f})")
+                status[str(n)] = "outside"
+                continue
+            before = dict(TILE_STATS)
+            img = hips_cutout(base, rd[0], rd[1], f_arc, BIG)
+            if img is not None and TILE_STATS["found"] == before["found"]:
+                print(f"Arp {n}: no tiles found ({rd[0]:.2f} {rd[1]:+.2f}, "
+                      f"{TILE_STATS['missing'] - before['missing']} missing)")
+                status[str(n)] = "outside"
+                continue
         else:
             img = cutout(rd[0], rd[1], f_arc, BIG)
             time.sleep(args.pause)
@@ -271,7 +312,7 @@ def main():
             continue
         bf = blank_fraction(img)
         if bf > BLANK_LIMIT and not args.keep_blank:
-            print(f"Arp {n}: outside KS4 ({bf:.0%} blank)")
+            print(f"Arp {n}: outside KS4 ({bf:.0%} blank, {rd[0]:.2f} {rd[1]:+.2f})")
             status[str(n)] = "outside"
             continue
         scale_bar(img, f_arc).save(big, quality=88)
@@ -286,6 +327,14 @@ def main():
     # ---- write arp.html ----
     ok = sorted(int(k) for k, v in status.items() if v == "ok"
                 and os.path.exists(os.path.join(OUT, f"arp{int(k):03d}.jpg")))
+    if args.hips_url:
+        print(f"\nTiles read: {TILE_STATS['found']}, missing: {TILE_STATS['missing']}")
+    if not ok:
+        for k in ("outside", "unresolved", "failed"):
+            bad = sorted(int(x) for x, v in status.items() if v == k)
+            if bad:
+                print(f"{k}: {len(bad)} -> {bad}")
+        sys.exit("\nNo images: arp.html was not written.")
     figs = []
     for n in ok:
         ra, dec = pos[str(n)]
