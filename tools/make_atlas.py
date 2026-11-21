@@ -1,29 +1,28 @@
 #!/usr/bin/env python3
 """
-Build image atlases from the KS4 DR1 BVI colour HiPS:
+Build image atlases from the KS4 DR1 BVI colour HiPS (southern sky, Dec < -28 deg):
 
-  arp       arp.html       Arp's Atlas of Peculiar Galaxies (Arp 1-338, positions from Sesame)
+  peculiar  peculiar.html  peculiar galaxies and other notable objects (tools/lists/peculiar.csv)
   ngc       ngc.html       NGC galaxies larger than 2 arcmin (tools/lists/ngc.csv, from OpenNGC)
   phangs    phangs.html    PHANGS-MUSE / PHANGS-JWST Cycle 1 galaxies (tools/lists/phangs.csv)
-  clusters  clusters.html  nearby southern galaxy clusters (tools/lists/clusters.csv)
+  clusters  clusters.html  nearby galaxy clusters (tools/lists/clusters.csv)
 
 For each object the script
   1. takes the position from the list (or resolves the name through Sesame),
   2. skips it if it is outside the KS4 footprint (HiPS MOC, or a mostly blank cutout),
   3. cuts a TAN image, north up, from the HiPS (CDS hips2fits, or the tiles directly),
   4. writes a large image and a 300 px thumbnail with a scale bar to assets/<collection>/,
-  5. fills atlas_template.html and writes <collection>.html.
+  5. fills atlas_template.html and writes <collection>.html,
+and finally rewrites the atlas links in gallery.html.
 
-Run it from the root of the website repository:
+Run it from the root of the website repository (tools/update_atlas.sh also commits and pushes):
 
     pip install astropy astropy-healpix scipy requests pillow numpy
-    python tools/make_atlas.py arp --only 1-20        # quick test
-    python tools/make_atlas.py ngc --hips-url <HiPS base URL or local directory>
-    python tools/make_atlas.py all --hips-url <HiPS base URL or local directory>
+    python tools/make_atlas.py --hips-url <HiPS base URL or local directory>          # all collections
+    python tools/make_atlas.py ngc --only 1-20 --hips-url <HiPS base URL or local directory>
 
---only takes Arp numbers for arp and row numbers (or ids such as ngc1365) for the lists.
+--only takes row numbers or ids such as ngc1365.
 Downloads are cached in assets/<collection>/, so the script can be re-run safely.
-Per-object field sizes for Arp can be set in tools/arp_fov.csv ("arp,fov_arcmin").
 The NGC and PHANGS lists are rebuilt with tools/make_lists.py.
 """
 import argparse, csv, io, json, os, sys, time
@@ -45,15 +44,16 @@ KS4_CREDIT = ("Images: KMTNet Synoptic Survey of Southern Sky (KS4) DR1, <i>BVI<
               "(Chang et al. 2026, JKAS).")
 
 COLLECTIONS = {
-    "arp": dict(
-        title="Arp galaxies in KS4", short="Arp galaxies", big=1024, fov=5.0,
-        description="Galaxies from Halton Arp's Atlas of Peculiar Galaxies, seen in the KMTNet Synoptic "
-                    "Survey of Southern Sky (KS4) Data Release 1.",
-        intro='This gallery shows the galaxies from <a href="https://ned.ipac.caltech.edu/level5/Arp/'
-              'Arp_contents.html">Halton Arp\'s Atlas of Peculiar Galaxies</a> that lie south of declination '
-              "{dec} and fall inside the footprint of KS4 Data Release 1. " + HOW_TO,
-        count="{n} Arp objects south of {dec} are inside the KS4 DR1 footprint.",
-        credit=KS4_CREDIT + " Object list: Arp (1966), positions from SIMBAD."),
+    "peculiar": dict(
+        title="Southern peculiar galaxies in KS4",
+        short="Southern peculiar galaxies", big=1024, list="tools/lists/peculiar.csv", shuffle=True,
+        description="Peculiar and interacting galaxies, star clusters and nebulae in the southern sky, seen in "
+                    "the KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1.",
+        intro="This gallery shows peculiar and interacting galaxies and a few other well-known objects, such as "
+              "globular clusters and planetary nebulae, that lie south of declination {dec} and fall inside the "
+              "footprint of KS4 Data Release 1. The order changes each time the page is opened. " + HOW_TO,
+        count="{n} of the {total} objects in the list are inside the KS4 DR1 footprint.",
+        credit=KS4_CREDIT + " Positions from SIMBAD."),
     "ngc": dict(
         title="NGC galaxies in KS4", short="NGC galaxies", big=800, list="tools/lists/ngc.csv",
         description="Galaxies from the New General Catalogue, seen in the KMTNet Synoptic Survey of "
@@ -104,26 +104,17 @@ def parse_only(text, n_max):
 
 def load_objects(name, cfg, only, dec_limit):
     """List of dicts: id, name, query, ra, dec, fov (ra/dec may be None)."""
-    if name == "arp":
-        fov = {}
-        if os.path.exists("tools/arp_fov.csv"):
-            with open("tools/arp_fov.csv") as f:
-                for row in csv.DictReader(f):
-                    fov[int(row["arp"])] = float(row["fov_arcmin"])
-        all_objs = [dict(id=f"arp{n:03d}", name=f"Arp {n}", query=f"Arp {n}", alt=f"ARP {n:03d}",
-                         ra=None, dec=None, fov=fov.get(n, cfg["fov"])) for n in range(1, 339)]
-    else:
-        all_objs = []
-        with open(cfg["list"]) as f:
-            for row in csv.DictReader(f):
-                all_objs.append(dict(id=row["id"], name=row["name"], query=row.get("query") or row["name"],
-                                     ra=float(row["ra"]) if row.get("ra") else None,
-                                     dec=float(row["dec"]) if row.get("dec") else None,
-                                     fov=float(row["fov_arcmin"])))
-        n_all = len(all_objs)
-        all_objs = [o for o in all_objs if o["dec"] is None or o["dec"] < dec_limit]
-        if len(all_objs) < n_all:
-            print(f"{name}: {n_all - len(all_objs)} objects north of {dec_limit:g} deg left out")
+    all_objs = []
+    with open(cfg["list"]) as f:
+        for row in csv.DictReader(f):
+            all_objs.append(dict(id=row["id"], name=row["name"], query=row.get("query") or row["name"],
+                                 ra=float(row["ra"]) if row.get("ra") else None,
+                                 dec=float(row["dec"]) if row.get("dec") else None,
+                                 fov=float(row["fov_arcmin"])))
+    n_all = len(all_objs)
+    all_objs = [o for o in all_objs if o["dec"] is None or o["dec"] < dec_limit]
+    if len(all_objs) < n_all:
+        print(f"{name}: {n_all - len(all_objs)} objects north of {dec_limit:g} deg left out")
     sel = parse_only(only, len(all_objs))
     by_id = {o["id"]: o for o in all_objs}
     out = []
@@ -144,7 +135,7 @@ def resolve(obj, cache):
     if key in cache:
         return cache[key]
     from astropy.coordinates import SkyCoord
-    for name in filter(None, (obj["query"], obj.get("alt"))):
+    for name in (obj["query"],):
         try:
             c = SkyCoord.from_name(name)
             cache[key] = [c.ra.deg, c.dec.deg]
@@ -390,11 +381,6 @@ def build(name, args):
     pos = json.load(open(cache_file)) if os.path.exists(cache_file) else {}
     status_file = os.path.join(out_dir, "status.json")
     status = json.load(open(status_file)) if os.path.exists(status_file) else {}
-    if name == "arp":   # caches from the first version were keyed "1", "2", ...
-        for d in (pos, status):
-            for k in [k for k in d if k.isdigit()]:
-                d.setdefault(f"arp{int(k):03d}", d.pop(k))
-
     print(f"== {name}: {len(todo)} objects")
     for obj in todo:
         oid, label = obj["id"], obj["name"]
@@ -480,9 +466,11 @@ def build(name, args):
             f'width="{THUMB}" height="{THUMB}" loading="lazy" alt="{alt}"></a>\n'
             f'        <figcaption><a href="{link}">{o["name"]}</a></figcaption>\n'
             f'      </figure>')
-    grid = '    <div class="arp-grid">\n' + "\n".join(figs) + '\n    </div>'
+    shuffle = ' data-shuffle' if cfg.get("shuffle") else ''
+    grid = f'    <div class="arp-grid"{shuffle}>\n' + "\n".join(figs) + '\n    </div>'
     bars = sorted({bar_arcmin(o["fov"]) for o in ok})
-    bar_text = " and ".join({1: "one arcminute", 5: "five arcminutes"}[b] for b in bars)
+    bar_text = {(1,): "one arcminute", (5,): "five arcminutes",
+                (1, 5): "one arcminute, or five arcminutes on fields of 25 arcminutes or more"}[tuple(bars)]
     dec_txt = f"\u2212{abs(args.dec_limit):g}\u00b0" if args.dec_limit < 0 else f"{args.dec_limit:g}\u00b0"
     intro = cfg["intro"].replace("{dec}", dec_txt) + f"The white bar in the lower-right corner of each image is {bar_text}."
     page = open("atlas_template.html").read()
@@ -497,8 +485,9 @@ def build(name, args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("collection", nargs="?", default="arp", choices=list(COLLECTIONS) + ["all"])
-    ap.add_argument("--only", help="arp: 1-50 or 81,82,244; lists: row numbers or ids such as ngc1365")
+    ap.add_argument("collection", nargs="?", default="all", choices=list(COLLECTIONS) + ["all"])
+    ap.add_argument("--no-gallery", action="store_true", help="do not update the atlas links in gallery.html")
+    ap.add_argument("--only", help="row numbers (1-50, 3,7) or ids such as ngc1365")
     ap.add_argument("--pause", type=float, default=0.5, help="seconds between hips2fits requests")
     ap.add_argument("--keep-blank", action="store_true", help="keep objects outside the footprint")
     ap.add_argument("--dec-limit", type=float, default=DEC_LIMIT,
@@ -515,6 +504,42 @@ def main():
     results = [build(n, args) for n in names]
     if not any(results):
         sys.exit(1)
+    if not args.no_gallery:
+        update_gallery()
+
+
+def update_gallery():
+    """Rewrite the atlas links in gallery.html from the atlas pages that exist with images."""
+    import re
+    start, end = "<!-- ATLAS LINKS START -->", "<!-- ATLAS LINKS END -->"
+    cards = []
+    for name, cfg in COLLECTIONS.items():
+        page = f"{name}.html"
+        if not os.path.exists(page):
+            continue
+        thumbs = re.findall(r'<img src="(assets/[^"]+_t\.jpg)"', open(page).read())
+        if not thumbs:
+            continue
+        cards.append(
+            f'      <a class="atlas-card" href="{page}">\n'
+            f'        <img src="{thumbs[0]}" width="{THUMB}" height="{THUMB}" loading="lazy" alt="">\n'
+            f'        <span class="atlas-name">{cfg["short"]}</span>\n'
+            f'        <span class="atlas-n">{len(thumbs)} images</span>\n'
+            f'      </a>')
+    block = start + "\n"
+    if cards:
+        block += ('    <h3 class="atlas-head">Atlases from KS4 DR1</h3>\n'
+                  '    <div class="atlas-links">\n' + "\n".join(cards) + '\n    </div>\n')
+    block += "    " + end
+    g = open("gallery.html").read()
+    if start in g:
+        g = re.sub(re.escape(start) + ".*?" + re.escape(end), lambda m: block, g, flags=re.S)
+    else:
+        anchor = '<div class="sechead gsec" id="places">'
+        assert anchor in g, "places heading not found in gallery.html"
+        g = g.replace(anchor, block + "\n\n    " + anchor, 1)
+    open("gallery.html", "w").write(g)
+    print(f"gallery.html: {len(cards)} atlas links")
 
 
 if __name__ == "__main__":
