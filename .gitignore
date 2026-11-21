@@ -7,3 +7,4 @@ CLAUDE.md
 # atlas caches written by tools/make_atlas.py
 assets/*/positions.json
 assets/*/status.json
+assets/*/fov.json
