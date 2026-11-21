@@ -212,6 +212,15 @@
   .album .desc { font-size: 14.5px; line-height: 1.6; color: var(--body); margin-top: 4px; }
   .album .fov { font-size: 13px; color: var(--label); margin-top: 4px; }
   .gsec { margin-top: clamp(36px, 6vw, 56px); scroll-margin-top: 90px; }
+  /* links to the KS4 atlas pages (block written by tools/make_atlas.py) */
+  .atlas-head { font-family: "Newsreader", Georgia, serif; font-weight: 400; font-size: 22px; margin: 34px 0 14px; }
+  .atlas-links { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .atlas-card { display: block; background: #0b0d0c; color: #e9ece9; text-decoration: none; overflow: hidden; }
+  .atlas-card img { width: 100%; height: auto; aspect-ratio: 1; display: block; transition: transform .35s ease; }
+  .atlas-card:hover img { transform: scale(1.04); }
+  .atlas-name { display: block; padding: 10px 12px 2px; font-size: 14.5px; line-height: 1.35; }
+  .atlas-n { display: block; padding: 0 12px 12px; font-size: 12.5px; color: #8a928d; }
+  @media (prefers-reduced-motion: reduce) { .atlas-card img { transition: none; } }
 </style>
 </head>
 <body>
