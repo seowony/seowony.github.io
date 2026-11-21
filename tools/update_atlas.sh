@@ -20,7 +20,7 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 BASE=$(git rev-parse --abbrev-ref HEAD)
 BRANCH=atlas-update
-GEN=(peculiar.html ngc.html phangs.html clusters.html assets/peculiar assets/ngc assets/phangs assets/clusters)
+GEN=(peculiar.html ngc.html clusters.html assets/peculiar assets/ngc assets/clusters)
 
 if ! git diff --quiet -- gallery.html; then
   echo "gallery.html has uncommitted changes. Commit or discard them first." >&2

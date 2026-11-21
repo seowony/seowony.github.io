@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NGC galaxies in KS4 | Seo-Won Chang</title>
+<meta name="description" content="Galaxies from the New General Catalogue, seen in the KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1.">
+<meta property="og:title" content="NGC galaxies in KS4">
+<meta property="og:description" content="Galaxies from the New General Catalogue, seen in the KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seowony.github.io/ngc.html">
+<meta property="og:image" content="https://seowony.github.io/assets/ks4-ngc4696-centaurus.jpg">
+<link rel="canonical" href="https://seowony.github.io/ngc.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Karla:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --paper:  #E5E9E4;
+    --panel:  #F3F6F1;
+    --ink:    #18211E;
+    --body:   #3C463F;
+    --second: #4E584F;
+    --label:  #7C867C;
+    --rule:   #C3CCC1;
+    --edge:   #CBD3C9;
+    --accent: #B02E26;
+    --accent-d: #7E1F1A;
+
+    --serif: Newsreader, "Iowan Old Style", Georgia, serif;
+    --sans:  Karla, "Helvetica Neue", Arial, sans-serif;
+    --gutter: clamp(16px, 5vw, 56px);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-d); text-decoration: underline; }
+  a:focus-visible, .skip:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 1120px; margin-inline: auto; padding-inline: var(--gutter); }
+
+  .skip { position: absolute; left: -9999px; background: var(--ink); color: var(--paper); padding: 10px 16px; z-index: 10; }
+  .skip:focus { left: 8px; top: 8px; }
+
+  header.site { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--edge); z-index: 5; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-block: 14px; }
+  .wordmark { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 19px; }
+  nav.site ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0; padding: 0; font-size: 14.5px; }
+  nav.site a { color: var(--second); }
+  nav.site a:hover { color: var(--ink); }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(34px, 5.4vw, 50px); line-height: 1.06; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(25px, 3.4vw, 32px); line-height: 1.15; }
+  h3 { font-size: clamp(19px, 2.4vw, 23px); line-height: 1.28; }
+  p { margin: 0; }
+
+  .kicker { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin: 0; }
+  .affil { font-family: var(--serif); font-size: clamp(17px, 2.2vw, 19px); color: var(--ink); line-height: 1.4; margin: 0; }
+  .affil a { color: var(--ink); border-bottom: 1px solid var(--rule); }
+  .affil a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+  section { padding-block: clamp(40px, 6vw, 60px); }
+  .sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+             border-bottom: 1px solid var(--rule); padding-bottom: 13px; margin-bottom: 30px; }
+
+  /* hero */
+  .hero { display: grid; gap: clamp(24px, 4vw, 44px); align-items: start; }
+  @media (min-width: 760px) { .hero { grid-template-columns: 240px minmax(0, 1fr); } }
+  .portrait { width: 100%; max-width: 240px; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .hero-copy { display: flex; flex-direction: column; gap: 18px; }
+  .hero-copy p.bio { color: var(--body); line-height: 1.72; max-width: 64ch; font-size: 16.5px; }
+  .idlinks { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+  .idlinks a {
+    font-size: 14px; padding: 9px 15px; border: 1px solid var(--edge);
+    color: var(--second); background: var(--panel); text-decoration: none;
+  }
+  .idlinks a:hover { border-color: var(--ink); color: var(--ink); text-decoration: none; }
+  .idlinks a.strong { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .idlinks a.strong:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* illustrations */
+  svg.art { display: block; width: 100%; height: auto; }
+  .ln  { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .lnt { fill: none; stroke: var(--ink); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+  .dash{ fill: none; stroke: var(--label); stroke-width: 1.1; stroke-dasharray: 3 5; stroke-linecap: round; }
+  .ac  { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .acf { fill: var(--accent); }
+  .lnf { fill: var(--ink); }
+  text.cap { font-family: var(--sans); font-size: 12px; letter-spacing: 1.4px; fill: var(--label); }
+
+  /* research cards */
+  .topics { display: grid; gap: clamp(28px, 4vw, 40px); }
+  @media (min-width: 880px) { .topics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .topic { display: flex; flex-direction: column; gap: 14px; }
+  .plate { background: var(--panel); border: 1px solid var(--edge); padding: 16px; }
+  .topic p { font-size: 15.5px; line-height: 1.68; color: var(--body); }
+
+  /* programs */
+  .progs { display: flex; flex-direction: column; }
+  .prog { display: grid; gap: 6px 20px; padding-block: 22px; border-top: 1px solid var(--edge); }
+  .prog:first-child { border-top: 0; padding-top: 0; }
+  @media (min-width: 720px) { .prog { grid-template-columns: 52px minmax(0, 1fr) 200px; } }
+  .prog-mark svg { display: block; width: 34px; height: 34px; }
+  .prog p { color: var(--body); line-height: 1.66; font-size: 15px; max-width: 62ch; }
+  .prog .meta { font-size: 13px; line-height: 1.6; color: var(--label); }
+  .prog .meta b { font-weight: 500; color: var(--second); display: block; margin-bottom: 3px; }
+  .queue { margin-top: 26px; border-top: 1px solid var(--rule); padding-top: 20px; display: grid; gap: 10px 32px; }
+  @media (min-width: 720px) { .queue { grid-template-columns: 52px minmax(0, 1fr); } }
+  .queue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .queue li { font-size: 15px; color: var(--second); }
+  .queue li::before { content: "— "; color: var(--label); }
+
+  /* gallery */
+  .gallery { display: grid; gap: 18px; }
+  @media (min-width: 720px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .gallery-item { display: flex; flex-direction: column; }
+  .gallery-item.wide { grid-column: 1 / -1; }
+  .gallery-item img { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .gallery-cap { padding: 10px 2px 0; }
+  .gallery-cap .obj { font-family: var(--serif); font-size: 17px; color: var(--ink); }
+  .gallery-cap .desc { font-size: 14.5px; color: var(--body); line-height: 1.62; margin-top: 4px; }
+  .gallery-cap .fov { font-size: 13px; color: var(--label); margin-top: 4px; }
+  .media { margin-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--rule); padding-top: 20px; }
+  .media .gallery { margin-top: 14px; }
+  figure.gallery-item { margin: 0; }
+  .gallery-item video { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: #000; }
+  .gallery-credit { font-size: 13px; color: var(--label); margin-top: 20px; border-top: 1px solid var(--edge); padding-top: 12px; }
+
+  /* rubin block */
+  .rubin { display: grid; gap: clamp(20px, 4vw, 40px); }
+  @media (min-width: 820px) { .rubin { grid-template-columns: minmax(0, 1fr) 320px; } }
+  .rubin p { color: var(--body); line-height: 1.7; max-width: 62ch; }
+  .roles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 14.5px; color: var(--second); }
+  .roles li { padding-left: 16px; position: relative; line-height: 1.55; }
+  .roles li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--accent); }
+  .roles .badge { display: inline-block; vertical-align: middle; margin-left: 4px; line-height: 0; }
+  .roles .badge img { height: 20px; width: auto; }
+  .topicchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .topicchips span { font-size: 13px; padding: 5px 11px; border: 1px solid var(--edge); background: var(--panel); color: var(--second); }
+
+  /* publications */
+  .pubs { display: flex; flex-direction: column; gap: 0; }
+  .pub { display: grid; gap: 2px 18px; padding-block: 15px; border-top: 1px solid var(--edge); align-items: baseline; }
+  .pub:first-child { border-top: 0; }
+  @media (min-width: 640px) { .pub { grid-template-columns: 62px minmax(0, 1fr) 132px; } }
+  .pub .yr { font-size: 14px; color: var(--label); font-variant-numeric: tabular-nums; }
+  .pub .ti { font-size: 15.5px; line-height: 1.5; color: var(--ink); }
+  .pub .vn { font-size: 13px; color: var(--label); }
+  @media (min-width: 640px) { .pub .vn { text-align: right; } }
+  .star { color: var(--accent); margin-right: 5px; }
+
+  /* news + contact */
+  .split { display: grid; gap: clamp(18px, 4vw, 40px); }
+  @media (min-width: 820px) { .split { grid-template-columns: 190px minmax(0, 1fr); } }
+  .news { display: flex; flex-direction: column; gap: 14px; max-width: 70ch; }
+  .item { display: grid; gap: 2px 18px; }
+  @media (min-width: 520px) { .item { grid-template-columns: 92px minmax(0, 1fr); align-items: baseline; } }
+  .when { font-size: 14px; color: var(--label); }
+  .when small { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+  .what { font-size: 15.5px; line-height: 1.62; color: var(--body); }
+
+  footer.site { border-top: 1px solid var(--rule); }
+  .foot { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between;
+          padding-block: 22px 40px; font-size: 13px; color: var(--label); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  /* story page */
+  .story { padding-block: clamp(32px, 5vw, 52px); max-width: 1120px; }
+  .story h1 { margin: 10px 0 28px; max-width: 22ch; }
+  .story .kicker a { color: var(--label); }
+  .comic { display: grid; gap: 16px; margin-bottom: clamp(32px, 5vw, 48px); }
+  @media (min-width: 720px) { .comic { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .panel { margin: 0; background: var(--panel); border: 1px solid var(--edge); padding: 14px 14px 12px; }
+  .panel figcaption { font-size: 14.5px; line-height: 1.55; color: var(--body); margin-top: 8px; }
+  .panel figcaption b { font-weight: 600; color: var(--accent); margin-right: 6px; }
+  .paper { fill: var(--panel); }
+  .win { fill: var(--accent); opacity: 0.22; }
+  text.say { font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 1px; fill: var(--ink); }
+  text.say.acc { fill: var(--accent); }
+  text.say.big { font-size: 30px; }
+  .prose { max-width: 66ch; display: flex; flex-direction: column; gap: 16px; }
+  .prose p { color: var(--body); font-size: 16.5px; line-height: 1.75; }
+  .prose blockquote { margin: 4px 0; padding: 14px 20px; border-left: 3px solid var(--accent); background: var(--panel);
+                      display: flex; flex-direction: column; gap: 8px; }
+  .prose blockquote p { font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--ink); }
+  .timeline { margin-top: clamp(36px, 5vw, 52px); border-top: 1px solid var(--rule); padding-top: 24px; max-width: 760px; }
+  .timeline .day { font-family: var(--serif); font-size: 18px; color: var(--ink); margin: 18px 0 10px; }
+  .timeline .item { grid-template-columns: 120px minmax(0, 1fr); }
+  .timeline .what { font-size: 15px; }
+  .back { margin-top: 36px; font-size: 15px; }
+  /* places page */
+  .album { display: grid; gap: 22px; }
+  @media (min-width: 760px) { .album { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .album figure { margin: 0; }
+  .album figure:first-child,
+  .album figure:nth-child(2):last-child { grid-column: 1 / -1; }
+  .album img { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .album figcaption { padding: 10px 2px 0; }
+  .album .obj { font-family: var(--serif); font-size: 18px; color: var(--ink); }
+  .album .desc { font-size: 14.5px; line-height: 1.6; color: var(--body); margin-top: 4px; }
+  .album .fov { font-size: 13px; color: var(--label); margin-top: 4px; }
+  .gsec { margin-top: clamp(36px, 6vw, 56px); scroll-margin-top: 90px; }
+  /* arp atlas: dark, image-first page */
+  body.dark { background: #0b0d0c; color: #e8ebe8; }
+  body.dark header.site { background: #0b0d0c; border-bottom-color: #222725; }
+  body.dark .wordmark, body.dark .wordmark a { color: #f2f4f2 !important; }
+  body.dark .wordmark svg circle:first-child { stroke: #f2f4f2; }
+  body.dark nav.site a { color: #a7aea9; }
+  body.dark nav.site a:hover { color: #fff; }
+  body.dark h1 { color: #f6f7f6; }
+  body.dark a { color: #ff8f86; }
+  body.dark .kicker, body.dark .kicker a { color: #8a928d; }
+  body.dark footer.site { border-top-color: #222725; }
+  body.dark .foot { color: #7d857f; }
+  .arp-intro { color: #c3c9c5; max-width: 70ch; line-height: 1.7; margin: -8px 0 10px; }
+  .arp-meta { font-size: 13.5px; color: #8a928d; margin-bottom: 26px; }
+  .arp-grid { display: grid; gap: 4px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .arp-grid figure { margin: 0; position: relative; overflow: hidden; background: #000; }
+  .arp-grid img { width: 100%; aspect-ratio: 1; height: auto; display: block; transition: transform .35s ease; }
+  .arp-grid figure:hover img { transform: scale(1.04); }
+  .arp-grid figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 10px 8px;
+                         background: linear-gradient(transparent, rgba(0,0,0,.75)); font-size: 13px; }
+  .arp-grid figcaption a { color: #fff; }
+  .arp-empty { padding: 28px; background: #141816; border: 1px dashed #333a37; color: #a7aea9; font-size: 14.5px; }
+  body.dark .gallery-credit { color: #8a928d; border-top-color: #222725; }
+  @media (prefers-reduced-motion: reduce) { .arp-grid img { transition: none; } }
+</style>
+</head>
+<body class="dark">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="wordmark" href="index.html" style="color: var(--ink); text-decoration: none;">
+      <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="24" fill="none" stroke="#18211E" stroke-width="3.4"></circle>
+        <circle cx="32" cy="32" r="8" fill="#B02E26"></circle>
+      </svg>
+      Seo-Won Chang
+    </a>
+    <nav class="site" aria-label="Sections">
+      <ul>
+        <li><a href="index.html#work">Research</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#rubin">Rubin / LSST</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="index.html#pubs">Publications</a></li>
+        <li><a href="index.html#community">Community</a></li>
+        <li><a href="cv.pdf">CV</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="wrap story">
+    <p class="kicker"><a href="index.html">Home</a> / <a href="gallery.html">Gallery</a> / NGC galaxies</p>
+    <h1>NGC galaxies in KS4</h1>
+    <p class="arp-intro">
+      This gallery shows the galaxies from the New General Catalogue that are larger than two arcminutes, lie south of declination −28° and fall inside the footprint of KS4 Data Release 1. Click an image to see it larger. The name under each image opens the KS4 <i>BVI</i> colour HiPS in <a href="https://aladin.cds.unistra.fr/AladinLite/">Aladin Lite</a> so you can pan and zoom around it. The white bar in the lower-right corner of each image is one arcminute.
+    </p>
+    <p class="arp-meta">187 of the 415 NGC galaxies south of −28° are inside the KS4 DR1 footprint.</p>
+
+    <div class="arp-grid">
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc0406.jpg"><img src="assets/ngc/ngc0406_t.jpg" width="300" height="300" loading="lazy" alt="NGC 406 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=16.85438%20-69.87917&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 406</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc1313.jpg"><img src="assets/ngc/ngc1313_t.jpg" width="300" height="300" loading="lazy" alt="NGC 1313 in KS4 BVI colour, 20 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=49.56687%20-66.49825&fov=0.667&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 1313</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc1511.jpg"><img src="assets/ngc/ngc1511_t.jpg" width="300" height="300" loading="lazy" alt="NGC 1511 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=59.90408%20-67.63425&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 1511</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc1559.jpg"><img src="assets/ngc/ngc1559_t.jpg" width="300" height="300" loading="lazy" alt="NGC 1559 in KS4 BVI colour, 7.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=64.39904%20-62.78367&fov=0.250&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 1559</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc1824.jpg"><img src="assets/ngc/ngc1824_t.jpg" width="300" height="300" loading="lazy" alt="NGC 1824 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=76.73417%20-59.72397&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 1824</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2049.jpg"><img src="assets/ngc/ngc2049_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2049 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=85.81379%20-30.07839&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2049</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2090.jpg"><img src="assets/ngc/ngc2090_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2090 in KS4 BVI colour, 8 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=86.75787%20-34.25061&fov=0.267&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2090</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2104.jpg"><img src="assets/ngc/ngc2104_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2104 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=86.76971%20-51.55292&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2104</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2188.jpg"><img src="assets/ngc/ngc2188_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2188 in KS4 BVI colour, 10 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=92.53971%20-34.10619&fov=0.333&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2188</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2221.jpg"><img src="assets/ngc/ngc2221_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2221 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=95.06550%20-57.57842&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2221</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2310.jpg"><img src="assets/ngc/ngc2310_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2310 in KS4 BVI colour, 8 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=103.47483%20-40.86261&fov=0.267&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2310</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2369.jpg"><img src="assets/ngc/ngc2369_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2369 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=109.15721%20-62.34372&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2369</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2369a.jpg"><img src="assets/ngc/ngc2369a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2369A in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=109.68142%20-62.93628&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2369A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2397.jpg"><img src="assets/ngc/ngc2397_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2397 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=110.33325%20-69.00147&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2397</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2417.jpg"><img src="assets/ngc/ngc2417_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2417 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=112.55037%20-62.25264&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2417</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2427.jpg"><img src="assets/ngc/ngc2427_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2427 in KS4 BVI colour, 10.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=114.11742%20-47.63556&fov=0.350&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2427</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2434.jpg"><img src="assets/ngc/ngc2434_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2434 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=113.71317%20-69.28414&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2434</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2442.jpg"><img src="assets/ngc/ngc2442_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2442 in KS4 BVI colour, 8.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=114.09933%20-69.53083&fov=0.283&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2442</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2502.jpg"><img src="assets/ngc/ngc2502_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2502 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=118.96467%20-52.30678&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2502</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2640.jpg"><img src="assets/ngc/ngc2640_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2640 in KS4 BVI colour, 8.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=129.35258%20-55.12375&fov=0.283&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2640</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2788a.jpg"><img src="assets/ngc/ngc2788a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2788A in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=135.66433%20-68.22683&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2788A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2822.jpg"><img src="assets/ngc/ngc2822_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2822 in KS4 BVI colour, 7 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=138.45717%20-69.64483&fov=0.233&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2822</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2842.jpg"><img src="assets/ngc/ngc2842_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2842 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=138.90179%20-63.06964&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2842</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2883.jpg"><img src="assets/ngc/ngc2883_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2883 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=141.32675%20-34.10325&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2883</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2887.jpg"><img src="assets/ngc/ngc2887_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2887 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=140.85021%20-63.81256&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2887</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc2997.jpg"><img src="assets/ngc/ngc2997_t.jpg" width="300" height="300" loading="lazy" alt="NGC 2997 in KS4 BVI colour, 18.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=146.41163%20-31.19108&fov=0.617&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 2997</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3001.jpg"><img src="assets/ngc/ngc3001_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3001 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=146.57775%20-30.43747&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3001</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3038.jpg"><img src="assets/ngc/ngc3038_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3038 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=147.81438%20-32.75256&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3038</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3059.jpg"><img src="assets/ngc/ngc3059_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3059 in KS4 BVI colour, 7 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=147.53400%20-73.92219&fov=0.233&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3059</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3082.jpg"><img src="assets/ngc/ngc3082_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3082 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=149.72113%20-30.35769&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3082</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3087.jpg"><img src="assets/ngc/ngc3087_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3087 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=149.78608%20-34.22522&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3087</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3095.jpg"><img src="assets/ngc/ngc3095_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3095 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=150.02429%20-31.55286&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3095</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3100.jpg"><img src="assets/ngc/ngc3100_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3100 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=150.17017%20-31.66453&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3100</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3108.jpg"><img src="assets/ngc/ngc3108_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3108 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=150.62096%20-31.67742&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3108</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3137.jpg"><img src="assets/ngc/ngc3137_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3137 in KS4 BVI colour, 10 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=152.28117%20-29.06431&fov=0.333&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3137</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3175.jpg"><img src="assets/ngc/ngc3175_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3175 in KS4 BVI colour, 9.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=153.67546%20-28.87206&fov=0.317&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3175</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3223.jpg"><img src="assets/ngc/ngc3223_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3223 in KS4 BVI colour, 7.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=155.39617%20-34.26681&fov=0.250&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3223</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3241.jpg"><img src="assets/ngc/ngc3241_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3241 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=156.07067%20-32.48261&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3241</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3244.jpg"><img src="assets/ngc/ngc3244_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3244 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=156.37017%20-39.82756&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3244</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3250.jpg"><img src="assets/ngc/ngc3250_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3250 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=156.63450%20-39.94394&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3250</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3250b.jpg"><img src="assets/ngc/ngc3250b_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3250B in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=156.93654%20-40.43503&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3250B</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3256.jpg"><img src="assets/ngc/ngc3256_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3256 in KS4 BVI colour, 6 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=156.96362%20-43.90375&fov=0.200&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3256</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3256b.jpg"><img src="assets/ngc/ngc3256b_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3256B in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.25446%20-44.40289&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3256B</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3258.jpg"><img src="assets/ngc/ngc3258_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3258 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.22321%20-35.60553&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3258</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3261.jpg"><img src="assets/ngc/ngc3261_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3261 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.25608%20-44.65683&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3261</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3263.jpg"><img src="assets/ngc/ngc3263_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3263 in KS4 BVI colour, 14 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.30567%20-44.12292&fov=0.467&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3263</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3268.jpg"><img src="assets/ngc/ngc3268_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3268 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.50275%20-35.32547&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3268</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3269.jpg"><img src="assets/ngc/ngc3269_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3269 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.48775%20-35.22439&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3269</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3271.jpg"><img src="assets/ngc/ngc3271_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3271 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.61037%20-35.35950&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3271</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3275.jpg"><img src="assets/ngc/ngc3275_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3275 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.71583%20-36.73697&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3275</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3281.jpg"><img src="assets/ngc/ngc3281_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3281 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.96704%20-34.85369&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3281</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3281d.jpg"><img src="assets/ngc/ngc3281d_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3281D in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=158.57925%20-34.40342&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3281D</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3283.jpg"><img src="assets/ngc/ngc3283_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3283 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=157.79833%20-46.25128&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3283</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3347.jpg"><img src="assets/ngc/ngc3347_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3347 in KS4 BVI colour, 7.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=160.69396%20-36.35267&fov=0.250&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3347</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3347a.jpg"><img src="assets/ngc/ngc3347a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3347A in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=160.08587%20-36.41111&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3347A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3347b.jpg"><img src="assets/ngc/ngc3347b_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3347B in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=160.49925%20-36.93533&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3347B</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3358.jpg"><img src="assets/ngc/ngc3358_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3358 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=160.88758%20-36.41069&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3358</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3366.jpg"><img src="assets/ngc/ngc3366_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3366 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=158.78450%20-43.69181&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3366</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3390.jpg"><img src="assets/ngc/ngc3390_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3390 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=162.01817%20-31.53336&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3390</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3449.jpg"><img src="assets/ngc/ngc3449_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3449 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=163.22358%20-32.92761&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3449</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3533.jpg"><img src="assets/ngc/ngc3533_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3533 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=166.78146%20-37.17264&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3533</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3557.jpg"><img src="assets/ngc/ngc3557_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3557 in KS4 BVI colour, 8 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=167.49017%20-37.53917&fov=0.267&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3557</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3568.jpg"><img src="assets/ngc/ngc3568_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3568 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=167.70237%20-37.44786&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3568</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3573.jpg"><img src="assets/ngc/ngc3573_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3573 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=167.82738%20-36.87553&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3573</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3620.jpg"><img src="assets/ngc/ngc3620_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3620 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=169.01950%20-76.21631&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3620</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3621.jpg"><img src="assets/ngc/ngc3621_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3621 in KS4 BVI colour, 17.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=169.56879%20-32.81406&fov=0.583&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3621</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3706.jpg"><img src="assets/ngc/ngc3706_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3706 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=172.43512%20-36.39131&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3706</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3717.jpg"><img src="assets/ngc/ngc3717_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3717 in KS4 BVI colour, 11.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=172.88329%20-30.30775&fov=0.383&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3717</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3742.jpg"><img src="assets/ngc/ngc3742_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3742 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=173.88546%20-37.95639&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3742</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3749.jpg"><img src="assets/ngc/ngc3749_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3749 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=173.97171%20-37.99736&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3749</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3783.jpg"><img src="assets/ngc/ngc3783_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3783 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=174.75733%20-37.73867&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3783</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc3904.jpg"><img src="assets/ngc/ngc3904_t.jpg" width="300" height="300" loading="lazy" alt="NGC 3904 in KS4 BVI colour, 6 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=177.30508%20-29.27675&fov=0.200&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 3904</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4105.jpg"><img src="assets/ngc/ngc4105_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4105 in KS4 BVI colour, 8 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=181.66987%20-29.76022&fov=0.267&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4105</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4106.jpg"><img src="assets/ngc/ngc4106_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4106 in KS4 BVI colour, 7.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=181.68667%20-29.76831&fov=0.250&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4106</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4219.jpg"><img src="assets/ngc/ngc4219_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4219 in KS4 BVI colour, 7 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=184.11383%20-43.32425&fov=0.233&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4219</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4304.jpg"><img src="assets/ngc/ngc4304_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4304 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=185.55300%20-33.48450&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4304</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4373.jpg"><img src="assets/ngc/ngc4373_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4373 in KS4 BVI colour, 7 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=186.32425%20-39.75972&fov=0.233&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4373</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4373a.jpg"><img src="assets/ngc/ngc4373a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4373A in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=186.40721%20-39.31967&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4373A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4444.jpg"><img src="assets/ngc/ngc4444_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4444 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=187.15171%20-43.26175&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4444</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4499.jpg"><img src="assets/ngc/ngc4499_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4499 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=188.02058%20-39.98247&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4499</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4553.jpg"><img src="assets/ngc/ngc4553_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4553 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=189.03167%20-39.43867&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4553</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4573.jpg"><img src="assets/ngc/ngc4573_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4573 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=189.43246%20-43.62114&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4573</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4575.jpg"><img src="assets/ngc/ngc4575_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4575 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=189.46300%20-40.53736&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4575</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4603.jpg"><img src="assets/ngc/ngc4603_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4603 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=190.23004%20-40.97639&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4603</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4645a.jpg"><img src="assets/ngc/ngc4645a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4645A in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=190.77321%20-41.35892&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4645A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4645b.jpg"><img src="assets/ngc/ngc4645b_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4645B in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=190.87992%20-41.36253&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4645B</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4650.jpg"><img src="assets/ngc/ngc4650_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4650 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=191.08162%20-40.73181&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4650</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4672.jpg"><img src="assets/ngc/ngc4672_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4672 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=191.56563%20-41.70597&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4672</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4679.jpg"><img src="assets/ngc/ngc4679_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4679 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=191.87604%20-39.57086&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4679</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4696.jpg"><img src="assets/ngc/ngc4696_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4696 in KS4 BVI colour, 7 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=192.20521%20-41.31083&fov=0.233&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4696</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4696c.jpg"><img src="assets/ngc/ngc4696c_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4696C in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=192.01108%20-40.81856&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4696C</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4709.jpg"><img src="assets/ngc/ngc4709_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4709 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=192.51617%20-41.38197&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4709</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4744.jpg"><img src="assets/ngc/ngc4744_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4744 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=193.08167%20-41.06003&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4744</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4767.jpg"><img src="assets/ngc/ngc4767_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4767 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=193.47062%20-39.71431&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4767</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4785.jpg"><img src="assets/ngc/ngc4785_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4785 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=193.36387%20-48.74919&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4785</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4832.jpg"><img src="assets/ngc/ngc4832_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4832 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=194.44804%20-39.76169&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4832</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4835.jpg"><img src="assets/ngc/ngc4835_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4835 in KS4 BVI colour, 6 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=194.53267%20-46.26422&fov=0.200&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4835</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4835a.jpg"><img src="assets/ngc/ngc4835a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4835A in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=194.30471%20-46.37469&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4835A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4930.jpg"><img src="assets/ngc/ngc4930_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4930 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=196.02196%20-41.41158&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4930</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4945.jpg"><img src="assets/ngc/ngc4945_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4945 in KS4 BVI colour, 20 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=196.36450%20-49.46822&fov=0.667&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4945</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4945a.jpg"><img src="assets/ngc/ngc4945a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4945A in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=196.64054%20-49.69064&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4945A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4946.jpg"><img src="assets/ngc/ngc4946_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4946 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=196.37242%20-43.59114&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4946</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4947.jpg"><img src="assets/ngc/ngc4947_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4947 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=196.33417%20-35.33742&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4947</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc4976.jpg"><img src="assets/ngc/ngc4976_t.jpg" width="300" height="300" loading="lazy" alt="NGC 4976 in KS4 BVI colour, 10.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=197.15637%20-49.50642&fov=0.350&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 4976</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5011.jpg"><img src="assets/ngc/ngc5011_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5011 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=198.21608%20-43.09622&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5011</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5026.jpg"><img src="assets/ngc/ngc5026_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5026 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=198.55683%20-42.96128&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5026</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5062.jpg"><img src="assets/ngc/ngc5062_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5062 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=199.59842%20-35.45867&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5062</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5063.jpg"><img src="assets/ngc/ngc5063_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5063 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=199.60713%20-35.35247&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5063</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5064.jpg"><img src="assets/ngc/ngc5064_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5064 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=199.74971%20-47.90867&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5064</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5090.jpg"><img src="assets/ngc/ngc5090_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5090 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=200.30342%20-43.70456&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5090</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5090b.jpg"><img src="assets/ngc/ngc5090b_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5090B in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=200.07300%20-43.86467&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5090B</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5091.jpg"><img src="assets/ngc/ngc5091_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5091 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=200.32383%20-43.71967&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5091</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5102.jpg"><img src="assets/ngc/ngc5102_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5102 in KS4 BVI colour, 17.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=200.49004%20-36.63025&fov=0.583&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5102</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5121.jpg"><img src="assets/ngc/ngc5121_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5121 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=201.19004%20-37.68219&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5121</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5124.jpg"><img src="assets/ngc/ngc5124_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5124 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=201.21013%20-30.30753&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5124</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5128.jpg"><img src="assets/ngc/ngc5128_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5128 in KS4 BVI colour, 20 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=201.36508%20-43.01911&fov=0.667&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5128</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5135.jpg"><img src="assets/ngc/ngc5135_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5135 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=201.43358%20-29.83367&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5135</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5140.jpg"><img src="assets/ngc/ngc5140_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5140 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=201.59054%20-33.86847&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5140</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5152.jpg"><img src="assets/ngc/ngc5152_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5152 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=201.96300%20-29.61861&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5152</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5153.jpg"><img src="assets/ngc/ngc5153_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5153 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=201.97637%20-29.61803&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5153</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5161.jpg"><img src="assets/ngc/ngc5161_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5161 in KS4 BVI colour, 9.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=202.30796%20-33.17383&fov=0.317&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5161</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5188.jpg"><img src="assets/ngc/ngc5188_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5188 in KS4 BVI colour, 6 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=202.86783%20-34.79442&fov=0.200&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5188</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5193.jpg"><img src="assets/ngc/ngc5193_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5193 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=202.97304%20-33.23422&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5193</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5206.jpg"><img src="assets/ngc/ngc5206_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5206 in KS4 BVI colour, 7.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=203.43325%20-48.15117&fov=0.250&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5206</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5215.jpg"><img src="assets/ngc/ngc5215_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5215 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=203.78417%20-33.48389&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5215</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5236.jpg"><img src="assets/ngc/ngc5236_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5236 in KS4 BVI colour, 20 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=204.25396%20-29.86542&fov=0.667&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5236</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5237.jpg"><img src="assets/ngc/ngc5237_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5237 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=204.41271%20-42.84697&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5237</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5253.jpg"><img src="assets/ngc/ngc5253_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5253 in KS4 BVI colour, 9 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=204.98317%20-31.64011&fov=0.300&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5253</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5264.jpg"><img src="assets/ngc/ngc5264_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5264 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=205.40283%20-29.91308&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5264</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5266.jpg"><img src="assets/ngc/ngc5266_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5266 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=205.75879%20-48.16942&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5266</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5292.jpg"><img src="assets/ngc/ngc5292_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5292 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=206.91696%20-30.93953&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5292</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5333.jpg"><img src="assets/ngc/ngc5333_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5333 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=208.60092%20-48.51253&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5333</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5357.jpg"><img src="assets/ngc/ngc5357_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5357 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=208.99812%20-30.34144&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5357</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5365.jpg"><img src="assets/ngc/ngc5365_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5365 in KS4 BVI colour, 7 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=209.46100%20-43.93131&fov=0.233&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5365</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5365a.jpg"><img src="assets/ngc/ngc5365a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5365A in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=209.16471%20-44.00925&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5365A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5398.jpg"><img src="assets/ngc/ngc5398_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5398 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=210.33983%20-33.06378&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5398</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5408.jpg"><img src="assets/ngc/ngc5408_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5408 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=210.83712%20-41.37769&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5408</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5419.jpg"><img src="assets/ngc/ngc5419_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5419 in KS4 BVI colour, 7 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=210.91138%20-33.97825&fov=0.233&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5419</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5483.jpg"><img src="assets/ngc/ngc5483_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5483 in KS4 BVI colour, 6 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=212.60429%20-43.32461&fov=0.200&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5483</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5488.jpg"><img src="assets/ngc/ngc5488_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5488 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=212.01296%20-33.31492&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5488</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5489.jpg"><img src="assets/ngc/ngc5489_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5489 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=213.00300%20-46.08872&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5489</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5494.jpg"><img src="assets/ngc/ngc5494_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5494 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=213.10075%20-30.64408&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5494</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5516.jpg"><img src="assets/ngc/ngc5516_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5516 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=213.97787%20-48.11486&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5516</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5530.jpg"><img src="assets/ngc/ngc5530_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5530 in KS4 BVI colour, 8.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=214.61312%20-43.38858&fov=0.283&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5530</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5556.jpg"><img src="assets/ngc/ngc5556_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5556 in KS4 BVI colour, 6 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=215.14204%20-29.24178&fov=0.200&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5556</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5786.jpg"><img src="assets/ngc/ngc5786_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5786 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=224.73442%20-42.01336&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5786</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc5833.jpg"><img src="assets/ngc/ngc5833_t.jpg" width="300" height="300" loading="lazy" alt="NGC 5833 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=227.97354%20-72.85942&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 5833</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6845.jpg"><img src="assets/ngc/ngc6845_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6845 in KS4 BVI colour, 7.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=300.24283%20-47.06997&fov=0.250&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6845</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6848.jpg"><img src="assets/ngc/ngc6848_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6848 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=300.69687%20-56.09031&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6848</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6849.jpg"><img src="assets/ngc/ngc6849_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6849 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=301.56508%20-40.19831&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6849</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6850.jpg"><img src="assets/ngc/ngc6850_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6850 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=300.87542%20-54.84478&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6850</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6851.jpg"><img src="assets/ngc/ngc6851_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6851 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=300.89321%20-48.28450&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6851</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6861d.jpg"><img src="assets/ngc/ngc6861d_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6861D in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=302.08117%20-48.21142&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6861D</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6868.jpg"><img src="assets/ngc/ngc6868_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6868 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=302.47529%20-48.37956&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6868</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6870.jpg"><img src="assets/ngc/ngc6870_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6870 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=302.54525%20-48.28708&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6870</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6872.jpg"><img src="assets/ngc/ngc6872_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6872 in KS4 BVI colour, 8.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=304.23567%20-70.76794&fov=0.283&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6872</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6875.jpg"><img src="assets/ngc/ngc6875_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6875 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=303.30196%20-46.16164&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6875</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6875a.jpg"><img src="assets/ngc/ngc6875a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6875A in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=302.98275%20-46.14408&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6875A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6876.jpg"><img src="assets/ngc/ngc6876_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6876 in KS4 BVI colour, 6 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=304.57979%20-70.85881&fov=0.200&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6876</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6877.jpg"><img src="assets/ngc/ngc6877_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6877 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=304.65083%20-70.85306&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6877</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6880.jpg"><img src="assets/ngc/ngc6880_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6880 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=304.87346%20-70.85986&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6880</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6887.jpg"><img src="assets/ngc/ngc6887_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6887 in KS4 BVI colour, 6 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=304.32204%20-52.79675&fov=0.200&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6887</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6902.jpg"><img src="assets/ngc/ngc6902_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6902 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=306.11725%20-43.65353&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6902</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6925.jpg"><img src="assets/ngc/ngc6925_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6925 in KS4 BVI colour, 8.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=308.58571%20-31.98089&fov=0.283&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6925</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc6932.jpg"><img src="assets/ngc/ngc6932_t.jpg" width="300" height="300" loading="lazy" alt="NGC 6932 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=310.53575%20-73.61936&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 6932</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7083.jpg"><img src="assets/ngc/ngc7083_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7083 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=323.93621%20-63.90283&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7083</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7095.jpg"><img src="assets/ngc/ngc7095_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7095 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=328.11017%20-81.53083&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7095</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7096.jpg"><img src="assets/ngc/ngc7096_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7096 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=325.33033%20-63.90869&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7096</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7096a.jpg"><img src="assets/ngc/ngc7096a_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7096A in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=324.70112%20-64.35019&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7096A</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7123.jpg"><img src="assets/ngc/ngc7123_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7123 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=327.69429%20-70.33414&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7123</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7154.jpg"><img src="assets/ngc/ngc7154_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7154 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=328.83767%20-34.81414&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7154</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7163.jpg"><img src="assets/ngc/ngc7163_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7163 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=329.83517%20-31.88317&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7163</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7172.jpg"><img src="assets/ngc/ngc7172_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7172 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=330.50788%20-31.86967&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7172</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7174.jpg"><img src="assets/ngc/ngc7174_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7174 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=330.52688%20-31.99297&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7174</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7192.jpg"><img src="assets/ngc/ngc7192_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7192 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=331.70900%20-64.31625&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7192</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7221.jpg"><img src="assets/ngc/ngc7221_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7221 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=332.81354%20-30.56317&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7221</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7307.jpg"><img src="assets/ngc/ngc7307_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7307 in KS4 BVI colour, 7 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=338.46892%20-40.93272&fov=0.233&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7307</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7361.jpg"><img src="assets/ngc/ngc7361_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7361 in KS4 BVI colour, 5.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=340.57463%20-30.05767&fov=0.183&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7361</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7368.jpg"><img src="assets/ngc/ngc7368_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7368 in KS4 BVI colour, 5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=341.38200%20-39.34183&fov=0.167&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7368</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7410.jpg"><img src="assets/ngc/ngc7410_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7410 in KS4 BVI colour, 11 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=343.75396%20-39.66133&fov=0.367&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7410</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7417.jpg"><img src="assets/ngc/ngc7417_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7417 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=344.45629%20-65.03856&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7417</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7418.jpg"><img src="assets/ngc/ngc7418_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7418 in KS4 BVI colour, 6.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=344.15067%20-37.03008&fov=0.217&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7418</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7421.jpg"><img src="assets/ngc/ngc7421_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7421 in KS4 BVI colour, 4.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=344.22638%20-37.34725&fov=0.150&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7421</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7456.jpg"><img src="assets/ngc/ngc7456_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7456 in KS4 BVI colour, 9.5 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=345.54342%20-39.56939&fov=0.317&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7456</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7462.jpg"><img src="assets/ngc/ngc7462_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7462 in KS4 BVI colour, 9 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=345.69371%20-40.83525&fov=0.300&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7462</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7637.jpg"><img src="assets/ngc/ngc7637_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7637 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=351.61525%20-81.91158&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7637</a></figcaption>
+      </figure>
+      <figure>
+        <a class="thumb" href="assets/ngc/ngc7676.jpg"><img src="assets/ngc/ngc7676_t.jpg" width="300" height="300" loading="lazy" alt="NGC 7676 in KS4 BVI colour, 4 arcmin field, scale bar 1 arcmin"></a>
+        <figcaption><a href="https://aladin.cds.unistra.fr/AladinLite/?target=352.25717%20-59.71667&fov=0.133&survey=SNU%2FP%2FKS4%2FDR1%2FcolorBVI">NGC 7676</a></figcaption>
+      </figure>
+    </div>
+
+    <p class="gallery-credit">
+      Images: KMTNet Synoptic Survey of Southern Sky (KS4) DR1, <i>BVI</i> colour HiPS (Chang et al. 2026, JKAS). Object list, positions and sizes: <a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).
+    </p>
+    <p class="back"><a href="gallery.html">← Back to the gallery</a></p>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap foot">
+    <div>Updated November 2026</div>
+  </div>
+</footer>
+
+<script>
+  // Shuffle the order on each visit for grids marked data-shuffle
+  document.querySelectorAll('.arp-grid[data-shuffle]').forEach(function (grid) {
+    var items = Array.prototype.slice.call(grid.children);
+    for (var i = items.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = items[i]; items[i] = items[j]; items[j] = t;
+    }
+    items.forEach(function (el) { grid.appendChild(el); });
+  });
+</script>
+</body>
+</html>

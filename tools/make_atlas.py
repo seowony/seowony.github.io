@@ -4,7 +4,6 @@ Build image atlases from the KS4 DR1 BVI colour HiPS (southern sky, Dec < -28 de
 
   peculiar  peculiar.html  peculiar galaxies and other notable objects (tools/lists/peculiar.csv)
   ngc       ngc.html       NGC galaxies larger than 2 arcmin (tools/lists/ngc.csv, from OpenNGC)
-  phangs    phangs.html    PHANGS-MUSE / PHANGS-JWST Cycle 1 galaxies (tools/lists/phangs.csv)
   clusters  clusters.html  nearby galaxy clusters (tools/lists/clusters.csv)
 
 For each object the script
@@ -23,7 +22,7 @@ Run it from the root of the website repository (tools/update_atlas.sh also commi
 
 --only takes row numbers or ids such as ngc1365.
 Downloads are cached in assets/<collection>/, so the script can be re-run safely.
-The NGC and PHANGS lists are rebuilt with tools/make_lists.py.
+The NGC list is rebuilt with tools/make_lists.py.
 """
 import argparse, csv, io, json, os, sys, time
 from urllib.parse import quote
@@ -49,11 +48,13 @@ COLLECTIONS = {
         short="Southern peculiar galaxies", big=1024, list="tools/lists/peculiar.csv", shuffle=True,
         description="Peculiar and interacting galaxies, star clusters and nebulae in the southern sky, seen in "
                     "the KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1.",
-        intro="This gallery shows peculiar and interacting galaxies and a few other well-known objects, such as "
-              "globular clusters and planetary nebulae, that lie south of declination {dec} and fall inside the "
+        intro="This gallery shows peculiar and interacting galaxies, nearby spiral galaxies from the "
+              '<a href="https://sites.google.com/view/phangs/home">PHANGS</a>-MUSE and PHANGS-JWST samples and a '
+              "few other well-known objects, such as globular clusters and planetary nebulae, that lie south of declination {dec} and fall inside the "
               "footprint of KS4 Data Release 1. The order changes each time the page is opened. " + HOW_TO,
         count="{n} of the {total} objects in the list are inside the KS4 DR1 footprint.",
-        credit=KS4_CREDIT + " Positions from SIMBAD."),
+        credit=KS4_CREDIT + ' Positions from SIMBAD and <a href="https://github.com/mattiaverga/OpenNGC">'
+               "OpenNGC</a> (CC BY-SA 4.0)."),
     "ngc": dict(
         title="NGC galaxies in KS4", short="NGC galaxies", big=800, list="tools/lists/ngc.csv",
         description="Galaxies from the New General Catalogue, seen in the KMTNet Synoptic Survey of "
@@ -64,18 +65,8 @@ COLLECTIONS = {
         count="{n} of the {total} NGC galaxies south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + ' Object list, positions and sizes: <a href="https://github.com/mattiaverga/'
                'OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
-    "phangs": dict(
-        title="PHANGS galaxies in KS4", short="PHANGS galaxies", big=1024, list="tools/lists/phangs.csv",
-        description="Nearby star-forming galaxies from the PHANGS surveys, seen in the KMTNet Synoptic "
-                    "Survey of Southern Sky (KS4) Data Release 1.",
-        intro='This gallery shows the galaxies of the <a href="https://sites.google.com/view/phangs/home">'
-              "PHANGS</a>-MUSE and PHANGS-JWST Cycle 1 samples that lie south of declination {dec} and fall "
-              "inside the footprint of KS4 Data Release 1. " + HOW_TO,
-        count="{n} of the {total} PHANGS galaxies south of {dec} are inside the KS4 DR1 footprint.",
-        credit=KS4_CREDIT + ' Positions and sizes: <a href="https://github.com/mattiaverga/OpenNGC">'
-               "OpenNGC</a> (CC BY-SA 4.0)."),
     "clusters": dict(
-        title="Nearby galaxy clusters in KS4", short="Galaxy clusters", big=1600,
+        title="Nearby galaxy clusters in KS4", short="Galaxy clusters", big=1200,
         list="tools/lists/clusters.csv",
         description="Nearby southern galaxy clusters seen in the KMTNet Synoptic Survey of Southern Sky "
                     "(KS4) Data Release 1.",
@@ -381,12 +372,16 @@ def build(name, args):
     pos = json.load(open(cache_file)) if os.path.exists(cache_file) else {}
     status_file = os.path.join(out_dir, "status.json")
     status = json.load(open(status_file)) if os.path.exists(status_file) else {}
+    fov_file = os.path.join(out_dir, "fov.json")
+    fov_done = json.load(open(fov_file)) if os.path.exists(fov_file) else {}
     print(f"== {name}: {len(todo)} objects")
     for obj in todo:
         oid, label = obj["id"], obj["name"]
         big = os.path.join(out_dir, f"{oid}.jpg")
         if os.path.exists(big) and status.get(oid) == "ok":
-            continue
+            if fov_done.setdefault(oid, obj["fov"]) == obj["fov"]:
+                continue
+            print(f"{label}: field changed to {obj['fov']:g}', cutting again")
         rd = resolve(obj, pos)
         json.dump(pos, open(cache_file, "w"), indent=0)
         if rd is None:
@@ -427,10 +422,13 @@ def build(name, args):
         th = img.resize((THUMB, THUMB), Image.LANCZOS)
         scale_bar(th, f_arc).save(os.path.join(out_dir, f"{oid}_t.jpg"), quality=85)
         status[oid] = "ok"
+        fov_done[oid] = f_arc
+        json.dump(fov_done, open(fov_file, "w"), indent=0)
         print(f"{label}: ok ({rd[0]:.4f}, {rd[1]:+.4f}, {f_arc}')")
         json.dump(status, open(status_file, "w"), indent=0)
 
     json.dump(status, open(status_file, "w"), indent=0)
+    json.dump(fov_done, open(fov_file, "w"), indent=0)
 
     # ---- write the page, in list order ----
     for o in all_objs:
