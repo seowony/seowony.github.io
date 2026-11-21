@@ -205,25 +205,53 @@ def hips_properties(base):
     return _PROPS[base]
 
 
+def _load_moc(base):
+    """Read Moc.fits (NUNIQ or RANGE ordering). Returns a checker or None."""
+    data = _fetch(base + "/Moc.fits")
+    if data is None:
+        print("MOC: no Moc.fits, footprint is judged from the cutouts only")
+        return None
+    from astropy.io import fits
+    with fits.open(io.BytesIO(data)) as h:
+        hdr = h[1].header
+        col = np.asarray(h[1].data.field(0), dtype=np.int64).ravel()
+    ordering = str(hdr.get("ORDERING", "NUNIQ")).upper()
+    frame = "galactic" if str(hdr.get("COORDSYS", "C")).upper().startswith("G") else "icrs"
+    if ordering.startswith("RANGE"):
+        depth = 29
+        starts, ends = col[0::2], col[1::2]
+        order = np.argsort(starts)
+        moc = ("range", depth, starts[order], ends[order])
+        area = float(np.sum(ends - starts)) / (12 * 4 ** depth)
+    elif ordering == "NUNIQ":
+        orders = (np.floor(np.log2(col) / 2) - 1).astype(int)
+        moc = ("nuniq", set(col.tolist()), sorted(set(orders.tolist())))
+        area = float(np.sum(4.0 ** -orders)) / 12
+    else:
+        print(f"MOC: unknown ORDERING {ordering}, not used")
+        return None
+    print(f"MOC: {ordering}, frame {frame}, {area * 41253:.0f} deg2 ({area:.1%} of the sky)")
+    return moc + (frame,)
+
+
 def in_moc(base, ra, dec):
-    """True/False from the HiPS Moc.fits, or None if there is no MOC to check against."""
+    """True/False from the HiPS Moc.fits, or None if there is no usable MOC."""
     if base not in _MOC:
-        _MOC[base] = None
-        data = _fetch(base + "/Moc.fits")
-        if data is not None:
-            from astropy.io import fits
-            with fits.open(io.BytesIO(data)) as h:
-                uniq = np.asarray(h[1].data.field(0), dtype=np.int64)
-            order = (np.floor(np.log2(uniq) / 2) - 1).astype(int)
-            _MOC[base] = (set(uniq.tolist()), sorted(set(order.tolist())))
-    if _MOC[base] is None:
+        _MOC[base] = _load_moc(base)
+    moc = _MOC[base]
+    if moc is None:
         return None
     from astropy_healpix import HEALPix
     from astropy.coordinates import SkyCoord
     import astropy.units as u
-    uniq, orders = _MOC[base]
-    frame = "galactic" if hips_properties(base).get("hips_frame", "equatorial").startswith("gal") else "icrs"
+    frame = moc[-1]
     c = SkyCoord(ra * u.deg, dec * u.deg)
+    if moc[0] == "range":
+        _, depth, starts, ends = moc[:4]
+        ipix = int(HEALPix(nside=2 ** depth, order="nested", frame=frame).skycoord_to_healpix(c))
+        i = np.searchsorted(starts, ipix, side="right") - 1
+        return bool(i >= 0 and ipix < ends[i])
+    _, uniq, orders = moc[:3]
     for o in orders:
         ipix = int(HEALPix(nside=2 ** o, order="nested", frame=frame).skycoord_to_healpix(c))
         if 4 * 4 ** o + ipix in uniq:
@@ -386,7 +414,7 @@ def build(name, args):
         f_arc = obj["fov"]
         if args.hips_url:
             base = args.hips_url.rstrip("/")
-            if not args.keep_blank and in_moc(base, rd[0], rd[1]) is False:
+            if not (args.keep_blank or args.no_moc) and in_moc(base, rd[0], rd[1]) is False:
                 print(f"{label}: outside KS4 (MOC, {rd[0]:.2f} {rd[1]:+.2f})")
                 status[oid] = "outside"
                 continue
@@ -475,6 +503,7 @@ def main():
     ap.add_argument("--keep-blank", action="store_true", help="keep objects outside the footprint")
     ap.add_argument("--dec-limit", type=float, default=DEC_LIMIT,
                     help=f"keep only objects south of this declination (default {DEC_LIMIT:g})")
+    ap.add_argument("--no-moc", action="store_true", help="do not use Moc.fits; judge the footprint from the cutouts")
     ap.add_argument("--hips-url", help="read tiles from this HiPS (URL or directory) instead of CDS hips2fits")
     args = ap.parse_args()
 
