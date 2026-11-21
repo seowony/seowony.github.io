@@ -8,3 +8,5 @@ CLAUDE.md
 assets/*/positions.json
 assets/*/status.json
 assets/*/fov.json
+tools/.gwcache/
+realbogus_input/

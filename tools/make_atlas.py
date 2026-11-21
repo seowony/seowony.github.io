@@ -374,6 +374,11 @@ def build(name, args):
     status = json.load(open(status_file)) if os.path.exists(status_file) else {}
     fov_file = os.path.join(out_dir, "fov.json")
     fov_done = json.load(open(fov_file)) if os.path.exists(fov_file) else {}
+    if os.path.exists(page_name):   # fields used last time, from the alt text of the existing page
+        import re
+        for oid, f in re.findall(r'src="assets/[^/]+/([^"/]+)_t\.jpg"[^>]*alt="[^"]*?, ([\d.]+) arcmin field',
+                                 open(page_name).read()):
+            fov_done.setdefault(oid, float(f))
     print(f"== {name}: {len(todo)} objects")
     for obj in todo:
         oid, label = obj["id"], obj["name"]
