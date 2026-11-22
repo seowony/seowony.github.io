@@ -5,6 +5,9 @@ Make print files from a KS4 atlas: images in list order with their names.
   <atlas>_A4.pdf       A4 pages, 4 x 5 images per page (300 dpi)
   <atlas>_poster.pdf   one poster page (A0 at 300 dpi by default; prints well scaled to A1, A2 or A3)
   <atlas>_poster.jpg   the same poster as a JPEG
+  <atlas>_tiles_3x2.pdf  (with --tiles 3x2) one poster split over A4 sheets that are pinned edge to edge:
+                       every sheet holds whole images and the margins equal half a gap, so the grid runs on
+                       across the joins. Print at 100% (actual size), no "fit to page".
 
     python tools/make_print.py ngc --out print/
     python tools/make_print.py peculiar --poster A1 --out print/
@@ -120,11 +123,90 @@ def poster(atlas, items, paper):
     return page, cols, rows
 
 
+def tiles(atlas, items, nx, ny, cell_mm=None, cap_mm=3.0):
+    """Poster over nx x ny A4 portrait sheets with a seamless grid (each sheet has whole images)."""
+    SW, SH = 210.0, 297.0
+    # images per sheet: as many as fit with a cell of about 29 mm and margins of at least 5 mm
+    cols, rows = 5, 7
+    if cell_mm is None:
+        cell_mm = min(SW / cols - 2 * 5.0, SH / rows - cap_mm - 2 * 5.0)
+    gh = SW / cols - cell_mm                 # horizontal pitch minus cell; sheet margin = gh / 2
+    gv = SH / rows - cell_mm - cap_mm
+    W, H = px(SW), px(SH)
+    total_cols, total_rows = cols * nx, rows * ny
+    slots = total_cols * total_rows
+    spare = slots - len(items)
+    if spare < cols:
+        sys.exit(f"{len(items)} images leave no room for the title in {slots} slots; use more sheets or --exclude")
+    t_rows = max(1, min(3, spare // cols))           # title block: top rows of the top-left sheet
+    n_credit = min(spare - t_rows * cols, cols * rows)  # credit block: last slots of the bottom-right sheet
+    sheets = [[Image.new("RGB", (W, H), "white") for _ in range(nx)] for _ in range(ny)]
+    f_cap, f_title, f_sub, f_tiny = font(32), font(92, True), font(40), font(20)
+    cpx = px(cell_mm)
+
+    def slot_xy(R, C):
+        sy, sx = R // rows, C // cols
+        lr, lc = R % rows, C % cols
+        x = px(gh / 2 + lc * (cell_mm + gh))
+        y = px(gv / 2 + lr * (cell_mm + cap_mm + gv))
+        return sheets[sy][sx], x, y
+
+    reserved = {(R, C) for R in range(t_rows) for C in range(cols)}
+    last_sheet = [(R, C) for R in range((ny - 1) * rows, ny * rows) for C in range((nx - 1) * cols, nx * cols)]
+    credit = last_sheet[len(last_sheet) - n_credit:] if n_credit else []
+    reserved |= set(credit)
+    free = [(R, C) for R in range(total_rows) for C in range(total_cols) if (R, C) not in reserved]
+
+    page, x, y = slot_xy(0, 0)
+    d = ImageDraw.Draw(page)
+    block_w = W - 2 * px(gh / 2)
+    size = 150
+    while size > 60 and d.textlength(TITLES.get(atlas, atlas), font=font(size, True)) > block_w:
+        size -= 6
+    f_title, f_sub = font(size, True), font(int(size * 0.42))
+    lines = [(TITLES.get(atlas, atlas), f_title, (20, 20, 20)),
+             (f"{len(items)} galaxies, {items[0][0]} to {items[-1][0]}", f_sub, (80, 80, 80)),
+             ("KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1", f_sub, (80, 80, 80)),
+             ("BVI colour. North up, east left. White bar: 1 arcmin.", f_sub, (80, 80, 80))]
+    yy = y + px(6)
+    for txt, f, col in lines:
+        d.text((x, yy), txt, fill=col, font=f)
+        yy += int(size * 1.45) if f is f_title else int(size * 0.62)
+
+    for (name, path), (R, C) in zip(items, free):
+        page, x, y = slot_xy(R, C)
+        im = Image.open(path).convert("RGB").resize((cpx, cpx), Image.LANCZOS)
+        page.paste(im, (x, y))
+        d = ImageDraw.Draw(page)
+        tw = d.textlength(name, font=f_cap)
+        d.text((x + (cpx - tw) / 2, y + cpx + px(0.5)), name, fill=(30, 30, 30), font=f_cap)
+
+    if credit:
+        R, C = credit[0]
+        page, x, y = slot_xy(R, C)
+        d = ImageDraw.Draw(page)
+        d.text((x, y + px(4)), "Images: Chang et al. 2026, JKAS", fill=(80, 80, 80), font=f_sub)
+        d.text((x, y + px(10.5)), f"seowony.github.io/{atlas}.html", fill=(80, 80, 80), font=f_sub)
+
+    # tiny sheet labels in the corner margin so the sheets are easy to arrange
+    out = []
+    for sy in range(ny):
+        for sx in range(nx):
+            page = sheets[sy][sx]
+            d = ImageDraw.Draw(page)
+            lab = f"{sy * nx + sx + 1}/{nx * ny}  row {sy + 1}, column {sx + 1}"
+            d.text((W - px(gh / 2) - d.textlength(lab, font=f_tiny), H - px(gv / 2) + px(0.8)), lab,
+                   fill=(185, 185, 185), font=f_tiny)
+            out.append(page)
+    return out, cell_mm, gh, gv
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("atlas", choices=list(TITLES))
     ap.add_argument("--out", default="print")
     ap.add_argument("--poster", default="A0", choices=list(PAPER_MM))
+    ap.add_argument("--tiles", help="also make a poster over A4 sheets, e.g. 3x2 (columns x rows)")
     ap.add_argument("--exclude", default="", help="ids to leave out, e.g. ngc2822,ngc5128")
     args = ap.parse_args()
     skip = {x.strip().lower() for x in args.exclude.split(",") if x.strip()}
@@ -133,6 +215,14 @@ def main():
     if not items:
         sys.exit(f"No images in assets/{args.atlas}/")
     os.makedirs(args.out, exist_ok=True)
+
+    if args.tiles:
+        nx, ny = (int(v) for v in args.tiles.lower().split("x"))
+        sheets, cell, gh, gv = tiles(args.atlas, items, nx, ny)
+        tp = os.path.join(args.out, f"{args.atlas}_tiles_{nx}x{ny}.pdf")
+        sheets[0].save(tp, save_all=True, append_images=sheets[1:], resolution=DPI, quality=92)
+        print(f"{tp}: {len(sheets)} A4 sheets ({nx} across, {ny} down), images {cell:.1f} mm, "
+              f"gaps {gh:.1f} x {gv:.1f} mm, finished size {210 * nx} x {297 * ny} mm")
 
     pages = a4_pages(args.atlas, items)
     a4 = os.path.join(args.out, f"{args.atlas}_A4.pdf")
