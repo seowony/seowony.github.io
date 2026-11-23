@@ -111,11 +111,12 @@ COLLECTIONS = {
               "footprint of KS4 Data Release 1, in Dunlop's order. " + HOW_TO,
         count="{n} of the {total} identified Dunlop objects south of {dec} are inside the KS4 DR1 footprint.",
         figure=('<figure class="atlas-fig"><a href="assets/dunlop-plate-1828.jpg">'
-                '<img src="assets/dunlop-plate-1828.jpg" width="1400" height="1757" loading="lazy" '
+                '<img src="assets/dunlop-plate-1828.jpg" width="1400" height="1889" loading="lazy" '
                 'alt="Plate of hand-drawn nebulae and star clusters by James Dunlop"></a>'
                 "<figcaption>Dunlop's own drawings of nebulae and clusters, from the plate published with his "
-                "catalogue (Dunlop 1828, Philosophical Transactions of the Royal Society 118, 113), as reproduced "
-                "by Cozens, Walsh and Orchiston (2010).</figcaption></figure>"),
+                "catalogue (Dunlop 1828, Philosophical Transactions of the Royal Society 118, 113). Scan of the "
+                'original from <a href="https://zenodo.org/record/1432362">JSTOR Early Journal Content</a>.'
+                "</figcaption></figure>"),
         credit=KS4_CREDIT + " Object list and identifications: Cozens, Walsh and Orchiston (2010), Journal of "
                "Astronomical History and Heritage 13, 59. Positions: "
                '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0) and the same paper.'),
