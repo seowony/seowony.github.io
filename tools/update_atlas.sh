@@ -21,7 +21,7 @@ cd "$(git rev-parse --show-toplevel)"
 BASE=$(git rev-parse --abbrev-ref HEAD)
 BRANCH=atlas-update
 GEN=()
-for c in peculiar ngc messier-caldwell dunlop planetary nebulae clusters; do
+for c in peculiar ngc messier-caldwell planetary nebulae clusters; do
   GEN+=("$c.html" "assets/$c")
 done
 

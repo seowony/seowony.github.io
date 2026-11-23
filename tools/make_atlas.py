@@ -6,7 +6,6 @@ Build image atlases from the KS4 DR1 BVI colour HiPS (southern sky, Dec < -28 de
   ngc       ngc.html       NGC galaxies larger than 2 arcmin (tools/lists/ngc.csv, from OpenNGC)
   messier-caldwell  messier-caldwell.html  Messier and Caldwell objects
   planetary, nebulae                               NGC/IC objects by type (tools/lists/<name>.csv)
-  dunlop    dunlop.html    Dunlop (1828) objects identified by Cozens et al. (2010) (tools/lists/dunlop.csv)
   clusters  clusters.html  nearby galaxy clusters (tools/lists/clusters.csv)
 
 For each object the script
@@ -99,27 +98,6 @@ COLLECTIONS = {
               "KS4 Data Release 1. " + HOW_TO,
         count="{n} of the {total} nebulae south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + " Object list, positions and sizes: " + '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
-    "dunlop": dict(
-        title="Dunlop's southern catalogue in KS4", short="Dunlop's catalogue (1828)", big=1024,
-        list="tools/lists/dunlop.csv",
-        description="Galaxies, star clusters and nebulae from James Dunlop's 1828 catalogue of the southern sky, "
-                    "seen in the KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1.",
-        intro="James Dunlop observed the southern sky from Parramatta, New South Wales, in 1826 with a 23-cm "
-              "reflecting telescope he had made, and published a catalogue of 629 nebulae and clusters in 1828. "
-              "Cozens, Walsh and Orchiston (2010) identified 187 of his objects outside the Magellanic Clouds. "
-              "This gallery shows the galaxies, star clusters and nebulae among them that fall inside the "
-              "footprint of KS4 Data Release 1, in Dunlop's order. " + HOW_TO,
-        count="{n} of the {total} identified Dunlop objects south of {dec} are inside the KS4 DR1 footprint.",
-        figure=('<figure class="atlas-fig"><a href="assets/dunlop-plate-1828.jpg">'
-                '<img src="assets/dunlop-plate-1828.jpg" width="1400" height="1889" loading="lazy" '
-                'alt="Plate of hand-drawn nebulae and star clusters by James Dunlop"></a>'
-                "<figcaption>Dunlop's own drawings of nebulae and clusters, from the plate published with his "
-                "catalogue (Dunlop 1828, Philosophical Transactions of the Royal Society 118, 113). Scan of the "
-                'original from <a href="https://zenodo.org/record/1432362">JSTOR Early Journal Content</a>.'
-                "</figcaption></figure>"),
-        credit=KS4_CREDIT + " Object list and identifications: Cozens, Walsh and Orchiston (2010), Journal of "
-               "Astronomical History and Heritage 13, 59. Positions: "
-               '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0) and the same paper.'),
     "clusters": dict(
         title="Nearby galaxy clusters in KS4", short="Galaxy clusters", big=1200,
         list="tools/lists/clusters.csv",
@@ -534,7 +512,7 @@ def build(name, args):
     page = open("atlas_template.html").read()
     for key, val in (("TITLE", cfg["title"]), ("SHORT", cfg["short"]), ("DESCRIPTION", cfg["description"]),
                      ("PAGE", page_name), ("INTRO", intro), ("CREDIT", cfg["credit"]),
-                     ("COUNT", cfg["count"].format(n=len(ok), total=len(all_objs), dec=dec_txt)), ("GRID", grid), ("FIGURE", cfg.get("figure", ""))):
+                     ("COUNT", cfg["count"].format(n=len(ok), total=len(all_objs), dec=dec_txt)), ("GRID", grid)):
         page = page.replace(f"<!-- {key} -->", val)
     open(page_name, "w").write(page)
     print(f"Wrote {page_name} with {len(ok)} objects.")
