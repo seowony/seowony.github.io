@@ -21,7 +21,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 DPI = 300
 PAPER_MM = {"A0": (841, 1189), "A1": (594, 841), "A2": (420, 594), "A3": (297, 420), "A4": (210, 297)}
-TITLES = {"ngc": "NGC galaxies in KS4 DR1", "peculiar": "Southern peculiar galaxies in KS4 DR1",
+TITLES = {"ngc": "NGC galaxies in KS4 DR1", "messier": "Messier objects in KS4 DR1",
+          "caldwell": "Caldwell objects in KS4 DR1", "peculiar": "Southern peculiar galaxies in KS4 DR1",
           "clusters": "Nearby galaxy clusters in KS4 DR1"}
 CREDIT = ("KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1, BVI colour (Chang et al. 2026, JKAS). "
           "North up, east left. White bar: 1 arcmin.")
@@ -54,6 +55,29 @@ def load_items(atlas):
     return items
 
 
+def caption(d, name, x, y, width, fnt):
+    """Centred caption under an image; long names ("C80 (NGC 5139, Omega Centauri)") go on two smaller lines."""
+    if d.textlength(name, font=fnt) <= width:
+        lines, f = [name], fnt
+    else:
+        if " (" in name:
+            a, b = name.split(" (", 1)
+            b = b.rstrip(")")
+            lines = [a, b]
+            if d.textlength(b, font=fnt.font_variant(size=int(fnt.size * 0.85))) > width and ", " in b:
+                lines = [a] + b.split(", ", 1)        # number / designation / common name
+        else:
+            lines = [name]
+        size = int(fnt.size * 0.85)
+        f = fnt.font_variant(size=size)
+        while size > fnt.size * 0.6 and max(d.textlength(t, font=f) for t in lines) > width:
+            size -= 2
+            f = fnt.font_variant(size=size)
+    for i, t in enumerate(lines):
+        tw = d.textlength(t, font=f)
+        d.text((x + (width - tw) / 2, y + i * f.size * 1.1), t, fill=(30, 30, 30), font=f)
+
+
 def draw_grid(page, items, box, cols, rows, gap, cap_px, fnt):
     x0, y0, w, h = box
     cell = min((w - (cols - 1) * gap) / cols, (h - (rows - 1) * gap) / rows - cap_px)
@@ -67,8 +91,7 @@ def draw_grid(page, items, box, cols, rows, gap, cap_px, fnt):
         y = y0 + r * (cell + cap_px + gap)
         im = Image.open(path).convert("RGB").resize((cell, cell), Image.LANCZOS)
         page.paste(im, (x, y))
-        tw = d.textlength(name, font=fnt)
-        d.text((x + (cell - tw) / 2, y + cell + cap_px * 0.18), name, fill=(30, 30, 30), font=fnt)
+        caption(d, name, x, y + cell + cap_px * 0.18, cell, fnt)
 
 
 def a4_pages(atlas, items, cols=4, rows=5):
@@ -165,7 +188,7 @@ def tiles(atlas, items, nx, ny, cell_mm=None, cap_mm=3.0):
         size -= 6
     f_title, f_sub = font(size, True), font(int(size * 0.42))
     lines = [(TITLES.get(atlas, atlas), f_title, (20, 20, 20)),
-             (f"{len(items)} galaxies, {items[0][0]} to {items[-1][0]}", f_sub, (80, 80, 80)),
+             (f"{len(items)} {'galaxies' if atlas == 'ngc' else 'objects'}, {items[0][0]} to {items[-1][0]}", f_sub, (80, 80, 80)),
              ("KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1", f_sub, (80, 80, 80)),
              ("BVI colour. North up, east left. White bar: 1 arcmin.", f_sub, (80, 80, 80))]
     yy = y + px(6)
@@ -178,8 +201,7 @@ def tiles(atlas, items, nx, ny, cell_mm=None, cap_mm=3.0):
         im = Image.open(path).convert("RGB").resize((cpx, cpx), Image.LANCZOS)
         page.paste(im, (x, y))
         d = ImageDraw.Draw(page)
-        tw = d.textlength(name, font=f_cap)
-        d.text((x + (cpx - tw) / 2, y + cpx + px(0.5)), name, fill=(30, 30, 30), font=f_cap)
+        caption(d, name, x, y + cpx + px(0.5), cpx, f_cap)
 
     if credit:
         R, C = credit[0]
