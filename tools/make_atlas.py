@@ -5,7 +5,7 @@ Build image atlases from the KS4 DR1 BVI colour HiPS (southern sky, Dec < -28 de
   peculiar  peculiar.html  peculiar galaxies and other notable objects (tools/lists/peculiar.csv)
   ngc       ngc.html       NGC galaxies larger than 2 arcmin (tools/lists/ngc.csv, from OpenNGC)
   messier-caldwell  messier-caldwell.html  Messier and Caldwell objects
-  planetary, globulars, nebulae, openclusters      NGC/IC objects by type (tools/lists/<name>.csv)
+  planetary, nebulae                               NGC/IC objects by type (tools/lists/<name>.csv)
   clusters  clusters.html  nearby galaxy clusters (tools/lists/clusters.csv)
 
 For each object the script
@@ -89,15 +89,6 @@ COLLECTIONS = {
               "arcseconds across, so their images are small fields. " + HOW_TO,
         count="{n} of the {total} planetary nebulae south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + " Object list, positions and sizes: " + '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
-    "globulars": dict(
-        title="Globular clusters in KS4", short="Globular clusters", big=800, list="tools/lists/globulars.csv",
-        description="Globular clusters from the NGC and IC catalogues, seen in the KMTNet Synoptic Survey of "
-                    "Southern Sky (KS4) Data Release 1.",
-        intro="This gallery shows the globular clusters from the NGC and IC catalogues, including those in the "
-              "Magellanic Clouds, that lie south of declination {dec} and fall inside the footprint of KS4 Data "
-              "Release 1. " + HOW_TO,
-        count="{n} of the {total} globular clusters south of {dec} are inside the KS4 DR1 footprint.",
-        credit=KS4_CREDIT + " Object list, positions and sizes: " + '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
     "nebulae": dict(
         title="Nebulae in KS4", short="Nebulae", big=800, list="tools/lists/nebulae.csv",
         description="Emission and reflection nebulae, star-forming regions and supernova remnants from the NGC "
@@ -106,14 +97,6 @@ COLLECTIONS = {
               "from the NGC and IC catalogues that lie south of declination {dec} and fall inside the footprint of "
               "KS4 Data Release 1. " + HOW_TO,
         count="{n} of the {total} nebulae south of {dec} are inside the KS4 DR1 footprint.",
-        credit=KS4_CREDIT + " Object list, positions and sizes: " + '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
-    "openclusters": dict(
-        title="Open clusters in KS4", short="Open clusters", big=800, list="tools/lists/openclusters.csv",
-        description="Open star clusters from the NGC and IC catalogues, seen in the KMTNet Synoptic Survey of "
-                    "Southern Sky (KS4) Data Release 1.",
-        intro="This gallery shows the open clusters from the NGC and IC catalogues that lie south of declination "
-              "{dec} and fall inside the footprint of KS4 Data Release 1. " + HOW_TO,
-        count="{n} of the {total} open clusters south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + " Object list, positions and sizes: " + '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
     "clusters": dict(
         title="Nearby galaxy clusters in KS4", short="Galaxy clusters", big=1200,
