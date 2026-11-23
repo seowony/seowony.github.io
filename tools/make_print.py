@@ -4,7 +4,7 @@ Make print files from a KS4 atlas: images in list order with their names.
 
   <atlas>_A4.pdf       A4 pages, 4 x 5 images per page (300 dpi)
   <atlas>_poster.pdf   one poster page (A0 at 300 dpi by default; prints well scaled to A1, A2 or A3)
-  <atlas>_poster.jpg   the same poster as a JPEG
+  <atlas>_poster.jpg   the same poster as a JPEG (with --poster-jpg)
   <atlas>_tiles_3x2.pdf  (with --tiles 3x2) one poster split over A4 sheets that are pinned edge to edge:
                        every sheet holds whole images and the margins equal half a gap, so the grid runs on
                        across the joins. Print at 100% (actual size), no "fit to page".
@@ -12,6 +12,8 @@ Make print files from a KS4 atlas: images in list order with their names.
     python tools/make_print.py ngc --out print/
     python tools/make_print.py peculiar --poster A1 --out print/
     python tools/make_print.py ngc --exclude ngc2822,ngc5128 --out print/
+    # web copies for download (about 19 MB in all for the NGC atlas):
+    python tools/make_print.py ngc --tiles 3x2 --dpi 200 --poster-dpi 150 --quality 85 --out assets/print/
 
 Run it from the website root after tools/make_atlas.py (it reads assets/<atlas>/ and tools/lists/<atlas>.csv).
 """
@@ -207,6 +209,10 @@ def main():
     ap.add_argument("--out", default="print")
     ap.add_argument("--poster", default="A0", choices=list(PAPER_MM))
     ap.add_argument("--tiles", help="also make a poster over A4 sheets, e.g. 3x2 (columns x rows)")
+    ap.add_argument("--poster-jpg", action="store_true", help="also write the poster as a JPEG")
+    ap.add_argument("--dpi", type=int, default=300, help="output resolution (pages are drawn at 300 dpi, then resampled)")
+    ap.add_argument("--poster-dpi", type=int, help="resolution of the poster (default: --dpi)")
+    ap.add_argument("--quality", type=int, default=92, help="JPEG quality inside the PDFs")
     ap.add_argument("--exclude", default="", help="ids to leave out, e.g. ngc2822,ngc5128")
     args = ap.parse_args()
     skip = {x.strip().lower() for x in args.exclude.split(",") if x.strip()}
@@ -216,23 +222,36 @@ def main():
         sys.exit(f"No images in assets/{args.atlas}/")
     os.makedirs(args.out, exist_ok=True)
 
+    def out(img, dpi=None):
+        dpi = dpi or args.dpi
+        if dpi == DPI:
+            return img
+        f = dpi / DPI
+        return img.resize((round(img.width * f), round(img.height * f)), Image.LANCZOS)
+    q = args.quality
+
     if args.tiles:
         nx, ny = (int(v) for v in args.tiles.lower().split("x"))
         sheets, cell, gh, gv = tiles(args.atlas, items, nx, ny)
         tp = os.path.join(args.out, f"{args.atlas}_tiles_{nx}x{ny}.pdf")
-        sheets[0].save(tp, save_all=True, append_images=sheets[1:], resolution=DPI, quality=92)
+        sheets = [out(x) for x in sheets]
+        sheets[0].save(tp, save_all=True, append_images=sheets[1:], resolution=args.dpi, quality=q)
         print(f"{tp}: {len(sheets)} A4 sheets ({nx} across, {ny} down), images {cell:.1f} mm, "
               f"gaps {gh:.1f} x {gv:.1f} mm, finished size {210 * nx} x {297 * ny} mm")
 
     pages = a4_pages(args.atlas, items)
     a4 = os.path.join(args.out, f"{args.atlas}_A4.pdf")
-    pages[0].save(a4, save_all=True, append_images=pages[1:], resolution=DPI, quality=92)
+    pages = [out(x) for x in pages]
+    pages[0].save(a4, save_all=True, append_images=pages[1:], resolution=args.dpi, quality=q)
     print(f"{a4}: {len(pages)} pages, {len(items)} images")
 
     pst, cols, rows = poster(args.atlas, items, args.poster)
     pdf = os.path.join(args.out, f"{args.atlas}_poster.pdf")
-    pst.save(pdf, resolution=DPI, quality=92)
-    pst.save(os.path.join(args.out, f"{args.atlas}_poster.jpg"), quality=92, dpi=(DPI, DPI))
+    pdpi = args.poster_dpi or args.dpi
+    pst = out(pst, pdpi)
+    pst.save(pdf, resolution=pdpi, quality=q)
+    if args.poster_jpg:
+        pst.save(os.path.join(args.out, f"{args.atlas}_poster.jpg"), quality=q, dpi=(pdpi, pdpi))
     print(f"{pdf}: {args.poster}, {cols} x {rows} grid, {pst.size[0]} x {pst.size[1]} px")
 
 
