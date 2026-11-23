@@ -360,15 +360,6 @@ def scale_bar(img, fov_arcmin):
     return img
 
 
-def downloads(name):
-    """Links to print files in assets/print/ (made by tools/make_print.py), if there are any."""
-    files = [(f"assets/print/{name}_A4.pdf", "A4 pages"), (f"assets/print/{name}_poster.pdf", "one-page poster"),
-             (f"assets/print/{name}_tiles_3x2.pdf", "six A4 sheets to join (3 across, 2 down)")]
-    links = [f'<a href="{f}" download>{label}</a> ({os.path.getsize(f) / 1e6:.1f} MB)' for f, label in files
-             if os.path.exists(f)]
-    return "<br>Download for printing: " + ", ".join(links) + "." if links else ""
-
-
 def build(name, args):
     cfg = COLLECTIONS[name]
     out_dir = f"assets/{name}"
@@ -488,8 +479,7 @@ def build(name, args):
     page = open("atlas_template.html").read()
     for key, val in (("TITLE", cfg["title"]), ("SHORT", cfg["short"]), ("DESCRIPTION", cfg["description"]),
                      ("PAGE", page_name), ("INTRO", intro), ("CREDIT", cfg["credit"]),
-                     ("COUNT", cfg["count"].format(n=len(ok), total=len(all_objs), dec=dec_txt) + downloads(name)),
-                     ("GRID", grid)):
+                     ("COUNT", cfg["count"].format(n=len(ok), total=len(all_objs), dec=dec_txt)), ("GRID", grid)):
         page = page.replace(f"<!-- {key} -->", val)
     open(page_name, "w").write(page)
     print(f"Wrote {page_name} with {len(ok)} objects.")

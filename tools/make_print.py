@@ -12,8 +12,6 @@ Make print files from a KS4 atlas: images in list order with their names.
     python tools/make_print.py ngc --out print/
     python tools/make_print.py peculiar --poster A1 --out print/
     python tools/make_print.py ngc --exclude ngc2822,ngc5128 --out print/
-    # web copies for download (about 19 MB in all for the NGC atlas):
-    python tools/make_print.py ngc --tiles 3x2 --dpi 200 --poster-dpi 150 --quality 85 --out assets/print/
 
 Run it from the website root after tools/make_atlas.py (it reads assets/<atlas>/ and tools/lists/<atlas>.csv).
 """
