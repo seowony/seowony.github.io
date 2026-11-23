@@ -100,7 +100,7 @@ COLLECTIONS = {
         count="{n} of the {total} nebulae south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + " Object list, positions and sizes: " + '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
     "dunlop": dict(
-        title="Dunlop's southern catalogue in KS4", short="Dunlop's catalogue (1828)", big=1024,
+        title="Dunlop's southern catalogue in KS4", short="Dunlop's catalogue (1828)", big=1024, cards=True,
         list="tools/lists/dunlop.csv",
         description="Galaxies, star clusters and nebulae from James Dunlop's 1828 catalogue of the southern sky, "
                     "seen in the KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1.",
@@ -108,7 +108,9 @@ COLLECTIONS = {
               "reflecting telescope he had made, and published a catalogue of 629 nebulae and clusters in 1828. "
               "Cozens, Walsh and Orchiston (2010) identified 187 of his objects outside the Magellanic Clouds. "
               "This gallery shows the galaxies, star clusters and nebulae among them that fall inside the "
-              "footprint of KS4 Data Release 1, in Dunlop's order. " + HOW_TO,
+              "footprint of KS4 Data Release 1, in Dunlop's order, each with his own description from 1828. Where he "
+              "drew the object, his drawing is shown next to the KS4 image, turned 180 degrees so that north is up "
+              "as in KS4 (he drew them as seen in the telescope, with south at the top). " + HOW_TO,
         count="{n} of the {total} identified Dunlop objects south of {dec} are inside the KS4 DR1 footprint.",
         figure=('<figure class="atlas-fig"><a href="assets/dunlop-plate-1828.jpg">'
                 '<img src="assets/dunlop-plate-1828.jpg" width="1400" height="1889" loading="lazy" '
@@ -156,7 +158,7 @@ def load_objects(name, cfg, only, dec_limit):
             all_objs.append(dict(id=row["id"], name=row["name"], query=row.get("query") or row["name"],
                                  ra=float(row["ra"]) if row.get("ra") else None,
                                  dec=float(row["dec"]) if row.get("dec") else None,
-                                 fov=float(row["fov_arcmin"])))
+                                 fov=float(row["fov_arcmin"]), extra=row))
     n_all = len(all_objs)
     all_objs = [o for o in all_objs if o["dec"] is None or o["dec"] < dec_limit]
     if len(all_objs) < n_all:
@@ -415,6 +417,36 @@ def scale_bar(img, fov_arcmin):
     return img
 
 
+def cards(ok, out_dir, pos):
+    """One card per object: KS4 image, the observer's own drawing if there is one, the original description."""
+    import html as H
+    out = ['    <div class="dun-list">']
+    for o in ok:
+        ex = o.get("extra") or {}
+        ra, dec = (o["ra"], o["dec"]) if o["ra"] is not None else pos[o["id"]]
+        link = (f"{ALADIN}?target={quote(f'{ra:.5f} {dec:+.5f}')}&fov={max(o['fov'] * 2, 6) / 60:.3f}"
+                f"&survey={quote(HIPS, safe='')}")
+        alt = f"{o['name']} in KS4 BVI colour, {o['fov']:g} arcmin field"
+        imgs = (f'<a class="dun-ks4" href="{out_dir}/{o["id"]}.jpg"><img src="{out_dir}/{o["id"]}_t.jpg" '
+                f'width="{THUMB}" height="{THUMB}" loading="lazy" alt="{H.escape(alt)}"><span>KS4 DR1</span></a>')
+        fig = (ex.get("fig") or "").strip()
+        if fig:
+            f = int(fig)
+            imgs += (f'<a class="dun-draw" href="assets/dunlop-fig/fig{f:02d}.png"><img src="assets/dunlop-fig/'
+                     f'fig{f:02d}.png" loading="lazy" alt="Dunlop\'s drawing, Fig. {f} of 1828, turned north up">'
+                     f'<span>Dunlop 1828, Fig. {f}</span></a>')
+        desc = (ex.get("desc") or "").strip()
+        off = (ex.get("offset_arcmin") or "").strip()
+        meta = f"Dunlop's position is {float(off):g}\u2032 from the modern one." if off else ""
+        out.append(f'      <article class="dun-card{" has-draw" if fig else ""}" id="{o["id"]}">\n'
+                   f'        <div class="dun-imgs">{imgs}</div>\n'
+                   f'        <div class="dun-text"><h3><a href="{link}">{H.escape(o["name"])}</a></h3>'
+                   + (f'<blockquote>{H.escape(desc)}</blockquote>' if desc else "")
+                   + (f'<p class="dun-meta">{meta}</p>' if meta else "") + '</div>\n      </article>')
+    out.append("    </div>")
+    return "\n".join(out)
+
+
 def build(name, args):
     cfg = COLLECTIONS[name]
     out_dir = f"assets/{name}"
@@ -526,6 +558,8 @@ def build(name, args):
             f'      </figure>')
     shuffle = ' data-shuffle' if cfg.get("shuffle") else ''
     grid = f'    <div class="arp-grid"{shuffle}>\n' + "\n".join(figs) + '\n    </div>'
+    if cfg.get("cards"):
+        grid = cards(ok, out_dir, pos)
     bars = sorted({bar_arcmin(o["fov"]) for o in ok})
     bar_text = {(1,): "one arcminute", (5,): "five arcminutes",
                 (1, 5): "one arcminute, or five arcminutes on fields of 25 arcminutes or more"}[tuple(bars)]

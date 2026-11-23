@@ -228,6 +228,21 @@
   .atlas-fig { margin: 0 0 30px; max-width: 460px; }
   .atlas-fig img { width: 100%; height: auto; display: block; background: #fff; }
   .atlas-fig figcaption { font-size: 13.5px; line-height: 1.6; color: #a7aea9; margin-top: 8px; }
+  .dun-list { display: flex; flex-direction: column; gap: 22px; }
+  .dun-card { display: grid; gap: 14px 22px; border-top: 1px solid #1f2629; padding-top: 18px; }
+  @media (min-width: 760px) { .dun-card { grid-template-columns: 300px minmax(0, 1fr); }
+                              .dun-card.has-draw { grid-template-columns: 460px minmax(0, 1fr); } }
+  .dun-imgs { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); align-items: start; }
+  .dun-imgs a { display: block; position: relative; text-decoration: none; }
+  .dun-imgs img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; display: block; }
+  .dun-ks4 img { background: #000; }
+  .dun-draw img { background: #f4f1e8; }
+  .dun-imgs span { display: block; font-size: 12px; color: #8a928d; margin-top: 4px; }
+  .dun-text h3 { font-family: var(--serif); font-weight: 400; font-size: 21px; margin: 0 0 8px; }
+  .dun-text h3 a { color: #eef1ee; text-decoration: none; }
+  .dun-text blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: 16.5px; line-height: 1.6;
+                         color: #cfd5d1; max-width: 68ch; }
+  .dun-meta { font-size: 13px; color: #8a928d; margin: 8px 0 0; }
   .arp-meta { font-size: 13.5px; color: #8a928d; margin-bottom: 26px; }
   .arp-grid { display: grid; gap: 4px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
   .arp-grid figure { margin: 0; position: relative; overflow: hidden; background: #000; }
