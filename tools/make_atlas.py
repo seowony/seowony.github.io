@@ -4,6 +4,8 @@ Build image atlases from the KS4 DR1 BVI colour HiPS (southern sky, Dec < -28 de
 
   peculiar  peculiar.html  peculiar galaxies and other notable objects (tools/lists/peculiar.csv)
   ngc       ngc.html       NGC galaxies larger than 2 arcmin (tools/lists/ngc.csv, from OpenNGC)
+  messier-caldwell  messier-caldwell.html  Messier and Caldwell objects
+  planetary, nebulae                               NGC/IC objects by type (tools/lists/<name>.csv)
   clusters  clusters.html  nearby galaxy clusters (tools/lists/clusters.csv)
 
 For each object the script
@@ -22,7 +24,7 @@ Run it from the root of the website repository (tools/update_atlas.sh also commi
 
 --only takes row numbers or ids such as ngc1365.
 Downloads are cached in assets/<collection>/, so the script can be re-run safely.
-The NGC list is rebuilt with tools/make_lists.py.
+All lists except peculiar and clusters are rebuilt with tools/make_lists.py.
 """
 import argparse, csv, io, json, os, sys, time
 from urllib.parse import quote
@@ -65,6 +67,37 @@ COLLECTIONS = {
         count="{n} of the {total} NGC galaxies south of {dec} are inside the KS4 DR1 footprint.",
         credit=KS4_CREDIT + ' Object list, positions and sizes: <a href="https://github.com/mattiaverga/'
                'OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
+    "messier-caldwell": dict(
+        title="Messier and Caldwell objects in KS4", short="Messier and Caldwell objects", big=1024,
+        list="tools/lists/messier-caldwell.csv",
+        description="Messier and Caldwell objects south of declination -28 degrees, seen in the KMTNet Synoptic "
+                    "Survey of Southern Sky (KS4) Data Release 1.",
+        intro="This gallery shows objects from Charles Messier's catalogue and from the Caldwell catalogue, Patrick "
+              "Moore's list of bright star clusters, nebulae and galaxies that Messier did not include, that lie "
+              "south of declination {dec} and fall inside the footprint of KS4 Data Release 1. Only a few Messier "
+              "objects are this far south, so most of the southern showpieces here come from the Caldwell list. "
+              + HOW_TO,
+        count="{n} of the {total} Messier and Caldwell objects south of {dec} are inside the KS4 DR1 footprint.",
+        credit=KS4_CREDIT + " Object lists: Messier (1781) and Caldwell (Moore 1995). Positions and sizes: "
+               + '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
+    "planetary": dict(
+        title="Planetary nebulae in KS4", short="Planetary nebulae", big=800, list="tools/lists/planetary.csv",
+        description="Planetary nebulae from the NGC and IC catalogues, seen in the KMTNet Synoptic Survey of "
+                    "Southern Sky (KS4) Data Release 1.",
+        intro="This gallery shows the planetary nebulae from the NGC and IC catalogues that lie south of "
+              "declination {dec} and fall inside the footprint of KS4 Data Release 1. Many are only a few "
+              "arcseconds across, so their images are small fields. " + HOW_TO,
+        count="{n} of the {total} planetary nebulae south of {dec} are inside the KS4 DR1 footprint.",
+        credit=KS4_CREDIT + " Object list, positions and sizes: " + '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
+    "nebulae": dict(
+        title="Nebulae in KS4", short="Nebulae", big=800, list="tools/lists/nebulae.csv",
+        description="Emission and reflection nebulae, star-forming regions and supernova remnants from the NGC "
+                    "and IC catalogues, seen in the KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1.",
+        intro="This gallery shows emission and reflection nebulae, star-forming regions and supernova remnants "
+              "from the NGC and IC catalogues that lie south of declination {dec} and fall inside the footprint of "
+              "KS4 Data Release 1. " + HOW_TO,
+        count="{n} of the {total} nebulae south of {dec} are inside the KS4 DR1 footprint.",
+        credit=KS4_CREDIT + " Object list, positions and sizes: " + '<a href="https://github.com/mattiaverga/OpenNGC">OpenNGC</a> (CC BY-SA 4.0).'),
     "clusters": dict(
         title="Nearby galaxy clusters in KS4", short="Galaxy clusters", big=1200,
         list="tools/lists/clusters.csv",
