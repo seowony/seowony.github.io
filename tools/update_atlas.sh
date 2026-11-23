@@ -32,12 +32,13 @@ fi
 
 echo "== Updating $BASE from GitHub"
 git fetch origin "$BASE"
-# Generated files from an earlier, already merged run: drop local copies that are
-# identical to GitHub so the update can bring them in as tracked files.
+# Pages and images are generated, and GitHub has the versions from the last merged run.
+# Let those win so the update never stops on them: local edits to tracked generated files
+# are reset, and untracked generated files that GitHub also has are removed (both are
+# written again below; images that are unchanged come back from GitHub, not from KS4).
+git diff --name-only -- "${GEN[@]}" | while IFS= read -r f; do git checkout -- "$f"; done
 git ls-files --others --exclude-standard -- "${GEN[@]}" | while IFS= read -r f; do
-  if remote=$(git rev-parse -q --verify "origin/$BASE:$f" 2>/dev/null) && [ "$remote" = "$(git hash-object "$f")" ]; then
-    rm -f "$f"
-  fi
+  if git cat-file -e "origin/$BASE:$f" 2>/dev/null; then rm -f "$f"; fi
 done
 git merge --ff-only "origin/$BASE"
 
