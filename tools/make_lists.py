@@ -3,8 +3,11 @@
 Write the object lists used by tools/make_atlas.py.
 
   tools/lists/ngc.csv       NGC galaxies with major axis >= --min-size arcmin and Dec < --max-dec
-  tools/lists/messier.csv   Messier objects with Dec < --max-dec
-  tools/lists/caldwell.csv  Caldwell objects with Dec < --max-dec (numbers and names from Wikipedia)
+  tools/lists/messier-caldwell.csv  Messier and Caldwell objects with Dec < --max-dec (Caldwell from Wikipedia)
+  tools/lists/planetary.csv         planetary nebulae (NGC and IC)
+  tools/lists/globulars.csv         globular clusters (NGC and IC, Magellanic Cloud clusters included)
+  tools/lists/nebulae.csv           emission, reflection and other nebulae, star-forming regions, remnants
+  tools/lists/openclusters.csv      open clusters
 
 Positions and sizes come from OpenNGC (https://github.com/mattiaverga/OpenNGC, CC BY-SA 4.0); objects that are
 not in OpenNGC are resolved through Sesame.
@@ -49,6 +52,14 @@ def row(r, lo, hi):
             "fov_arcmin": fov_for(major, lo, hi)}
 
 
+def write(path, cols, rows):
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, cols, lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
+    print(f"{path}: {len(rows)} objects")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--min-size", type=float, default=2.0, help="NGC: minimum major axis (arcmin)")
@@ -79,16 +90,14 @@ def main():
     # Messier: OpenNGC carries the Messier number
     mess = sorted((r for r in allrows.values() if r.get("M") and r["Type"] != "Dup" and r["Dec"]
                    and sexa(r["Dec"], False) < args.max_dec), key=lambda r: int(r["M"]))
-    with open("tools/lists/messier.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, cols)
-        w.writeheader()
-        for r in mess:
-            d = row(r, 5.0, 60.0)
-            m = int(r["M"])
-            common = r.get("Common names", "").split(",")[0].strip()
-            d.update(id=f"m{m:03d}", name=f"M{m} ({pretty(r['Name'])}{', ' + common if common else ''})")
-            w.writerow(d)
-    print(f"tools/lists/messier.csv: {len(mess)} objects")
+    mc = []
+    for r in mess:
+        d = row(r, 5.0, 60.0)
+        m = int(r["M"])
+        common = r.get("Common names", "").split(",")[0].strip()
+        d.update(id=f"m{m:03d}", name=f"M{m} ({pretty(r['Name'])}{', ' + common if common else ''})")
+        mc.append(d)
+    print(f"Messier: {len(mess)} objects")
 
     # Caldwell: number, designation and common name from the Wikipedia table
     import re
@@ -115,11 +124,29 @@ def main():
             continue
         d.update(id=f"c{n:03d}", name=f"C{n} ({desig}{', ' + common if common else ''})", query=desig)
         cald.append(d)
-    with open("tools/lists/caldwell.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, cols)
-        w.writeheader()
-        w.writerows(cald)
-    print(f"tools/lists/caldwell.csv: {len(cald)} objects")
+    print(f"Caldwell: {len(cald)} objects")
+    write("tools/lists/messier-caldwell.csv", cols, mc + cald)
+
+    # lists by object type from OpenNGC (NGC and IC numbers only)
+    def by_type(types, lo, hi, scale, default):
+        out = []
+        for r in sorted(allrows.values(), key=lambda r: r["Name"]):
+            if r["Type"] not in types or not r["Dec"] or sexa(r["Dec"], False) >= args.max_dec:
+                continue
+            if not re.match(r"(NGC|IC)\d", r["Name"]):
+                continue
+            major = float(r["MajAx"]) if r["MajAx"] else default
+            d = row(r, lo, hi)
+            d["fov_arcmin"] = round(max(lo, min(hi, scale * major)) * 2) / 2
+            common = r.get("Common names", "").split(",")[0].strip()
+            if common:
+                d["name"] = f"{d['name']} ({common})"
+            out.append(d)
+        return out
+    write("tools/lists/planetary.csv", cols, by_type({"PN"}, 3.0, 15.0, 4.0, 0.5))
+    write("tools/lists/globulars.csv", cols, by_type({"GCl"}, 4.0, 40.0, 1.6, 3.0))
+    write("tools/lists/nebulae.csv", cols, by_type({"Neb", "HII", "EmN", "RfN", "SNR", "Cl+N"}, 5.0, 60.0, 1.5, 5.0))
+    write("tools/lists/openclusters.csv", cols, by_type({"OCl"}, 5.0, 60.0, 1.5, 5.0))
 
 
 

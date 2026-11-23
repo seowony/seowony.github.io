@@ -21,8 +21,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 DPI = 300
 PAPER_MM = {"A0": (841, 1189), "A1": (594, 841), "A2": (420, 594), "A3": (297, 420), "A4": (210, 297)}
-TITLES = {"ngc": "NGC galaxies in KS4 DR1", "messier": "Messier objects in KS4 DR1",
-          "caldwell": "Caldwell objects in KS4 DR1", "peculiar": "Southern peculiar galaxies in KS4 DR1",
+TITLES = {"ngc": "NGC galaxies in KS4 DR1", "messier-caldwell": "Messier and Caldwell objects in KS4 DR1",
+          "planetary": "Planetary nebulae in KS4 DR1", "globulars": "Globular clusters in KS4 DR1",
+          "nebulae": "Nebulae in KS4 DR1", "openclusters": "Open clusters in KS4 DR1", "peculiar": "Southern peculiar galaxies in KS4 DR1",
           "clusters": "Nearby galaxy clusters in KS4 DR1"}
 CREDIT = ("KMTNet Synoptic Survey of Southern Sky (KS4) Data Release 1, BVI colour (Chang et al. 2026, JKAS). "
           "North up, east left. White bar: 1 arcmin.")
