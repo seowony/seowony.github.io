@@ -274,10 +274,11 @@
     <p class="kicker"><a href="index.html">Home</a> / Real or bogus?</p>
     <h1>Real or bogus?</h1>
     <p class="rb-intro">
-      Every night the IMSNG and GECKO pipelines subtract a reference image from each new image. Most of what is left
-      is not a new source but cosmic rays, poor subtractions, satellite trails and detector defects. People and a
-      machine-learning classifier sort these candidates into real and bogus. Try it: look at the new, reference and
-      difference images and decide.
+      When GECKO follows up a gravitational-wave alert with KMTNet, the pipeline subtracts a reference image from
+      each new image and flags what is left. Most of it is not a real source but poor subtractions, residuals of
+      bright stars, cosmic rays and detector defects. A machine-learning classifier gives each candidate a score,
+      and the team then checks them by eye. Try it: look at the new, reference and difference images and decide.
+      The candidate is in the small box at the centre.
     </p>
     <div class="rb-card">
       <div class="rb-labels"><span>New</span><span>Reference</span><span>Difference</span></div>
@@ -291,7 +292,10 @@
       <div class="rb-score"><span class="rb-n"></span><span class="rb-right"></span></div>
       <p class="rb-help">Keys: R for real, B for bogus, N or space for the next one.</p>
     </div>
-    <p class="rb-note"><!-- RB_COUNT -->, labelled by the IMSNG and GECKO team. The order is random on each visit.</p>
+    <p class="rb-note"><!-- RB_COUNT --> from the GECKO KMTNet follow-up of S240422ed and S250206dm, labelled by
+      the team. Real ones are sources already known before the alert, such as variable stars and supernovae; none
+      is a counterpart of the gravitational-wave event. The order is random on each visit. See also the
+      <a href="gw.html">gravitational-wave follow-up</a> page.</p>
     <p class="back"><a href="index.html">← Back to the home page</a></p>
   </section>
 </main>

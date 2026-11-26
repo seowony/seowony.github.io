@@ -37,9 +37,9 @@ def load_stamp(path, size):
         data = np.nan_to_num(np.asarray(data, dtype=float))
         lo, hi = ZScaleInterval().get_limits(data)
         img = np.clip((data - lo) / max(hi - lo, 1e-9), 0, 1)
-        im = Image.fromarray((img[::-1] * 255).astype(np.uint8))      # FITS row 0 is the bottom
+        im = Image.fromarray((img[::-1] * 255).astype(np.uint8)).convert("RGB")  # FITS row 0 is the bottom
     else:
-        im = Image.open(path).convert("L")
+        im = Image.open(path).convert("RGB")      # keep colour marks such as the candidate box
     return im.resize((size, size), Image.LANCZOS)
 
 
@@ -68,7 +68,7 @@ def main():
                 print(f"{cid}: {e}, skipped")
                 continue
             gap = max(2, args.size // 40)
-            strip = Image.new("L", (3 * args.size + 2 * gap, args.size), 255)
+            strip = Image.new("RGB", (3 * args.size + 2 * gap, args.size), (255, 255, 255))
             for i, s in enumerate(stamps):
                 strip.paste(s, (i * (args.size + gap), 0))
             strip.save(os.path.join(OUT, f"{cid}.jpg"), quality=88)
