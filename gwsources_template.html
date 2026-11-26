@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Real or bogus? | Seo-Won Chang</title>
-<meta name="description" content="Try sorting IMSNG and GECKO transient candidates into real and bogus, as the team and its classifier do every night.">
-<meta property="og:title" content="Real or bogus? | Seo-Won Chang">
-<meta property="og:description" content="A short real/bogus quiz with IMSNG and GECKO candidates.">
+<title>Sources found in GW follow-up | Seo-Won Chang</title>
+<meta name="description" content="Real sources picked up by the GECKO KMTNet follow-up of gravitational-wave alerts, with their images and light curves.">
+<meta property="og:title" content="Sources found in GW follow-up | Seo-Won Chang">
+<meta property="og:description" content="Variable stars, supernovae and other real sources found while following up gravitational-wave alerts.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://seowony.github.io/realbogus.html">
+<meta property="og:url" content="https://seowony.github.io/gwsources.html">
 <meta property="og:image" content="https://seowony.github.io/assets/ks4-ngc4696-centaurus.jpg">
-<link rel="canonical" href="https://seowony.github.io/realbogus.html">
+<link rel="canonical" href="https://seowony.github.io/gwsources.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Karla:wght@400;500;600&display=swap">
@@ -221,23 +221,23 @@
   .atlas-name { display: block; padding: 10px 12px 2px; font-size: 14.5px; line-height: 1.35; }
   .atlas-n { display: block; padding: 0 12px 12px; font-size: 12.5px; color: #8a928d; }
   @media (prefers-reduced-motion: reduce) { .atlas-card img { transition: none; } }
-  /* real or bogus quiz */
-  .rb-intro { color: var(--body); line-height: 1.7; max-width: 66ch; margin: -6px 0 22px; }
-  .rb-card { background: var(--panel); border: 1px solid var(--edge); padding: clamp(14px, 3vw, 24px); max-width: 760px; }
-  .rb-labels, .rb-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-  .rb-labels { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label); margin-bottom: 6px; text-align: center; }
-  .rb-img { width: 100%; height: auto; display: block; image-rendering: auto; background: #111; }
-  .rb-buttons { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
-  .rb-buttons button { font: inherit; font-size: 16px; padding: 10px 26px; cursor: pointer; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); }
-  .rb-buttons button:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
-  .rb-buttons button:disabled { opacity: .45; cursor: default; }
-  .rb-buttons .rb-next { margin-left: auto; border-color: var(--accent); color: var(--accent); }
-  .rb-buttons .rb-next:hover:not(:disabled) { background: var(--accent); color: #fff; }
-  .rb-result { min-height: 3.2em; margin-top: 14px; font-size: 15.5px; line-height: 1.6; color: var(--body); }
-  .rb-result b.ok { color: #2e7d4f; } .rb-result b.no { color: var(--accent); }
-  .rb-score { display: flex; gap: 22px; margin-top: 12px; font-size: 14px; color: var(--second); font-variant-numeric: tabular-nums; }
-  .rb-help { font-size: 13px; color: var(--label); margin-top: 10px; }
-  .rb-note { font-size: 13px; color: var(--label); margin-top: 26px; max-width: 76ch; line-height: 1.6; }
+  /* sources found in GW follow-up */
+  .src-intro { color: var(--body); line-height: 1.7; max-width: 68ch; margin: -6px 0 10px; }
+  .src-meta { font-size: 13.5px; color: var(--label); margin: 0 0 24px; }
+  .src-list { display: grid; gap: 22px; }
+  @media (min-width: 900px) { .src-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .src-card { background: var(--panel); border: 1px solid var(--edge); padding: 14px 14px 12px; }
+  .src-card h2 { font-size: 21px; margin: 0 0 2px; }
+  .src-card h2 a { color: var(--ink); }
+  .src-sub { font-size: 14px; color: var(--second); margin: 0 0 10px; line-height: 1.5; }
+  .src-stamps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .src-stamps img { width: 100%; height: auto; aspect-ratio: 1; display: block; background: #111; }
+  .src-stamps span { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); margin-top: 3px; text-align: center; }
+  .src-lc { margin-top: 10px; }
+  .src-lc svg { width: 100%; height: auto; display: block; }
+  .src-lc .ax { stroke: var(--rule); }
+  .src-lc text { font-family: var(--sans); font-size: 11px; fill: var(--label); }
+  .src-note { font-size: 13px; color: var(--label); margin-top: 26px; max-width: 80ch; line-height: 1.6; }
 </style>
 </head>
 
@@ -271,32 +271,18 @@
 
 <main id="main">
   <section class="wrap story">
-    <p class="kicker"><a href="index.html">Home</a> / Real or bogus?</p>
-    <h1>Real or bogus?</h1>
-    <p class="rb-intro">
-      When GECKO follows up a gravitational-wave alert with KMTNet, the pipeline subtracts a reference image from
-      each new image and flags what is left. Most of it is not a real source but poor subtractions, residuals of
-      bright stars, cosmic rays and detector defects. A machine-learning classifier gives each candidate a score,
-      and the team then checks them by eye. Try it: look at the new, reference and difference images and decide.
-      The candidate is in the small box at the centre.
+    <p class="kicker"><a href="index.html">Home</a> / <a href="gw.html">Gravitational waves</a> / Sources found</p>
+    <h1>Sources found in GW follow-up</h1>
+    <p class="src-intro">
+      When GECKO follows up a gravitational-wave alert with KMTNet, the image subtraction picks up many real sources
+      that have nothing to do with the merger: variable stars, supernovae and other transients that were already
+      known. They are a useful check that the search works. Each card shows the new, reference and difference images
+      and the light curve measured in the follow-up images.
     </p>
-    <div class="rb-card">
-      <div class="rb-labels"><span>New</span><span>Reference</span><span>Difference</span></div>
-      <img class="rb-img" alt="New, reference and difference images of a transient candidate" width="486" height="160">
-      <div class="rb-buttons">
-        <button type="button" data-guess="real">Real</button>
-        <button type="button" data-guess="bogus">Bogus</button>
-        <button type="button" class="rb-next" disabled>Next →</button>
-      </div>
-      <div class="rb-result" aria-live="polite"></div>
-      <div class="rb-score"><span class="rb-n"></span><span class="rb-right"></span></div>
-      <p class="rb-help">Keys: R for real, B for bogus, N or space for the next one.</p>
-    </div>
-    <p class="rb-note">18 candidates (6 real, 12 bogus) from the GECKO KMTNet follow-up of S240422ed and S250206dm, labelled by
-      the team. Real ones are sources already known before the alert, such as variable stars and supernovae; none
-      is a counterpart of the gravitational-wave event. The order is random on each visit. See also the
-      <a href="gw.html">gravitational-wave follow-up</a> page.</p>
-    <p class="back"><a href="index.html">← Back to the home page</a></p>
+    <p class="src-meta"><!-- SRC_COUNT --></p>
+<!-- SRC_CARDS -->
+    <p class="src-note"><!-- SRC_NOTE --></p>
+    <p class="back"><a href="gw.html">← Gravitational-wave follow-up</a></p>
   </section>
 </main>
 
@@ -306,42 +292,5 @@
   </div>
 </footer>
 
-<script>
-const RB = [{"id":"c001","label":"real","img":"assets/realbogus/c001.jpg","score":1.0,"note":"Gaia20egc, a young stellar object, already known before the alert","facility":"KMTNet SAAO, S240422ed follow-up"},{"id":"c002","label":"real","img":"assets/realbogus/c002.jpg","score":0.99,"note":"Gaia21brv, a cataclysmic variable, already known before the alert","facility":"KMTNet SAAO, S240422ed follow-up"},{"id":"c003","label":"real","img":"assets/realbogus/c003.jpg","score":0.92,"note":"Gaia17abn, a cataclysmic variable, already known before the alert","facility":"KMTNet CTIO, S240422ed follow-up"},{"id":"c004","label":"real","img":"assets/realbogus/c004.jpg","score":0.92,"note":"AT2019sia, a transient already reported to TNS","facility":"KMTNet SSO, S240422ed follow-up"},{"id":"c005","label":"real","img":"assets/realbogus/c005.jpg","score":0.96,"note":"SN2021upa, a Type II supernova, already known before the alert","facility":"KMTNet CTIO, S250206dm follow-up"},{"id":"c006","label":"real","img":"assets/realbogus/c006.jpg","score":0.95,"note":"Gaia19aal, a cataclysmic variable, already known before the alert","facility":"KMTNet SAAO, S250206dm follow-up"},{"id":"c007","label":"bogus","img":"assets/realbogus/c007.jpg","score":0.89,"note":"Rejected by the team in visual inspection","facility":"KMTNet SAAO, S240422ed follow-up"},{"id":"c008","label":"bogus","img":"assets/realbogus/c008.jpg","score":0.56,"note":"Rejected by the team in visual inspection","facility":"KMTNet CTIO, S250206dm follow-up"},{"id":"c009","label":"bogus","img":"assets/realbogus/c009.jpg","score":0.9,"note":"Rejected by the team in visual inspection","facility":"KMTNet CTIO, S250206dm follow-up"},{"id":"c010","label":"bogus","img":"assets/realbogus/c010.jpg","score":0.53,"note":"Rejected by the team in visual inspection","facility":"KMTNet SSO, S240422ed follow-up"},{"id":"c011","label":"bogus","img":"assets/realbogus/c011.jpg","score":0.86,"note":"Rejected by the team in visual inspection","facility":"KMTNet CTIO, S250206dm follow-up"},{"id":"c012","label":"bogus","img":"assets/realbogus/c012.jpg","score":0.62,"note":"Rejected by the team in visual inspection","facility":"KMTNet SSO, S240422ed follow-up"},{"id":"c013","label":"bogus","img":"assets/realbogus/c013.jpg","score":0.74,"note":"Rejected by the team in visual inspection","facility":"KMTNet CTIO, S250206dm follow-up"},{"id":"c014","label":"bogus","img":"assets/realbogus/c014.jpg","score":0.82,"note":"Rejected by the team in visual inspection","facility":"KMTNet CTIO, S250206dm follow-up"},{"id":"c015","label":"bogus","img":"assets/realbogus/c015.jpg","score":0.61,"note":"Rejected by the team in visual inspection","facility":"KMTNet CTIO, S250206dm follow-up"},{"id":"c016","label":"bogus","img":"assets/realbogus/c016.jpg","score":0.99,"note":"Rejected by the team in visual inspection","facility":"KMTNet CTIO, S250206dm follow-up"},{"id":"c017","label":"bogus","img":"assets/realbogus/c017.jpg","score":0.95,"note":"Rejected by the team in visual inspection","facility":"KMTNet SAAO, S250206dm follow-up"},{"id":"c018","label":"bogus","img":"assets/realbogus/c018.jpg","score":0.51,"note":"Rejected by the team in visual inspection","facility":"KMTNet SAAO, S250206dm follow-up"}];
-(function () {
-  var order = RB.map(function (_, i) { return i; });
-  for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = order[i]; order[i] = order[j]; order[j] = t; }
-  var k = 0, seen = 0, right = 0, answered = false;
-  var img = document.querySelector(".rb-img"), res = document.querySelector(".rb-result");
-  var btns = document.querySelectorAll("[data-guess]"), next = document.querySelector(".rb-next");
-  function show() {
-    var c = RB[order[k % order.length]];
-    img.src = c.img; answered = false; res.innerHTML = "";
-    btns.forEach(function (b) { b.disabled = false; }); next.disabled = true;
-  }
-  function guess(g) {
-    if (answered) return;
-    var c = RB[order[k % order.length]]; answered = true; seen++;
-    var ok = g === c.label; if (ok) right++;
-    var txt = '<b class="' + (ok ? "ok" : "no") + '">' + (ok ? "Correct." : "Not quite.") + "</b> The team labelled it <b>" + c.label + "</b>.";
-    if (c.score !== null) txt += " Classifier score " + c.score.toFixed(2) + " (1 = real).";
-    if (c.note) txt += "<br>" + c.note + (c.facility ? " (" + c.facility + ")" : "");
-    else if (c.facility) txt += "<br>" + c.facility;
-    res.innerHTML = txt;
-    btns.forEach(function (b) { b.disabled = true; }); next.disabled = false;
-    document.querySelector(".rb-n").textContent = seen + " answered";
-    document.querySelector(".rb-right").textContent = right + " correct (" + Math.round(100 * right / seen) + "%)";
-  }
-  btns.forEach(function (b) { b.addEventListener("click", function () { guess(b.dataset.guess); }); });
-  next.addEventListener("click", function () { k++; show(); });
-  document.addEventListener("keydown", function (e) {
-    if (e.target.tagName === "INPUT" || e.metaKey || e.ctrlKey) return;
-    var key = e.key.toLowerCase();
-    if (key === "r") guess("real"); else if (key === "b") guess("bogus");
-    else if ((key === "n" || key === " ") && answered) { e.preventDefault(); k++; show(); }
-  });
-  show();
-})();
-</script>
 </body>
 </html>
