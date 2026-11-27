@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources found in GW follow-up | Seo-Won Chang</title>
+<meta name="description" content="Real sources picked up by the GECKO KMTNet follow-up of gravitational-wave alerts, with their images and light curves.">
+<meta property="og:title" content="Sources found in GW follow-up | Seo-Won Chang">
+<meta property="og:description" content="Variable stars, supernovae and other real sources found while following up gravitational-wave alerts.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seowony.github.io/gwsources.html">
+<meta property="og:image" content="https://seowony.github.io/assets/ks4-ngc4696-centaurus.jpg">
+<link rel="canonical" href="https://seowony.github.io/gwsources.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Karla:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --paper:  #E5E9E4;
+    --panel:  #F3F6F1;
+    --ink:    #18211E;
+    --body:   #3C463F;
+    --second: #4E584F;
+    --label:  #7C867C;
+    --rule:   #C3CCC1;
+    --edge:   #CBD3C9;
+    --accent: #B02E26;
+    --accent-d: #7E1F1A;
+
+    --serif: Newsreader, "Iowan Old Style", Georgia, serif;
+    --sans:  Karla, "Helvetica Neue", Arial, sans-serif;
+    --gutter: clamp(16px, 5vw, 56px);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-d); text-decoration: underline; }
+  a:focus-visible, .skip:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 1120px; margin-inline: auto; padding-inline: var(--gutter); }
+
+  .skip { position: absolute; left: -9999px; background: var(--ink); color: var(--paper); padding: 10px 16px; z-index: 10; }
+  .skip:focus { left: 8px; top: 8px; }
+
+  header.site { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--edge); z-index: 5; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-block: 14px; }
+  .wordmark { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 19px; }
+  nav.site ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0; padding: 0; font-size: 14.5px; }
+  nav.site a { color: var(--second); }
+  nav.site a:hover { color: var(--ink); }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(34px, 5.4vw, 50px); line-height: 1.06; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(25px, 3.4vw, 32px); line-height: 1.15; }
+  h3 { font-size: clamp(19px, 2.4vw, 23px); line-height: 1.28; }
+  p { margin: 0; }
+
+  .kicker { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--label); margin: 0; }
+  .affil { font-family: var(--serif); font-size: clamp(17px, 2.2vw, 19px); color: var(--ink); line-height: 1.4; margin: 0; }
+  .affil a { color: var(--ink); border-bottom: 1px solid var(--rule); }
+  .affil a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+  section { padding-block: clamp(40px, 6vw, 60px); }
+  .sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+             border-bottom: 1px solid var(--rule); padding-bottom: 13px; margin-bottom: 30px; }
+
+  /* hero */
+  .hero { display: grid; gap: clamp(24px, 4vw, 44px); align-items: start; }
+  @media (min-width: 760px) { .hero { grid-template-columns: 240px minmax(0, 1fr); } }
+  .portrait { width: 100%; max-width: 240px; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .hero-copy { display: flex; flex-direction: column; gap: 18px; }
+  .hero-copy p.bio { color: var(--body); line-height: 1.72; max-width: 64ch; font-size: 16.5px; }
+  .idlinks { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+  .idlinks a {
+    font-size: 14px; padding: 9px 15px; border: 1px solid var(--edge);
+    color: var(--second); background: var(--panel); text-decoration: none;
+  }
+  .idlinks a:hover { border-color: var(--ink); color: var(--ink); text-decoration: none; }
+  .idlinks a.strong { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .idlinks a.strong:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* illustrations */
+  svg.art { display: block; width: 100%; height: auto; }
+  .ln  { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .lnt { fill: none; stroke: var(--ink); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+  .dash{ fill: none; stroke: var(--label); stroke-width: 1.1; stroke-dasharray: 3 5; stroke-linecap: round; }
+  .ac  { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .acf { fill: var(--accent); }
+  .lnf { fill: var(--ink); }
+  text.cap { font-family: var(--sans); font-size: 12px; letter-spacing: 1.4px; fill: var(--label); }
+
+  /* research cards */
+  .topics { display: grid; gap: clamp(28px, 4vw, 40px); }
+  @media (min-width: 880px) { .topics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .topic { display: flex; flex-direction: column; gap: 14px; }
+  .plate { background: var(--panel); border: 1px solid var(--edge); padding: 16px; }
+  .topic p { font-size: 15.5px; line-height: 1.68; color: var(--body); }
+
+  /* programs */
+  .progs { display: flex; flex-direction: column; }
+  .prog { display: grid; gap: 6px 20px; padding-block: 22px; border-top: 1px solid var(--edge); }
+  .prog:first-child { border-top: 0; padding-top: 0; }
+  @media (min-width: 720px) { .prog { grid-template-columns: 52px minmax(0, 1fr) 200px; } }
+  .prog-mark svg { display: block; width: 34px; height: 34px; }
+  .prog p { color: var(--body); line-height: 1.66; font-size: 15px; max-width: 62ch; }
+  .prog .meta { font-size: 13px; line-height: 1.6; color: var(--label); }
+  .prog .meta b { font-weight: 500; color: var(--second); display: block; margin-bottom: 3px; }
+  .queue { margin-top: 26px; border-top: 1px solid var(--rule); padding-top: 20px; display: grid; gap: 10px 32px; }
+  @media (min-width: 720px) { .queue { grid-template-columns: 52px minmax(0, 1fr); } }
+  .queue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .queue li { font-size: 15px; color: var(--second); }
+  .queue li::before { content: "— "; color: var(--label); }
+
+  /* gallery */
+  .gallery { display: grid; gap: 18px; }
+  @media (min-width: 720px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .gallery-item { display: flex; flex-direction: column; }
+  .gallery-item.wide { grid-column: 1 / -1; }
+  .gallery-item img { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .gallery-cap { padding: 10px 2px 0; }
+  .gallery-cap .obj { font-family: var(--serif); font-size: 17px; color: var(--ink); }
+  .gallery-cap .desc { font-size: 14.5px; color: var(--body); line-height: 1.62; margin-top: 4px; }
+  .gallery-cap .fov { font-size: 13px; color: var(--label); margin-top: 4px; }
+  .media { margin-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--rule); padding-top: 20px; }
+  .media .gallery { margin-top: 14px; }
+  figure.gallery-item { margin: 0; }
+  .gallery-item video { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: #000; }
+  .gallery-credit { font-size: 13px; color: var(--label); margin-top: 20px; border-top: 1px solid var(--edge); padding-top: 12px; }
+
+  /* rubin block */
+  .rubin { display: grid; gap: clamp(20px, 4vw, 40px); }
+  @media (min-width: 820px) { .rubin { grid-template-columns: minmax(0, 1fr) 320px; } }
+  .rubin p { color: var(--body); line-height: 1.7; max-width: 62ch; }
+  .roles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 14.5px; color: var(--second); }
+  .roles li { padding-left: 16px; position: relative; line-height: 1.55; }
+  .roles li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--accent); }
+  .roles .badge { display: inline-block; vertical-align: middle; margin-left: 4px; line-height: 0; }
+  .roles .badge img { height: 20px; width: auto; }
+  .topicchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .topicchips span { font-size: 13px; padding: 5px 11px; border: 1px solid var(--edge); background: var(--panel); color: var(--second); }
+
+  /* publications */
+  .pubs { display: flex; flex-direction: column; gap: 0; }
+  .pub { display: grid; gap: 2px 18px; padding-block: 15px; border-top: 1px solid var(--edge); align-items: baseline; }
+  .pub:first-child { border-top: 0; }
+  @media (min-width: 640px) { .pub { grid-template-columns: 62px minmax(0, 1fr) 132px; } }
+  .pub .yr { font-size: 14px; color: var(--label); font-variant-numeric: tabular-nums; }
+  .pub .ti { font-size: 15.5px; line-height: 1.5; color: var(--ink); }
+  .pub .vn { font-size: 13px; color: var(--label); }
+  @media (min-width: 640px) { .pub .vn { text-align: right; } }
+  .star { color: var(--accent); margin-right: 5px; }
+
+  /* news + contact */
+  .split { display: grid; gap: clamp(18px, 4vw, 40px); }
+  @media (min-width: 820px) { .split { grid-template-columns: 190px minmax(0, 1fr); } }
+  .news { display: flex; flex-direction: column; gap: 14px; max-width: 70ch; }
+  .item { display: grid; gap: 2px 18px; }
+  @media (min-width: 520px) { .item { grid-template-columns: 92px minmax(0, 1fr); align-items: baseline; } }
+  .when { font-size: 14px; color: var(--label); }
+  .when small { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+  .what { font-size: 15.5px; line-height: 1.62; color: var(--body); }
+
+  footer.site { border-top: 1px solid var(--rule); }
+  .foot { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between;
+          padding-block: 22px 40px; font-size: 13px; color: var(--label); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  /* story page */
+  .story { padding-block: clamp(32px, 5vw, 52px); max-width: 1120px; }
+  .story h1 { margin: 10px 0 28px; max-width: 22ch; }
+  .story .kicker a { color: var(--label); }
+  .comic { display: grid; gap: 16px; margin-bottom: clamp(32px, 5vw, 48px); }
+  @media (min-width: 720px) { .comic { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .panel { margin: 0; background: var(--panel); border: 1px solid var(--edge); padding: 14px 14px 12px; }
+  .panel figcaption { font-size: 14.5px; line-height: 1.55; color: var(--body); margin-top: 8px; }
+  .panel figcaption b { font-weight: 600; color: var(--accent); margin-right: 6px; }
+  .paper { fill: var(--panel); }
+  .win { fill: var(--accent); opacity: 0.22; }
+  text.say { font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 1px; fill: var(--ink); }
+  text.say.acc { fill: var(--accent); }
+  text.say.big { font-size: 30px; }
+  .prose { max-width: 66ch; display: flex; flex-direction: column; gap: 16px; }
+  .prose p { color: var(--body); font-size: 16.5px; line-height: 1.75; }
+  .prose blockquote { margin: 4px 0; padding: 14px 20px; border-left: 3px solid var(--accent); background: var(--panel);
+                      display: flex; flex-direction: column; gap: 8px; }
+  .prose blockquote p { font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--ink); }
+  .timeline { margin-top: clamp(36px, 5vw, 52px); border-top: 1px solid var(--rule); padding-top: 24px; max-width: 760px; }
+  .timeline .day { font-family: var(--serif); font-size: 18px; color: var(--ink); margin: 18px 0 10px; }
+  .timeline .item { grid-template-columns: 120px minmax(0, 1fr); }
+  .timeline .what { font-size: 15px; }
+  .back { margin-top: 36px; font-size: 15px; }
+  /* places page */
+  .album { display: grid; gap: 22px; }
+  @media (min-width: 760px) { .album { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .album figure { margin: 0; }
+  .album figure:first-child,
+  .album figure:nth-child(2):last-child { grid-column: 1 / -1; }
+  .album img { width: 100%; height: auto; display: block; border: 1px solid var(--edge); background: var(--panel); }
+  .album figcaption { padding: 10px 2px 0; }
+  .album .obj { font-family: var(--serif); font-size: 18px; color: var(--ink); }
+  .album .desc { font-size: 14.5px; line-height: 1.6; color: var(--body); margin-top: 4px; }
+  .album .fov { font-size: 13px; color: var(--label); margin-top: 4px; }
+  .gsec { margin-top: clamp(36px, 6vw, 56px); scroll-margin-top: 90px; }
+  /* links to the KS4 atlas pages (block written by tools/make_atlas.py) */
+  .atlas-head { font-family: "Newsreader", Georgia, serif; font-weight: 400; font-size: 22px; margin: 34px 0 14px; }
+  .atlas-links { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .atlas-card { display: block; background: #0b0d0c; color: #e9ece9; text-decoration: none; overflow: hidden; }
+  .atlas-card img { width: 100%; height: auto; aspect-ratio: 1; display: block; transition: transform .35s ease; }
+  .atlas-card:hover img { transform: scale(1.04); }
+  .atlas-name { display: block; padding: 10px 12px 2px; font-size: 14.5px; line-height: 1.35; }
+  .atlas-n { display: block; padding: 0 12px 12px; font-size: 12.5px; color: #8a928d; }
+  @media (prefers-reduced-motion: reduce) { .atlas-card img { transition: none; } }
+  /* sources found in GW follow-up */
+  .src-intro { color: var(--body); line-height: 1.7; max-width: 68ch; margin: -6px 0 10px; }
+  .src-meta { font-size: 13.5px; color: var(--label); margin: 0 0 24px; }
+  .src-list { display: grid; gap: 22px; }
+  @media (min-width: 900px) { .src-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .src-card { background: var(--panel); border: 1px solid var(--edge); padding: 14px 14px 12px; }
+  .src-card h2 { font-size: 21px; margin: 0 0 2px; }
+  .src-card h2 a { color: var(--ink); }
+  .src-sub { font-size: 14px; color: var(--second); margin: 0 0 10px; line-height: 1.5; }
+  .src-stamps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .src-stamps img { width: 100%; height: auto; aspect-ratio: 1; display: block; background: #111; }
+  .src-stamps span { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); margin-top: 3px; text-align: center; }
+  .src-lc { margin-top: 10px; }
+  .src-lc svg { width: 100%; height: auto; display: block; }
+  .src-lc .ax { stroke: var(--rule); }
+  .src-lc text { font-family: var(--sans); font-size: 11px; fill: var(--label); }
+  .src-switch { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; color: var(--second); margin: -8px 0 22px; }
+  .src-switch button { font: inherit; font-size: 13.5px; padding: 5px 12px; border: 1px solid var(--edge); background: var(--panel); color: var(--ink); cursor: pointer; }
+  .src-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  body.mag-auto .src-lc[data-mag="aper"], body:not(.mag-auto) .src-lc[data-mag="auto"] { display: none; }
+  .src-note { font-size: 13px; color: var(--label); margin-top: 26px; max-width: 80ch; line-height: 1.6; }
+</style>
+</head>
+
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="wordmark" href="index.html" style="color: var(--ink); text-decoration: none;">
+      <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="24" fill="none" stroke="#18211E" stroke-width="3.4"></circle>
+        <circle cx="32" cy="32" r="8" fill="#B02E26"></circle>
+      </svg>
+      Seo-Won Chang
+    </a>
+    <nav class="site" aria-label="Sections">
+      <ul>
+        <li><a href="index.html#work">Research</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#rubin">Rubin / LSST</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="index.html#pubs">Publications</a></li>
+        <li><a href="index.html#community">Community</a></li>
+        <li><a href="cv.pdf">CV</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="wrap story">
+    <p class="kicker"><a href="index.html">Home</a> / <a href="gw.html">Gravitational waves</a> / Sources found</p>
+    <h1>Sources found in GW follow-up</h1>
+    <p class="src-intro">
+      When GECKO follows up a gravitational-wave alert with KMTNet, the image subtraction picks up many real sources
+      that have nothing to do with the merger: variable stars, supernovae and other transients that were already
+      known. They are a useful check that the search works. Each card shows the new, reference and difference images
+      and the light curve measured in the follow-up images.
+    </p>
+    <p class="src-meta">6 sources from the follow-up of S240422ed and S250206dm.</p>
+    <div class="src-list">
+      <article class="src-card" id="s065">
+        <h2><a href="https://gsaweb.ast.cam.ac.uk/alerts/alert/Gaia20egc/">Gaia20egc</a></h2>
+        <p class="src-sub">Young stellar object, S240422ed follow-up, KMTNet SAAO, 2 detections</p>
+        <div class="src-stamps"><div><img src="assets/gwsources/s065_new.jpg" width="240" height="240" loading="lazy" alt="New image of Gaia20egc"><span>New</span></div><div><img src="assets/gwsources/s065_ref.jpg" width="240" height="240" loading="lazy" alt="Reference image of Gaia20egc"><span>Reference</span></div><div><img src="assets/gwsources/s065_diff.jpg" width="240" height="240" loading="lazy" alt="Difference image of Gaia20egc"><span>Difference</span></div></div>
+        <div class="src-lc" data-mag="aper"><svg viewBox="0 0 460 190" role="img" aria-label="Light curve"><line class="ax" x1="44" y1="160" x2="448" y2="160"/><line class="ax" x1="44" y1="10" x2="44" y2="160"/><text x="38" y="15.3" text-anchor="end">17.5</text><text x="38" y="58.7" text-anchor="end">17.7</text><text x="38" y="102.1" text-anchor="end">17.9</text><text x="38" y="145.5" text-anchor="end">18.1</text><text x="84.6" y="174" text-anchor="middle">1.6</text><text x="211.0" y="174" text-anchor="middle">1.8</text><text x="337.4" y="174" text-anchor="middle">2</text><text x="246" y="188" text-anchor="middle">days after the GW event</text><text x="11" y="85" text-anchor="middle" transform="rotate(-90 11 85)">mag</text><line x1="223.6" y1="91.4" x2="223.6" y2="98.4" stroke="#c8402f" stroke-width="1.2"/><circle cx="223.6" cy="94.9" r="3.2" fill="#c8402f"><title>R 17.89 ± 0.02, +1.82 d</title></circle><line x1="268.4" y1="72.1" x2="268.4" y2="78.2" stroke="#c8402f" stroke-width="1.2"/><circle cx="268.4" cy="75.1" r="3.2" fill="#c8402f"><title>R 17.79 ± 0.01, +1.89 d</title></circle><circle cx="388" cy="16" r="3.5" fill="#c8402f"/><text x="394" y="20">R</text></svg></div>
+      </article>
+      <article class="src-card" id="s066">
+        <h2><a href="https://gsaweb.ast.cam.ac.uk/alerts/alert/Gaia21brv/">Gaia21brv</a></h2>
+        <p class="src-sub">Cataclysmic variable, S240422ed follow-up, KMTNet SAAO, 1 detection</p>
+        <div class="src-stamps"><div><img src="assets/gwsources/s066_new.jpg" width="240" height="240" loading="lazy" alt="New image of Gaia21brv"><span>New</span></div><div><img src="assets/gwsources/s066_ref.jpg" width="240" height="240" loading="lazy" alt="Reference image of Gaia21brv"><span>Reference</span></div><div><img src="assets/gwsources/s066_diff.jpg" width="240" height="240" loading="lazy" alt="Difference image of Gaia21brv"><span>Difference</span></div></div>
+        <div class="src-lc" data-mag="aper"><svg viewBox="0 0 460 190" role="img" aria-label="Light curve"><line class="ax" x1="44" y1="160" x2="448" y2="160"/><line class="ax" x1="44" y1="10" x2="44" y2="160"/><text x="38" y="38.2" text-anchor="end">18.9</text><text x="38" y="88.2" text-anchor="end">19.1</text><text x="38" y="138.2" text-anchor="end">19.3</text><text x="70.4" y="174" text-anchor="middle">1.7</text><text x="142.5" y="174" text-anchor="middle">1.8</text><text x="214.7" y="174" text-anchor="middle">1.9</text><text x="286.8" y="174" text-anchor="middle">2</text><text x="358.9" y="174" text-anchor="middle">2.1</text><text x="431.1" y="174" text-anchor="middle">2.2</text><text x="246" y="188" text-anchor="middle">days after the GW event</text><text x="11" y="85" text-anchor="middle" transform="rotate(-90 11 85)">mag</text><line x1="246.0" y1="73.2" x2="246.0" y2="96.8" stroke="#c8402f" stroke-width="1.2"/><circle cx="246.0" cy="85.0" r="3.2" fill="#c8402f"><title>R 19.10 ± 0.05, +1.94 d</title></circle><circle cx="388" cy="16" r="3.5" fill="#c8402f"/><text x="394" y="20">R</text></svg></div>
+      </article>
+      <article class="src-card" id="s067">
+        <h2><a href="https://gsaweb.ast.cam.ac.uk/alerts/alert/Gaia17abn/">Gaia17abn</a></h2>
+        <p class="src-sub">Cataclysmic variable, S240422ed follow-up, KMTNet CTIO, 1 detection</p>
+        <div class="src-stamps"><div><img src="assets/gwsources/s067_new.jpg" width="240" height="240" loading="lazy" alt="New image of Gaia17abn"><span>New</span></div><div><img src="assets/gwsources/s067_ref.jpg" width="240" height="240" loading="lazy" alt="Reference image of Gaia17abn"><span>Reference</span></div><div><img src="assets/gwsources/s067_diff.jpg" width="240" height="240" loading="lazy" alt="Difference image of Gaia17abn"><span>Difference</span></div></div>
+        <div class="src-lc" data-mag="aper"><svg viewBox="0 0 460 190" role="img" aria-label="Light curve"><line class="ax" x1="44" y1="160" x2="448" y2="160"/><line class="ax" x1="44" y1="10" x2="44" y2="160"/><text x="38" y="28.5" text-anchor="end">17.5</text><text x="38" y="78.5" text-anchor="end">17.7</text><text x="38" y="128.5" text-anchor="end">17.9</text><text x="82.6" y="174" text-anchor="middle">1</text><text x="154.8" y="174" text-anchor="middle">1.1</text><text x="226.9" y="174" text-anchor="middle">1.2</text><text x="299.0" y="174" text-anchor="middle">1.3</text><text x="371.2" y="174" text-anchor="middle">1.4</text><text x="443.3" y="174" text-anchor="middle">1.5</text><text x="246" y="188" text-anchor="middle">days after the GW event</text><text x="11" y="85" text-anchor="middle" transform="rotate(-90 11 85)">mag</text><line x1="246.0" y1="81.2" x2="246.0" y2="88.8" stroke="#c8402f" stroke-width="1.2"/><circle cx="246.0" cy="85.0" r="3.2" fill="#c8402f"><title>R 17.74 ± 0.01, +1.23 d</title></circle><circle cx="388" cy="16" r="3.5" fill="#c8402f"/><text x="394" y="20">R</text></svg></div>
+      </article>
+      <article class="src-card" id="s068">
+        <h2><a href="https://www.wis-tns.org/object/2019sia">AT 2019sia</a></h2>
+        <p class="src-sub">S240422ed follow-up, KMTNet SSO, 1 detection</p>
+        <div class="src-stamps"><div><img src="assets/gwsources/s068_new.jpg" width="240" height="240" loading="lazy" alt="New image of AT 2019sia"><span>New</span></div><div><img src="assets/gwsources/s068_ref.jpg" width="240" height="240" loading="lazy" alt="Reference image of AT 2019sia"><span>Reference</span></div><div><img src="assets/gwsources/s068_diff.jpg" width="240" height="240" loading="lazy" alt="Difference image of AT 2019sia"><span>Difference</span></div></div>
+        <div class="src-lc" data-mag="aper"><svg viewBox="0 0 460 190" role="img" aria-label="Light curve"><line class="ax" x1="44" y1="160" x2="448" y2="160"/><line class="ax" x1="44" y1="10" x2="44" y2="160"/><text x="38" y="28.3" text-anchor="end">16.8</text><text x="38" y="78.3" text-anchor="end">17.0</text><text x="38" y="128.2" text-anchor="end">17.2</text><text x="93.6" y="174" text-anchor="middle">1.4</text><text x="165.7" y="174" text-anchor="middle">1.5</text><text x="237.9" y="174" text-anchor="middle">1.6</text><text x="310.0" y="174" text-anchor="middle">1.7</text><text x="382.1" y="174" text-anchor="middle">1.8</text><text x="246" y="188" text-anchor="middle">days after the GW event</text><text x="11" y="85" text-anchor="middle" transform="rotate(-90 11 85)">mag</text><line x1="246.0" y1="79.5" x2="246.0" y2="90.5" stroke="#c8402f" stroke-width="1.2"/><circle cx="246.0" cy="85.0" r="3.2" fill="#c8402f"><title>R 17.04 ± 0.02, +1.61 d</title></circle><circle cx="388" cy="16" r="3.5" fill="#c8402f"/><text x="394" y="20">R</text></svg></div>
+      </article>
+      <article class="src-card" id="s080">
+        <h2><a href="https://www.wis-tns.org/object/2021upa">SN 2021upa</a></h2>
+        <p class="src-sub">Type II supernova, S250206dm follow-up, KMTNet CTIO, 2 detections</p>
+        <div class="src-stamps"><div><img src="assets/gwsources/s080_new.jpg" width="240" height="240" loading="lazy" alt="New image of SN 2021upa"><span>New</span></div><div><img src="assets/gwsources/s080_ref.jpg" width="240" height="240" loading="lazy" alt="Reference image of SN 2021upa"><span>Reference</span></div><div><img src="assets/gwsources/s080_diff.jpg" width="240" height="240" loading="lazy" alt="Difference image of SN 2021upa"><span>Difference</span></div></div>
+        <div class="src-lc" data-mag="aper"><svg viewBox="0 0 460 190" role="img" aria-label="Light curve"><line class="ax" x1="44" y1="160" x2="448" y2="160"/><line class="ax" x1="44" y1="10" x2="44" y2="160"/><text x="38" y="28.0" text-anchor="end">19.9</text><text x="38" y="76.1" text-anchor="end">20.1</text><text x="38" y="124.3" text-anchor="end">20.3</text><text x="113.0" y="174" text-anchor="middle">3</text><text x="203.3" y="174" text-anchor="middle">4</text><text x="293.5" y="174" text-anchor="middle">5</text><text x="383.8" y="174" text-anchor="middle">6</text><text x="246" y="188" text-anchor="middle">days after the GW event</text><text x="11" y="85" text-anchor="middle" transform="rotate(-90 11 85)">mag</text><line x1="65.6" y1="48.5" x2="65.6" y2="115.9" stroke="#7a1f17" stroke-width="1.2"/><circle cx="65.6" cy="82.2" r="3.2" fill="#7a1f17"><title>I 20.14 ± 0.14, +2.48 d</title></circle><line x1="426.4" y1="68.7" x2="426.4" y2="106.8" stroke="#7a1f17" stroke-width="1.2"/><circle cx="426.4" cy="87.8" r="3.2" fill="#7a1f17"><title>I 20.16 ± 0.08, +6.47 d</title></circle><circle cx="388" cy="16" r="3.5" fill="#7a1f17"/><text x="394" y="20">I</text></svg></div>
+      </article>
+      <article class="src-card" id="s108">
+        <h2><a href="https://gsaweb.ast.cam.ac.uk/alerts/alert/Gaia19aal/">Gaia19aal</a></h2>
+        <p class="src-sub">Cataclysmic variable, S250206dm follow-up, KMTNet SAAO, 1 detection</p>
+        <div class="src-stamps"><div><img src="assets/gwsources/s108_new.jpg" width="240" height="240" loading="lazy" alt="New image of Gaia19aal"><span>New</span></div><div><img src="assets/gwsources/s108_ref.jpg" width="240" height="240" loading="lazy" alt="Reference image of Gaia19aal"><span>Reference</span></div><div><img src="assets/gwsources/s108_diff.jpg" width="240" height="240" loading="lazy" alt="Difference image of Gaia19aal"><span>Difference</span></div></div>
+        <div class="src-lc" data-mag="aper"><svg viewBox="0 0 460 190" role="img" aria-label="Light curve"><line class="ax" x1="44" y1="160" x2="448" y2="160"/><line class="ax" x1="44" y1="10" x2="44" y2="160"/><text x="38" y="34.5" text-anchor="end">21.2</text><text x="38" y="84.5" text-anchor="end">21.4</text><text x="38" y="134.5" text-anchor="end">21.6</text><text x="48.3" y="174" text-anchor="middle">1.9</text><text x="120.4" y="174" text-anchor="middle">2</text><text x="192.6" y="174" text-anchor="middle">2.1</text><text x="264.7" y="174" text-anchor="middle">2.2</text><text x="336.9" y="174" text-anchor="middle">2.3</text><text x="409.0" y="174" text-anchor="middle">2.4</text><text x="246" y="188" text-anchor="middle">days after the GW event</text><text x="11" y="85" text-anchor="middle" transform="rotate(-90 11 85)">mag</text><line x1="246.0" y1="63.0" x2="246.0" y2="107.0" stroke="#c8402f" stroke-width="1.2"/><circle cx="246.0" cy="85.0" r="3.2" fill="#c8402f"><title>R 21.42 ± 0.09, +2.17 d</title></circle><circle cx="388" cy="16" r="3.5" fill="#c8402f"/><text x="394" y="20">R</text></svg></div>
+      </article>
+    </div>
+    <p class="src-note">Magnitudes come from the KMTNet follow-up images as measured by the GECKO pipeline (aperture magnitudes). Names link to the Gaia alerts and TNS pages. None of these sources is a counterpart of the gravitational-wave event.</p>
+    <p class="back"><a href="gw.html">← Gravitational-wave follow-up</a></p>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot">
+    <div>Updated November 2026</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.src-switch button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.body.classList.toggle('mag-auto', b.dataset.mag === 'auto');
+      document.querySelectorAll('.src-switch button').forEach(function (x) {
+        x.setAttribute('aria-pressed', String(x === b));
+      });
+    });
+  });
+</script>
+</body>
+</html>
