@@ -121,6 +121,7 @@ def main():
                if args.include_unreported or r.get("reported", "yes") == "yes"]
     cards = []
     events = []
+    differ = False      # are mag_aper and mag_auto ever different? If not, no switch is shown
     for r in sources:
         stamps = []
         for k in ("new", "ref", "diff"):
@@ -129,6 +130,7 @@ def main():
         for k, im in zip(("new", "ref", "diff"), stamps):
             im.save(os.path.join(OUT, f"{r['id']}_{k}.jpg"), quality=86)
         lc = list(csv.DictReader(open(os.path.join(args.input, r["lc"])))) if r.get("lc") else []
+        differ |= any(x.get("mag_auto") and x.get("mag_aper") and x["mag_auto"] != x["mag_aper"] for x in lc)
         t0 = event_t0_mjd(r["event"])
         if r["event"] not in events:
             events.append(r["event"])
@@ -152,12 +154,19 @@ def main():
     if not cards:
         sys.exit("No sources: gwsources.html was not written.")
     page = open("gwsources_template.html").read()
+    if not differ:      # identical magnitudes: drop the switch and the duplicate AUTO curves
+        import re as _re
+        page = _re.sub(r'    <div class="src-switch".*?</div>\n', "", page, flags=_re.S)
+        cards = [_re.sub(r'\n        <div class="src-lc" data-mag="auto">.*?</div>(?=\n      </article>)', "", c, flags=_re.S)
+                 for c in cards]
+        print("mag_aper and mag_auto are identical: no switch")
     page = page.replace("<!-- SRC_CARDS -->", '    <div class="src-list">\n' + "\n".join(cards) + "\n    </div>")
     ev_txt = ", ".join(events[:-1]) + " and " + events[-1] if len(events) > 1 else events[0]
     page = page.replace("<!-- SRC_COUNT -->", f"{len(cards)} sources from the follow-up of {ev_txt}.")
     page = page.replace("<!-- SRC_NOTE -->",
-                        "Magnitudes come from the KMTNet follow-up images as measured by the GECKO pipeline: either "
-                        "the best-aperture magnitude or the AUTO (Kron-like) magnitude, chosen with the switch above. "
+                        "Magnitudes come from the KMTNet follow-up images as measured by the GECKO pipeline"
+                        + (": either the best-aperture magnitude or the AUTO (Kron-like) magnitude, chosen with the "
+                           "switch above. " if differ else " (aperture magnitudes). ") +
                         "Names link to the Gaia alerts and TNS pages. None of these sources is a counterpart of the "
                         "gravitational-wave event.")
     open("gwsources.html", "w").write(page)
