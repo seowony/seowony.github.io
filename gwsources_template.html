@@ -237,6 +237,10 @@
   .src-lc svg { width: 100%; height: auto; display: block; }
   .src-lc .ax { stroke: var(--rule); }
   .src-lc text { font-family: var(--sans); font-size: 11px; fill: var(--label); }
+  .src-switch { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; color: var(--second); margin: -8px 0 22px; }
+  .src-switch button { font: inherit; font-size: 13.5px; padding: 5px 12px; border: 1px solid var(--edge); background: var(--panel); color: var(--ink); cursor: pointer; }
+  .src-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  body.mag-auto .src-lc[data-mag="aper"], body:not(.mag-auto) .src-lc[data-mag="auto"] { display: none; }
   .src-note { font-size: 13px; color: var(--label); margin-top: 26px; max-width: 80ch; line-height: 1.6; }
 </style>
 </head>
@@ -280,6 +284,11 @@
       and the light curve measured in the follow-up images.
     </p>
     <p class="src-meta"><!-- SRC_COUNT --></p>
+    <div class="src-switch" role="group" aria-label="Magnitude type">
+      Light curves:
+      <button type="button" data-mag="aper" aria-pressed="true">Aperture magnitude</button>
+      <button type="button" data-mag="auto" aria-pressed="false">AUTO magnitude</button>
+    </div>
 <!-- SRC_CARDS -->
     <p class="src-note"><!-- SRC_NOTE --></p>
     <p class="back"><a href="gw.html">← Gravitational-wave follow-up</a></p>
@@ -292,5 +301,15 @@
   </div>
 </footer>
 
+<script>
+  document.querySelectorAll('.src-switch button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.body.classList.toggle('mag-auto', b.dataset.mag === 'auto');
+      document.querySelectorAll('.src-switch button').forEach(function (x) {
+        x.setAttribute('aria-pressed', String(x === b));
+      });
+    });
+  });
+</script>
 </body>
 </html>

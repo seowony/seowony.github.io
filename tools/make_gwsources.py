@@ -52,9 +52,12 @@ def pretty_name(name):
     return f"{m.group(1)} {m.group(2)}" if m else name
 
 
-def lc_svg(rows, t0):
-    pts = [(float(r["mjd"]) - t0, float(r["mag"]), float(r["mag_err"] or 0), r["filter"])
-           for r in rows if r.get("mag")]
+def lc_svg(rows, t0, col="mag_aper"):
+    """SVG light curve from the `col` magnitudes (mag_aper or mag_auto; old files have mag/mag_err)."""
+    if rows and col not in rows[0] and "mag" in rows[0]:
+        col = "mag"
+    pts = [(float(r["mjd"]) - t0, float(r[col]), float(r.get(col + "_err") or r.get("mag_err") or 0), r["filter"])
+           for r in rows if r.get(col)]
     if not pts:
         return ""
     W, H, L, R, T, B = 460, 190, 44, 12, 10, 30
@@ -134,7 +137,7 @@ def main():
         title = f'<a href="{url}">{html.escape(name)}</a>' if url else html.escape(name)
         typ = TYPES.get(r.get("type", ""), r.get("type", ""))
         typ = "" if typ.lower() in ("", "candidate") else typ
-        n = len([x for x in lc if x.get("mag")])
+        n = len(lc)
         sub = ", ".join(x for x in [typ[:1].upper() + typ[1:] if typ else "", f"{r['event']} follow-up",
                                     f"KMTNet {r['site'].replace('KMTN_', '')}" if r.get("site") else "",
                                     f"{n} detection{'s' if n != 1 else ''}"] if x)
@@ -144,16 +147,19 @@ def main():
         cards.append(f'      <article class="src-card" id="{r["id"]}">\n'
                      f'        <h2>{title}</h2>\n        <p class="src-sub">{html.escape(sub)}</p>\n'
                      f'        <div class="src-stamps">{imgs}</div>\n'
-                     f'        <div class="src-lc">{lc_svg(lc, t0)}</div>\n      </article>')
+                     f'        <div class="src-lc" data-mag="aper">{lc_svg(lc, t0, "mag_aper")}</div>\n'
+                     f'        <div class="src-lc" data-mag="auto">{lc_svg(lc, t0, "mag_auto")}</div>\n      </article>')
     if not cards:
         sys.exit("No sources: gwsources.html was not written.")
     page = open("gwsources_template.html").read()
     page = page.replace("<!-- SRC_CARDS -->", '    <div class="src-list">\n' + "\n".join(cards) + "\n    </div>")
-    page = page.replace("<!-- SRC_COUNT -->", f"{len(cards)} sources from the follow-up of {' and '.join(events)}.")
+    ev_txt = ", ".join(events[:-1]) + " and " + events[-1] if len(events) > 1 else events[0]
+    page = page.replace("<!-- SRC_COUNT -->", f"{len(cards)} sources from the follow-up of {ev_txt}.")
     page = page.replace("<!-- SRC_NOTE -->",
-                        "Magnitudes are aperture magnitudes from the KMTNet follow-up images, as measured by the GECKO "
-                        "pipeline. Names link to the Gaia alerts and TNS pages. None of these sources is a "
-                        "counterpart of the gravitational-wave event.")
+                        "Magnitudes come from the KMTNet follow-up images as measured by the GECKO pipeline: either "
+                        "the best-aperture magnitude or the AUTO (Kron-like) magnitude, chosen with the switch above. "
+                        "Names link to the Gaia alerts and TNS pages. None of these sources is a counterpart of the "
+                        "gravitational-wave event.")
     open("gwsources.html", "w").write(page)
     print(f"Wrote gwsources.html with {len(cards)} sources.")
 
